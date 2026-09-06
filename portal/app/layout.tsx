@@ -19,16 +19,23 @@ export const metadata: Metadata = {
   },
 };
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const SIGN_IN_URL = `${BASE_PATH}/sign-in`;
+const REQUEST_ACCESS_URL = `${BASE_PATH}/request-access`;
+const PORTAL_HOME_URL = BASE_PATH || "/";
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
         <ClerkProvider
-          signInUrl="/sign-in"
-          signUpUrl="/request-access"
-          waitlistUrl="/request-access"
-          signInFallbackRedirectUrl="/"
-          signUpFallbackRedirectUrl="/"
+          signInUrl={SIGN_IN_URL}
+          signUpUrl={REQUEST_ACCESS_URL}
+          waitlistUrl={REQUEST_ACCESS_URL}
+          signInFallbackRedirectUrl={
+            process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL || PORTAL_HOME_URL
+          }
+          signUpFallbackRedirectUrl={PORTAL_HOME_URL}
           localization={{
             signIn: {
               start: {
