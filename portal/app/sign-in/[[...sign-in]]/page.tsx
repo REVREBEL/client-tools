@@ -4,14 +4,16 @@ import { clerkAuthAppearance } from "../../clerk-auth";
 
 export const dynamic = "force-dynamic";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function SignInPage() {
   return (
     <AuthShell>
       <SignIn
         appearance={clerkAuthAppearance}
-        path="/sign-in"
+        path={`${BASE_PATH}/sign-in`}
         routing="path"
-        waitlistUrl="/request-access"
+        waitlistUrl={`${BASE_PATH}/request-access`}
         withSignUp={false}
       />
     </AuthShell>
