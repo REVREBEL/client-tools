@@ -1,0 +1,19 @@
+{
+  "name": "pdfgs",
+  "scripts": {
+    "patch": "patch node_modules/pdfjs-dist/build/pdf.js < src/pdf.js.diff",
+    "build": "node build.js",
+    "deploy": "clasp push",
+    "test": "node test test/pages.pdf"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "core-js": "^3.38.0",
+    "core-js-pure": "^3.38.0",
+    "esbuild": "^0.23.0",
+    "esbuild-gas-plugin": "^0.8.0",
+    "pdfjs-dist": "3",
+    "realistic-structured-clone": "^3.0.0",
+    "web-streams-polyfill": "^4.0.0"
+  }
+}
