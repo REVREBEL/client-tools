@@ -1,4 +1,4 @@
-import PlaylistPage from "../../../playlist/app/page";
+import PlaylistPage from "../../../portal/playlist/app/page";
 
 export const dynamic = "force-dynamic";
 
