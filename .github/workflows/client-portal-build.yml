@@ -3,7 +3,10 @@ name: Client Portal Build
 on:
   push:
     branches:
-      - feat/webflow-client-portal
+      - main
+    paths:
+      - "portal/**"
+      - ".github/workflows/client-portal-build.yml"
   pull_request:
     paths:
       - "portal/**"
@@ -15,6 +18,7 @@ jobs:
     env:
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_ZmFrZS5jbGVyay5hY2NvdW50cy5kZXYk
       CLERK_SECRET_KEY: sk_test_fake_for_build_only
+      NEXT_PUBLIC_BASE_PATH: /portal
     steps:
       - name: Checkout
         uses: actions/checkout@v4
