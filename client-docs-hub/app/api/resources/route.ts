@@ -1,25 +1,25 @@
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { isPortalAuthorized } from "../../lib/auth";
 
-const SHEET_ID = "1DUKyQPbnQuNKJfU40fygxZ1eqNR0SExWgGAK358ulQw";
-const SHEET_GID = "1388513406";
+const SHEET_ID = process.env.DOCS_SPREADSHEET_ID || "1DUKyQPbnQuNKJfU40fygxZ1eqNR0SExWgGAK358ulQw";
+const SHEET_GID = process.env.DOCS_SPREADSHEET_GID || "1388513406";
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${SHEET_GID}&range=C:K`;
 
 const localFallbacks: Array<[string, string]> = [
-  ["segment definition + hierarchy", "/resources/segment-code-library.pdf"],
-  ["room type & amenity descriptions", "/resources/rooms-page-copy.pdf"],
-  ["campaign pages, seo + organic discovery", "/resources/campaign-pages-seo.pdf"],
-  ["channel sources setup", "/resources/source-tracking-setup.pdf"],
-  ["segmentation setup", "/resources/segmentation-setup.pdf"],
-  ["agoda test booking", "/resources/agoda-test-booking.pdf"],
-  ["hopper test booking", "/resources/hopper-test-booking.pdf"],
-  ["international rates", "/resources/international-rate-visibility.pdf"],
-  ["metasearch test booking", "/resources/metasearch-test-booking.pdf"],
-  ["rate linking", "/resources/rate-linking-review.pdf"],
-  ["wholesale price test", "/resources/wholesale-price-test.pdf"],
-  ["strategy playlist", "/resources/strategy-playlist.pdf"],
-  ["enhancing visibility", "/resources/product-conversion-strategy.pdf"],
-  ["layout recommendations", "/resources/layout-recommendations.pdf"],
+  ["segment definition + hierarchy", "segment-code-library.pdf"],
+  ["room type & amenity descriptions", "rooms-page-copy.pdf"],
+  ["campaign pages, seo + organic discovery", "campaign-pages-seo.pdf"],
+  ["channel sources setup", "source-tracking-setup.pdf"],
+  ["segmentation setup", "segmentation-setup.pdf"],
+  ["agoda test booking", "agoda-test-booking.pdf"],
+  ["hopper test booking", "hopper-test-booking.pdf"],
+  ["international rates", "international-rate-visibility.pdf"],
+  ["metasearch test booking", "metasearch-test-booking.pdf"],
+  ["rate linking", "rate-linking-review.pdf"],
+  ["wholesale price test", "wholesale-price-test.pdf"],
+  ["strategy playlist", "strategy-playlist.pdf"],
+  ["enhancing visibility", "product-conversion-strategy.pdf"],
+  ["layout recommendations", "layout-recommendations.pdf"],
 ];
 
 function parseCsv(input: string) {
@@ -50,9 +50,21 @@ function cleanMultiline(value = "") {
   return value.replace(/\r\n?/g, "\n").trim();
 }
 
-function fallbackFor(title: string, fileName: string) {
+function mediaHref(key: string) {
+  const normalized = key.replace(/^\/+/, "");
+  return normalized ? `/api/docs/files/${normalized.split("/").map(encodeURIComponent).join("/")}` : "";
+}
+
+function fallbackFileFor(title: string, fileName: string) {
   const source = `${title} ${fileName}`.toLowerCase();
-  return localFallbacks.find(([needle]) => source.includes(needle))?.[1] ?? "";
+  return localFallbacks.find(([needle]) => source.includes(needle))?.[1] || fileName;
+}
+
+function resourceHref(sheetUrl: string, title: string, fileName: string) {
+  if (/^https?:\/\//i.test(sheetUrl)) return sheetUrl;
+  if (/^(?:r2|upload):\/\//i.test(sheetUrl)) return mediaHref(sheetUrl.replace(/^(?:r2|upload):\/\//i, ""));
+  const fallbackFile = fallbackFileFor(title, fileName);
+  return fallbackFile ? mediaHref(`resources/${fallbackFile}`) : "";
 }
 
 function resourceFormat(url: string, fileName: string) {
@@ -63,11 +75,13 @@ function resourceFormat(url: string, fileName: string) {
   if (source.includes(".svg")) return "SVG";
   if (source.includes(".md")) return "Markdown";
   if (source.includes(".pdf")) return "PDF";
+  if (/\.(?:jpe?g|png|webp|gif)(?:$|\?)/.test(source)) return "Image";
   return "Resource";
 }
 
 export async function GET() {
-  if (!(await isPortalAuthorized())) {
+  const { userId } = await auth();
+  if (!userId) {
     return NextResponse.json(
       { error: "Authentication required." },
       { status: 401, headers: { "Cache-Control": "private, no-store" } },
@@ -91,7 +105,7 @@ export async function GET() {
         const title = clean(row[index.title]);
         const fileName = clean(row[index.fileName]);
         const sheetUrl = clean(row[index.url]);
-        const href = /^https?:\/\//i.test(sheetUrl) ? sheetUrl : fallbackFor(title, fileName);
+        const href = resourceHref(sheetUrl, title, fileName);
         return {
           id: `${rowIndex + 2}-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
           title, description: cleanMultiline(row[index.description]), useWhen: cleanMultiline(row[index.useWhen]), href, fileName,

@@ -1,0 +1,315 @@
+@font-face {
+  font-family: "Khand";
+  src: url("/fonts/khand-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Khand";
+  src: url("/fonts/khand-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  --rr-blue: #163666;
+  --rr-blue-dark: #0d274e;
+  --rr-teal: #047c97;
+  --rr-cyan: #00a6b6;
+  --rr-aqua: #71c9c5;
+  --rr-powder: #b2d3de;
+  --rr-frost: #eff5f6;
+  --rr-yellow: #faca78;
+  --rr-orange: #f37d59;
+  --rr-red: #e05047;
+  --rr-purple: #8e456a;
+  --rr-white: #fafafa;
+  --rr-display: "Khand", "Arial Narrow", sans-serif;
+  --rr-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html {
+  background: var(--rr-frost);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--rr-frost);
+  color: var(--rr-blue);
+  font-family: var(--rr-body);
+}
+
+.rr-client-portal {
+  min-height: 100vh;
+}
+
+.rr-client-portal-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: minmax(170px, 1fr) auto minmax(170px, 1fr);
+  align-items: center;
+  gap: 24px;
+  min-height: 66px;
+  padding: 0 28px;
+  color: var(--rr-powder);
+  background: var(--rr-blue);
+  border-bottom: 1px solid rgba(178, 211, 222, 0.28);
+  font-family: var(--rr-display);
+}
+
+.rr-client-portal-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  color: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.rr-client-portal-nav__brand img {
+  display: block;
+  width: 112px;
+  height: auto;
+}
+
+.rr-client-portal-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rr-client-portal-nav__links a {
+  padding: 9px 13px 7px;
+  color: var(--rr-powder);
+  font-family: var(--rr-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+.rr-client-portal-nav__links a:hover,
+.rr-client-portal-nav__links a:focus-visible,
+.rr-client-portal-nav__links a[data-active="true"] {
+  color: var(--rr-blue);
+  background: var(--rr-aqua);
+  border-color: var(--rr-aqua);
+  outline: none;
+}
+
+.rr-client-portal-nav__account {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rr-client-portal-main {
+  min-width: 0;
+}
+
+.rr-portal-home {
+  min-height: calc(100vh - 66px);
+  padding: clamp(54px, 8vw, 110px) 32px 96px;
+  background:
+    linear-gradient(rgba(22, 54, 102, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 54, 102, 0.04) 1px, transparent 1px),
+    var(--rr-frost);
+  background-size: 42px 42px;
+}
+
+.rr-portal-home__inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.rr-portal-eyebrow {
+  margin: 0 0 13px;
+  color: var(--rr-teal);
+  font-family: var(--rr-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.rr-portal-home h1 {
+  max-width: 950px;
+  margin: 0;
+  color: var(--rr-blue);
+  font-family: var(--rr-display);
+  font-size: clamp(58px, 9vw, 118px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+.rr-portal-home__intro {
+  max-width: 650px;
+  margin: 28px 0 58px;
+  color: rgba(22, 54, 102, 0.72);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.rr-tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 2px solid var(--rr-blue);
+  border-left: 2px solid var(--rr-blue);
+  background: var(--rr-white);
+}
+
+.rr-tool-card {
+  min-height: 310px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  color: var(--rr-blue);
+  text-decoration: none;
+  background: var(--rr-white);
+  border-right: 2px solid var(--rr-blue);
+  border-bottom: 2px solid var(--rr-blue);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.rr-tool-card:hover,
+.rr-tool-card:focus-visible {
+  background: var(--rr-yellow);
+  outline: none;
+}
+
+.rr-tool-card__number,
+.rr-tool-card__status {
+  font-family: var(--rr-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.rr-tool-card h2 {
+  margin: auto 0 16px;
+  font-family: var(--rr-display);
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 700;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.rr-tool-card p {
+  margin: 0 0 24px;
+  line-height: 1.55;
+}
+
+.rr-tool-card__open {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  font-family: var(--rr-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-top: 1px solid rgba(22, 54, 102, 0.25);
+}
+
+.auth-page {
+  min-height: 100vh;
+  padding: 48px 24px;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(rgba(22, 54, 102, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 54, 102, 0.04) 1px, transparent 1px),
+    var(--rr-frost);
+  background-size: 42px 42px;
+}
+
+.auth-card-frame {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+
+.auth-secured {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(22, 54, 102, 0.55);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.auth-secured strong {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.auth-secured svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+
+@media (max-width: 900px) {
+  .rr-client-portal-nav {
+    grid-template-columns: 1fr auto;
+    padding: 10px 18px;
+  }
+
+  .rr-client-portal-nav__brand span {
+    display: none;
+  }
+
+  .rr-client-portal-nav__links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 8px;
+  }
+
+  .rr-tool-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .rr-client-portal-nav__account [data-localization-key="organizationSwitcherTrigger"] {
+    display: none;
+  }
+
+  .rr-portal-home {
+    padding-inline: 18px;
+  }
+}

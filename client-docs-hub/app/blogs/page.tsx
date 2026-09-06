@@ -56,18 +56,16 @@ export default function BlogsPage() {
   return (
     <main id="top">
       <header className="site-header">
-        <Link className="brand" href="/" aria-label="REVREBEL resource hub home">
+        <Link className="brand" href="/docs" aria-label="REVREBEL resource hub home">
           <Image src="/revrebel-logo-blue.svg" alt="REVREBEL" width={1180} height={175} priority />
         </Link>
         <nav aria-label="Primary navigation">
-          <Link href="/">Home</Link>
-          <Link href="/#resource-library">Resources</Link>
-          <Link href="/campaigns">Campaigns</Link>
-          <Link className="current" href="/blogs" aria-current="page">Blogs</Link>
-          <Link href="/photos">Photos</Link>
-          <form action="/api/logout" method="post">
-            <button type="submit">Lock Portal</button>
-          </form>
+          <Link href="/docs">Home</Link>
+          <Link href="/docs#resource-library">Resources</Link>
+          <Link href="/docs/campaigns">Campaigns</Link>
+          <Link className="current" href="/docs/blogs" aria-current="page">Blogs</Link>
+          <Link href="/docs/photos">Photos</Link>
+          <Link href="/">Client Tools</Link>
         </nav>
         <span className="property-label">Now Now NoHo</span>
       </header>

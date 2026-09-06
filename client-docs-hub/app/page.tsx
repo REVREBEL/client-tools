@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type Resource = {
@@ -43,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     let active = true;
 
-    fetch("/api/resources")
+    fetch("/api/docs/resources")
       .then((response) => {
         if (!response.ok) throw new Error("The resource feed could not be loaded.");
         return response.json() as Promise<ResourceResponse>;
@@ -107,16 +108,14 @@ export default function Home() {
         <a className="brand" href="#top" aria-label="REVREBEL resource hub home">
           <Image src="/revrebel-logo-blue.svg" alt="REVREBEL" width={1180} height={175} priority />
         </a>
-        <nav aria-label="Primary navigation">
+        <nav aria-label="Resource Hub navigation">
           <a href="#strategies">Strategies</a>
           <a href="#resource-library">Resources</a>
-          <a href="/campaigns">Campaigns</a>
-          <a href="/blogs">Blogs</a>
-          <a href="/photos">Photos</a>
+          <Link href="/docs/campaigns">Campaigns</Link>
+          <Link href="/docs/blogs">Blogs</Link>
+          <Link href="/docs/photos">Photos</Link>
           <a href="#using-the-hub">How to Use</a>
-          <form action="/api/logout" method="post">
-            <button type="submit">Lock Portal</button>
-          </form>
+          <Link href="/">Client Tools</Link>
         </nav>
         <span className="property-label">Now Now NoHo</span>
       </header>

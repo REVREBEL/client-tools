@@ -11,8 +11,6 @@ import Link from "next/link";
 import Dashboard from "./dashboard";
 import ChannelDashboard from "./channel-dashboard";
 import {
-  CODE_EDITOR_PERMISSION,
-  CODE_EDITOR_PERMISSION_UNSCOPED,
   GOOGLE_SHEET_URL_PERMISSION,
   GOOGLE_SHEET_URL_PERMISSION_UNSCOPED,
 } from "./permissions";
@@ -82,7 +80,7 @@ export default function SheetDashboard({
           `&gid=${encodeURIComponent(connection.gid || "0")}` +
           `${connection.range ? `&range=${encodeURIComponent(connection.range)}` : ""}` +
           `&refresh=${Date.now()}`;
-        const response = await fetch(`/api/sheet${query}`, { cache: "no-store" });
+        const response = await fetch(`/api/metrics/sheet${query}`, { cache: "no-store" });
 
         if (!response.ok) {
           const detail = (await response.json().catch(() => null)) as { error?: string } | null;
@@ -246,7 +244,7 @@ export default function SheetDashboard({
               <Show when="signed-in">
                 <OrganizationSwitcher
                   hidePersonal
-                  afterSelectOrganizationUrl="/"
+                  afterSelectOrganizationUrl="/metrics"
                   appearance={{
                     elements: {
                       rootBox: { display: "flex", alignItems: "center" },
@@ -320,18 +318,6 @@ export default function SheetDashboard({
             </div>
           </Show>
         )}
-        <Show
-          when={(has) =>
-            has({ permission: CODE_EDITOR_PERMISSION }) ||
-            has({ permission: CODE_EDITOR_PERMISSION_UNSCOPED })
-          }
-        >
-          <div className="sheet-admin-controls">
-            <Link className="sheet-settings sheet-code-link" href="/code">
-              Code Canvas
-            </Link>
-          </div>
-        </Show>
       </div>
 
       {error && <div className="sheet-error">{error}</div>}

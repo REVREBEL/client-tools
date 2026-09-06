@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "revrebel-client-portal",
+  "compatibility_date": "2026-09-05",
+  "r2_buckets": [
+    {
+      "binding": "DOCS_MEDIA",
+      "bucket_name": "revrebel-client-docs-media"
+    }
+  ]
+}
