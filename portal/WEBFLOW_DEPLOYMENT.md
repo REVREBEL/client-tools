@@ -2,9 +2,9 @@
 
 The `portal` directory is the deployable Next.js application and should be selected as the Webflow Cloud app root. Docs, Metrics, and Playlist live inside that application boundary as modular source folders so their UI, styles, and business logic can continue to evolve independently.
 
-## App root
+## App root and mount path
 
-Select this directory in Webflow Cloud:
+Select this repository directory as the Webflow Cloud **app path**:
 
 ```text
 /portal
@@ -12,16 +12,38 @@ Select this directory in Webflow Cloud:
 
 `package.json`, `next.config.ts`, `webflow.json`, and `wrangler.json` are all colocated in this directory so Webflow can detect and deploy the Next.js app without relying on repository-root framework detection.
 
+Set the Webflow Cloud environment **mount path** to:
+
+```text
+/portal
+```
+
+These are two different settings: the app path tells Webflow where the deployable project lives in GitHub, while the mount path controls where the application is served on the Webflow domain.
+
+Because this app is mounted below the site root, add this public environment variable:
+
+```text
+NEXT_PUBLIC_BASE_PATH=/portal
+```
+
+Webflow Cloud supplies Next.js with its production base path automatically. The public variable above is only used by browser-side requests and third-party auth URLs that Next.js cannot prefix for us.
+
 ## Routes
 
-- `/` — authenticated Client Tools launcher
-- `/docs` — Docs Hub
-- `/docs/campaigns` — campaign concepts
-- `/docs/blogs` — blog concepts
-- `/docs/photos` — current photo gallery
-- `/docs/manage` — admin PDF/photo storage and one-time migration
-- `/metrics` — Client Metrics
-- `/playlist` — Strategy Playlist
+With the `/portal` mount path, the public route surface is:
+
+- `/portal` — authenticated Client Tools launcher
+- `/portal/docs` — Docs Hub
+- `/portal/docs/campaigns` — campaign concepts
+- `/portal/docs/blogs` — blog concepts
+- `/portal/docs/photos` — current photo gallery
+- `/portal/docs/manage` — admin PDF/photo storage and one-time migration
+- `/portal/metrics` — Client Metrics
+- `/portal/playlist` — Strategy Playlist
+- `/portal/sign-in` — Clerk sign in
+- `/portal/request-access` — Clerk access request
+
+Internally, the Next.js route definitions remain `/`, `/docs`, `/metrics`, and so on. Webflow applies the environment mount path at build time.
 
 ## Source modules
 
@@ -34,10 +56,17 @@ Within the Webflow app root:
 
 ## Required Webflow Cloud environment variables
 
+### Webflow mount path
+
+- `NEXT_PUBLIC_BASE_PATH=/portal`
+
 ### Clerk
 
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 - `CLERK_SECRET_KEY`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/portal/sign-in`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/portal/request-access`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=https://revrebel.io/portal`
 
 ### Google Sheets
 
@@ -85,11 +114,11 @@ External Google Docs/Sheets URLs remain external links. Uploaded files use an `r
 r2://resources/rate-linking-review.pdf
 ```
 
-The Docs API converts that reference to an authenticated `/api/docs/files/...` route.
+The Docs API converts that reference to an authenticated `/api/docs/files/...` route, and the client prefixes `/portal` when the app is deployed at the configured mount path.
 
 ### First deployment migration
 
-After the first Webflow deployment, visit `/docs/manage` as an organization admin. Use:
+After the first Webflow deployment, visit `/portal/docs/manage` as an organization admin. Use:
 
 - **Import Existing PDFs** to copy the PDFs currently committed under `portal/docs/public/resources` into Object Storage.
 - **Import Existing Photos** to copy the current gallery images into the `photos/` prefix.
@@ -107,4 +136,4 @@ npm run dev
 npm run build
 ```
 
-The standalone source implementations remain under `portal/docs`, `portal/metrics`, and `portal/playlist`, while `portal/app` provides the shared authenticated shell and route surface for Webflow Cloud.
+Local Next.js development serves the app at `/` unless you deliberately set up mount-path parity. The standalone source implementations remain under `portal/docs`, `portal/metrics`, and `portal/playlist`, while `portal/app` provides the shared authenticated shell and route surface for Webflow Cloud.
