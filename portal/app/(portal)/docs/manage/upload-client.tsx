@@ -20,6 +20,8 @@ type MigrationResult = {
   error?: string;
 };
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function DocsUploadClient() {
   const [folder, setFolder] = useState("resources");
   const [busy, setBusy] = useState(false);
@@ -40,7 +42,7 @@ export default function DocsUploadClient() {
       const form = event.currentTarget;
       const formData = new FormData(form);
       formData.set("folder", folder);
-      const response = await fetch("/api/docs/upload", { method: "POST", body: formData });
+      const response = await fetch(`${BASE_PATH}/api/docs/upload`, { method: "POST", body: formData });
       const payload = (await response.json().catch(() => null)) as (UploadResult & { error?: string }) | null;
       if (!response.ok || !payload) throw new Error(payload?.error || "The upload failed.");
       setResult(payload);
@@ -69,7 +71,7 @@ export default function DocsUploadClient() {
 
     try {
       while (true) {
-        const response = await fetch("/api/docs/migrate", {
+        const response = await fetch(`${BASE_PATH}/api/docs/migrate`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ folder: target, offset }),
