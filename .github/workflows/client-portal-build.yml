@@ -5,11 +5,29 @@ on:
     branches:
       - main
     paths:
+      - "app/**"
       - "portal/**"
+      - "public/**"
+      - "package.json"
+      - "next.config.ts"
+      - "webflow.json"
+      - "wrangler.json"
+      - "tsconfig.json"
+      - "postcss.config.mjs"
+      - "proxy.ts"
       - ".github/workflows/client-portal-build.yml"
   pull_request:
     paths:
+      - "app/**"
       - "portal/**"
+      - "public/**"
+      - "package.json"
+      - "next.config.ts"
+      - "webflow.json"
+      - "wrangler.json"
+      - "tsconfig.json"
+      - "postcss.config.mjs"
+      - "proxy.ts"
       - ".github/workflows/client-portal-build.yml"
 
 jobs:
@@ -29,9 +47,7 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        working-directory: portal
         run: npm install --no-audit --no-fund
 
       - name: Build portal
-        working-directory: portal
         run: npm run build
