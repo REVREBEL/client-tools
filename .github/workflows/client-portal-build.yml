@@ -1,0 +1,38 @@
+name: Client Portal Build
+
+on:
+  push:
+    branches:
+      - feat/webflow-client-portal
+  pull_request:
+    paths:
+      - "app/**"
+      - "client-docs-hub/**"
+      - "client-metrics/**"
+      - "client-playlist/**"
+      - "package.json"
+      - "next.config.ts"
+      - "webflow.json"
+      - "wrangler.json"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_ZmFrZS5jbGVyay5hY2NvdW50cy5kZXYk
+      CLERK_SECRET_KEY: sk_test_fake_for_build_only
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build portal
+        run: npm run build
