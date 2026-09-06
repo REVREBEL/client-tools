@@ -24,6 +24,7 @@ type SheetConnection = {
 };
 
 const STORAGE_KEY = "revrebel-segment-dashboard-sheet";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const DEFAULT_CONNECTION: SheetConnection = {
   url: "https://docs.google.com/spreadsheets/d/1MD-PF0GScwSG3m9wTwAzTHjl2kownwFNEppz3VmuyK0/edit",
   gid: "1941800013",
@@ -80,7 +81,7 @@ export default function SheetDashboard({
           `&gid=${encodeURIComponent(connection.gid || "0")}` +
           `${connection.range ? `&range=${encodeURIComponent(connection.range)}` : ""}` +
           `&refresh=${Date.now()}`;
-        const response = await fetch(`/api/metrics/sheet${query}`, { cache: "no-store" });
+        const response = await fetch(`${BASE_PATH}/api/metrics/sheet${query}`, { cache: "no-store" });
 
         if (!response.ok) {
           const detail = (await response.json().catch(() => null)) as { error?: string } | null;
@@ -244,7 +245,7 @@ export default function SheetDashboard({
               <Show when="signed-in">
                 <OrganizationSwitcher
                   hidePersonal
-                  afterSelectOrganizationUrl="/metrics"
+                  afterSelectOrganizationUrl={`${BASE_PATH}/metrics`}
                   appearance={{
                     elements: {
                       rootBox: { display: "flex", alignItems: "center" },
