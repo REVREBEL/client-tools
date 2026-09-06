@@ -6,21 +6,21 @@
     />
     <img
       src=".github/assets/readme-banner_light.jpg"
-      alt="__REPO__ repository banner"
+      alt="client-tools repository banner"
     />
   </picture>
 </p>
 
-<p align="right">__REPO__ a project by REVREBEL</p>
+<p align="right">client-tools a project by REVREBEL</p>
 
-# __REPO_UPPER__
+# CLIENT-TOOLS
 
 <div align="left">
-  <a href="https://github.com/__OWNER__/__REPO__/issues">
-    <img src="https://img.shields.io/github/issues/__OWNER__/__REPO__?color=163666&style=for-the-badge&logo=github" alt="Issues"/>
+  <a href="https://github.com/REVREBEL/client-tools/issues">
+    <img src="https://img.shields.io/github/issues/REVREBEL/client-tools?color=163666&style=for-the-badge&logo=github" alt="Issues"/>
   </a>
-  <a href="https://github.com/__OWNER__/__REPO__/pulls">
-    <img src="https://img.shields.io/github/issues-pr/__OWNER__/__REPO__?color=71c9c5&style=for-the-badge&logo=github" alt="PRs"/>
+  <a href="https://github.com/REVREBEL/client-tools/pulls">
+    <img src="https://img.shields.io/github/issues-pr/REVREBEL/client-tools?color=71c9c5&style=for-the-badge&logo=github" alt="PRs"/>
   </a>
 </div>
 
