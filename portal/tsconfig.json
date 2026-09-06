@@ -23,14 +23,14 @@
     ".next/types/**/*.ts",
     "app/**/*.ts",
     "app/**/*.tsx",
-    "client-docs-hub/app/**/*.ts",
-    "client-docs-hub/app/**/*.tsx",
-    "client-metrics/app/**/*.ts",
-    "client-metrics/app/**/*.tsx",
-    "client-metrics/app/**/*.jsx",
-    "client-playlist/app/**/*.ts",
-    "client-playlist/app/**/*.tsx",
+    "docs/app/**/*.ts",
+    "docs/app/**/*.tsx",
+    "metrics/app/**/*.ts",
+    "metrics/app/**/*.tsx",
+    "metrics/app/**/*.jsx",
+    "playlist/app/**/*.ts",
+    "playlist/app/**/*.tsx",
     "proxy.ts"
   ],
-  "exclude": ["node_modules", "**/build/**", "**/.next/**", "client-metrics/app/code/**"]
+  "exclude": ["node_modules", "**/build/**", "**/.next/**", "metrics/app/code/**"]
 }

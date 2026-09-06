@@ -6,14 +6,8 @@ on:
       - feat/webflow-client-portal
   pull_request:
     paths:
-      - "app/**"
-      - "client-docs-hub/**"
-      - "client-metrics/**"
-      - "client-playlist/**"
-      - "package.json"
-      - "next.config.ts"
-      - "webflow.json"
-      - "wrangler.json"
+      - "portal/**"
+      - ".github/workflows/client-portal-build.yml"
 
 jobs:
   build:
@@ -31,7 +25,9 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
+        working-directory: portal
         run: npm install --no-audit --no-fund
 
       - name: Build portal
+        working-directory: portal
         run: npm run build

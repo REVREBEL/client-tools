@@ -1,6 +1,16 @@
 # Webflow Cloud Client Portal
 
-The repository root is the deployable Next.js application. The existing tool folders remain source modules so their UI, styles, and business logic can continue to evolve independently.
+The `portal` directory is the deployable Next.js application and should be selected as the Webflow Cloud app root. Docs, Metrics, and Playlist live inside that application boundary as modular source folders so their UI, styles, and business logic can continue to evolve independently.
+
+## App root
+
+Select this directory in Webflow Cloud:
+
+```text
+/portal
+```
+
+`package.json`, `next.config.ts`, `webflow.json`, and `wrangler.json` are all colocated in this directory so Webflow can detect and deploy the Next.js app without relying on repository-root framework detection.
 
 ## Routes
 
@@ -12,6 +22,15 @@ The repository root is the deployable Next.js application. The existing tool fol
 - `/docs/manage` — admin PDF/photo storage and one-time migration
 - `/metrics` — Client Metrics
 - `/playlist` — Strategy Playlist
+
+## Source modules
+
+Within the Webflow app root:
+
+- `portal/docs` — Docs Hub source
+- `portal/metrics` — Client Metrics source
+- `portal/playlist` — Strategy Playlist source and Apps Script project
+- `portal/app` — shared Next.js App Router shell and route adapters
 
 ## Required Webflow Cloud environment variables
 
@@ -72,7 +91,7 @@ The Docs API converts that reference to an authenticated `/api/docs/files/...` r
 
 After the first Webflow deployment, visit `/docs/manage` as an organization admin. Use:
 
-- **Import Existing PDFs** to copy the PDFs currently committed under `client-docs-hub/public/resources` into Object Storage.
+- **Import Existing PDFs** to copy the PDFs currently committed under `portal/docs/public/resources` into Object Storage.
 - **Import Existing Photos** to copy the current gallery images into the `photos/` prefix.
 
 The migration runs in small batches and is safe to rerun. The existing gallery remains served from static repo assets during the first deployment so the visual pages do not break while storage is being initialized.
@@ -82,9 +101,10 @@ The migration runs in small batches and is safe to rerun. The existing gallery r
 From the repository root:
 
 ```bash
+cd portal
 npm install
 npm run dev
 npm run build
 ```
 
-The previous standalone Vinext/Vite scaffolds remain in `client-docs-hub` and `client-metrics` as references while the root app becomes the Webflow Cloud deployment target.
+The standalone source implementations remain under `portal/docs`, `portal/metrics`, and `portal/playlist`, while `portal/app` provides the shared authenticated shell and route surface for Webflow Cloud.

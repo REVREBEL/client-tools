@@ -1,4 +1,4 @@
-import MetricsPage from "../../../client-metrics/app/page";
+import MetricsPage from "../../../metrics/app/page";
 
 export const dynamic = "force-dynamic";
 

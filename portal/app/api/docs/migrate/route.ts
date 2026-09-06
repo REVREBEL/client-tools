@@ -51,7 +51,7 @@ const PHOTO_FILES = [
 ] as const;
 
 const BATCH_SIZE = 3;
-const SOURCE_ROOT = "https://raw.githubusercontent.com/REVREBEL/client-tools/main/client-docs-hub/public";
+const SOURCE_ROOT = "https://raw.githubusercontent.com/REVREBEL/client-tools/main/portal/docs/public";
 
 function contentType(fileName: string) {
   if (fileName.endsWith(".pdf")) return "application/pdf";
