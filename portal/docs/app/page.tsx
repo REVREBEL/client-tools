@@ -24,6 +24,7 @@ type ResourceResponse = {
   checkedAt: string;
 };
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1DUKyQPbnQuNKJfU40fygxZ1eqNR0SExWgGAK358ulQw/edit?coid=1661698131&gid=0#gid=0";
 
@@ -35,6 +36,10 @@ function anchorId(value: string) {
   return normalize(value).replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
+function resourceUrl(href: string) {
+  return href.startsWith("/api/") ? `${BASE_PATH}${href}` : href;
+}
+
 export default function Home() {
   const [data, setData] = useState<ResourceResponse | null>(null);
   const [error, setError] = useState("");
@@ -44,7 +49,7 @@ export default function Home() {
   useEffect(() => {
     let active = true;
 
-    fetch("/api/docs/resources")
+    fetch(`${BASE_PATH}/api/docs/resources`)
       .then((response) => {
         if (!response.ok) throw new Error("The resource feed could not be loaded.");
         return response.json() as Promise<ResourceResponse>;
@@ -234,7 +239,7 @@ export default function Home() {
                             <span>{resource.useWhen || "You need supporting guidance for this workstream."}</span>
                           </div>
                           {resource.href ? (
-                            <a className="resource-link" href={resource.href} target="_blank" rel="noreferrer">Open Resource <span className="rr-arrow" aria-hidden="true" /></a>
+                            <a className="resource-link" href={resourceUrl(resource.href)} target="_blank" rel="noreferrer">Open Resource <span className="rr-arrow" aria-hidden="true" /></a>
                           ) : (
                             <span className="resource-link disabled">Link Pending</span>
                           )}
