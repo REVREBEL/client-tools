@@ -110,6 +110,25 @@ async function createAccessToken() {
   return result.access_token;
 }
 
+async function loadSheetRows(spreadsheetId: string, sheetName: string) {
+  const accessToken = await createAccessToken();
+  const endpoint =
+    `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(spreadsheetId)}` +
+    `/values/${encodeURIComponent(sheetName)}` +
+    "?majorDimension=ROWS&valueRenderOption=FORMATTED_VALUE&dateTimeRenderOption=FORMATTED_STRING";
+  const response = await fetch(endpoint, {
+    cache: "no-store",
+    headers: { Authorization: `Bearer ${accessToken}`, Accept: "application/json" },
+  });
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(`Google Sheets API request failed (${response.status}): ${detail.slice(0, 160)}`);
+  }
+
+  const payload = (await response.json()) as { values?: unknown[][] };
+  return (payload.values || []).map((row) => row.map((value) => String(value ?? "")));
+}
+
 export type PlaylistRow = {
   rowNumber: number;
   values: Record<string, string>;
@@ -123,6 +142,72 @@ export type PlaylistData = {
   error?: string;
 };
 
+export type WorkspaceTeamMember = {
+  rowNumber: number;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  email: string;
+  emailOptOut: boolean;
+};
+
+export type WorkspaceColorSetting = {
+  rowNumber: number;
+  label: string;
+  backgroundColor: string;
+  fontColor: string;
+};
+
+export type WorkspaceSetupColumns = {
+  projectName: number;
+  teamFirstName: number;
+  teamLastName: number;
+  teamFullName: number;
+  teamEmail: number;
+  teamEmailOptOut: number;
+  statusName: number;
+  statusBackground: number;
+  statusFont: number;
+  priorityName: number;
+  priorityBackground: number;
+  priorityFont: number;
+};
+
+export type WorkspaceSetupData = {
+  configured: boolean;
+  projectName: string;
+  dashboardUrl: string;
+  teamMembers: WorkspaceTeamMember[];
+  statuses: WorkspaceColorSetting[];
+  priorities: WorkspaceColorSetting[];
+  nextTeamRow: number;
+  nextStatusRow: number;
+  nextPriorityRow: number;
+  columns: WorkspaceSetupColumns;
+  syncedAt: string | null;
+  error?: string;
+};
+
+function headerIndex(headers: string[], names: string[], fallback: number) {
+  const normalized = headers.map((header) => header.trim().toUpperCase());
+  for (const name of names) {
+    const index = normalized.indexOf(name.toUpperCase());
+    if (index >= 0) return index;
+  }
+  return fallback;
+}
+
+function rowCell(rows: string[][], rowIndex: number, columnIndex: number) {
+  return rows[rowIndex]?.[columnIndex]?.trim() || "";
+}
+
+function nextOpenRow(rows: string[][], columnIndex: number) {
+  for (let index = 1; index < rows.length; index += 1) {
+    if (!rowCell(rows, index, columnIndex)) return index + 1;
+  }
+  return Math.max(2, rows.length + 1);
+}
+
 export async function loadPlaylistData(): Promise<PlaylistData> {
   const spreadsheetId = process.env.PLAYLIST_SPREADSHEET_ID?.trim();
   if (!spreadsheetId) {
@@ -130,23 +215,8 @@ export async function loadPlaylistData(): Promise<PlaylistData> {
   }
 
   try {
-    const accessToken = await createAccessToken();
     const sheetName = process.env.PLAYLIST_DATA_SHEET || "Action Items";
-    const endpoint =
-      `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(spreadsheetId)}` +
-      `/values/${encodeURIComponent(sheetName)}` +
-      "?majorDimension=ROWS&valueRenderOption=FORMATTED_VALUE&dateTimeRenderOption=FORMATTED_STRING";
-    const response = await fetch(endpoint, {
-      cache: "no-store",
-      headers: { Authorization: `Bearer ${accessToken}`, Accept: "application/json" },
-    });
-    if (!response.ok) {
-      const detail = await response.text();
-      throw new Error(`Google Sheets API request failed (${response.status}): ${detail.slice(0, 160)}`);
-    }
-
-    const payload = (await response.json()) as { values?: unknown[][] };
-    const values = (payload.values || []).map((row) => row.map((value) => String(value ?? "")));
+    const values = await loadSheetRows(spreadsheetId, sheetName);
     const headers = (values.shift() || []).map((value) => value.trim());
     const rows = values
       .map((row, index) => ({
@@ -163,6 +233,141 @@ export async function loadPlaylistData(): Promise<PlaylistData> {
       rows: [],
       syncedAt: null,
       error: error instanceof Error ? error.message : "The Playlist could not be loaded.",
+    };
+  }
+}
+
+export async function loadWorkspaceSetupData(): Promise<WorkspaceSetupData> {
+  const spreadsheetId = process.env.PLAYLIST_SPREADSHEET_ID?.trim();
+  const emptyColumns: WorkspaceSetupColumns = {
+    projectName: 1,
+    teamFirstName: 4,
+    teamLastName: 5,
+    teamFullName: 6,
+    teamEmail: 7,
+    teamEmailOptOut: 8,
+    statusName: 14,
+    statusBackground: 15,
+    statusFont: 16,
+    priorityName: 19,
+    priorityBackground: 20,
+    priorityFont: 21,
+  };
+
+  if (!spreadsheetId) {
+    return {
+      configured: false,
+      projectName: "",
+      dashboardUrl: "",
+      teamMembers: [],
+      statuses: [],
+      priorities: [],
+      nextTeamRow: 2,
+      nextStatusRow: 2,
+      nextPriorityRow: 2,
+      columns: emptyColumns,
+      syncedAt: null,
+    };
+  }
+
+  try {
+    const sheetName = process.env.PLAYLIST_SETUP_SHEET || "Setup";
+    const rows = await loadSheetRows(spreadsheetId, sheetName);
+    const headers = (rows[0] || []).map((value) => value.trim());
+
+    const teamFirstName = headerIndex(headers, ["FIRST NAME"], 3);
+    const teamLastName = headerIndex(headers, ["LAST NAME"], 4);
+    const teamFullName = headerIndex(headers, ["FULL NAME"], 5);
+    const teamEmail = headerIndex(headers, ["EMAIL"], 6);
+    const teamEmailOptOut = headerIndex(headers, ["EMAIL OPT OUT"], 7);
+    const statusName = headerIndex(headers, ["STATUS"], 13);
+    const statusBackground = headerIndex(headers, ["STATUS BG COLOR", "BACKGROUND HEX COLOR"], 14);
+    const statusFont = headerIndex(headers, ["STATUS FONT COLOR", "FONT HEX COLOR"], 15);
+    const priorityName = headerIndex(headers, ["PRIORITY"], 18);
+    const priorityBackground = headerIndex(headers, ["PRIORITY BG COLOR"], 19);
+    const priorityFont = headerIndex(headers, ["PRIORITY FONT COLOR"], 20);
+
+    const teamMembers: WorkspaceTeamMember[] = [];
+    const statuses: WorkspaceColorSetting[] = [];
+    const priorities: WorkspaceColorSetting[] = [];
+
+    for (let index = 1; index < rows.length; index += 1) {
+      const fullName = rowCell(rows, index, teamFullName);
+      if (fullName) {
+        const optOut = rowCell(rows, index, teamEmailOptOut).toUpperCase();
+        teamMembers.push({
+          rowNumber: index + 1,
+          firstName: rowCell(rows, index, teamFirstName),
+          lastName: rowCell(rows, index, teamLastName),
+          fullName,
+          email: rowCell(rows, index, teamEmail),
+          emailOptOut: optOut === "TRUE" || optOut === "YES" || optOut === "1",
+        });
+      }
+
+      const status = rowCell(rows, index, statusName);
+      if (status) {
+        statuses.push({
+          rowNumber: index + 1,
+          label: status,
+          backgroundColor: rowCell(rows, index, statusBackground),
+          fontColor: rowCell(rows, index, statusFont),
+        });
+      }
+
+      const priority = rowCell(rows, index, priorityName);
+      if (priority) {
+        priorities.push({
+          rowNumber: index + 1,
+          label: priority,
+          backgroundColor: rowCell(rows, index, priorityBackground),
+          fontColor: rowCell(rows, index, priorityFont),
+        });
+      }
+    }
+
+    const columns: WorkspaceSetupColumns = {
+      projectName: 1,
+      teamFirstName: teamFirstName + 1,
+      teamLastName: teamLastName + 1,
+      teamFullName: teamFullName + 1,
+      teamEmail: teamEmail + 1,
+      teamEmailOptOut: teamEmailOptOut + 1,
+      statusName: statusName + 1,
+      statusBackground: statusBackground + 1,
+      statusFont: statusFont + 1,
+      priorityName: priorityName + 1,
+      priorityBackground: priorityBackground + 1,
+      priorityFont: priorityFont + 1,
+    };
+
+    return {
+      configured: true,
+      projectName: rowCell(rows, 1, 0) || "NEW PROJECT",
+      dashboardUrl: rowCell(rows, 4, 0),
+      teamMembers,
+      statuses,
+      priorities,
+      nextTeamRow: nextOpenRow(rows, teamFullName),
+      nextStatusRow: nextOpenRow(rows, statusName),
+      nextPriorityRow: nextOpenRow(rows, priorityName),
+      columns,
+      syncedAt: new Date().toISOString(),
+    };
+  } catch (error) {
+    return {
+      configured: true,
+      projectName: "",
+      dashboardUrl: "",
+      teamMembers: [],
+      statuses: [],
+      priorities: [],
+      nextTeamRow: 2,
+      nextStatusRow: 2,
+      nextPriorityRow: 2,
+      columns: emptyColumns,
+      syncedAt: null,
+      error: error instanceof Error ? error.message : "Workspace Setup could not be loaded.",
     };
   }
 }
