@@ -42,14 +42,14 @@ export async function POST(request: Request) {
   }
 
   if (body.action === "updateSetupCells") {
-    if (!Number.isInteger(body.rowNumber) || (body.rowNumber || 0) < 2) {
+    if (typeof body.rowNumber !== "number" || !Number.isInteger(body.rowNumber) || body.rowNumber < 2) {
       return NextResponse.json({ error: "A valid Setup rowNumber is required." }, { status: 400 });
     }
     if (!Array.isArray(body.cells) || body.cells.length === 0) {
       return NextResponse.json({ error: "At least one Setup cell update is required." }, { status: 400 });
     }
     const invalidCell = body.cells.some(
-      (cell) => !Number.isInteger(cell.column) || (cell.column || 0) < 1 || (cell.column || 0) > 100,
+      (cell) => typeof cell.column !== "number" || !Number.isInteger(cell.column) || cell.column < 1 || cell.column > 100,
     );
     if (invalidCell) {
       return NextResponse.json({ error: "Setup cell columns must be between 1 and 100." }, { status: 400 });
