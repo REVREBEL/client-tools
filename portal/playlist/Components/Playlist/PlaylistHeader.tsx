@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, ListChecks } from "lucide-react";
+import { BarChart3, ListChecks, SlidersHorizontal } from "lucide-react";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -10,10 +10,18 @@ type PlaylistHeaderProps = {
   eyebrow: string;
   syncedAt: string | null;
   rowCount: number;
-  active: "playlist" | "tracking";
+  countLabel?: string;
+  active: "playlist" | "tracking" | "setup";
 };
 
-export default function PlaylistHeader({ title, eyebrow, syncedAt, rowCount, active }: PlaylistHeaderProps) {
+export default function PlaylistHeader({
+  title,
+  eyebrow,
+  syncedAt,
+  rowCount,
+  countLabel = "action items",
+  active,
+}: PlaylistHeaderProps) {
   return (
     <>
       <header className="playlist-app-header">
@@ -27,7 +35,7 @@ export default function PlaylistHeader({ title, eyebrow, syncedAt, rowCount, act
         </div>
 
         <div className="playlist-app-header__sync">
-          <span>{rowCount.toLocaleString()} action items</span>
+          <span>{rowCount.toLocaleString()} {countLabel}</span>
           <small>{syncedAt ? `Synced ${new Date(syncedAt).toLocaleString()}` : "Live Google Sheet"}</small>
         </div>
       </header>
@@ -40,6 +48,10 @@ export default function PlaylistHeader({ title, eyebrow, syncedAt, rowCount, act
         <Link href={`${BASE_PATH}/playlist/tracking`} data-active={active === "tracking" ? "true" : "false"}>
           <BarChart3 aria-hidden="true" />
           Tracking Dashboard
+        </Link>
+        <Link href={`${BASE_PATH}/playlist/setup`} data-active={active === "setup" ? "true" : "false"}>
+          <SlidersHorizontal aria-hidden="true" />
+          Workspace Setup
         </Link>
       </nav>
 
