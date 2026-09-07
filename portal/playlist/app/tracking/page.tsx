@@ -1,9 +1,9 @@
 import TrackingDashboard from "../../Components/Tracking/TrackingDashboard";
-import { loadPlaylistData } from "../lib/google-sheets";
+import { loadPlaylistData, loadWorkspaceSetupData } from "../lib/google-sheets";
 
 export const dynamic = "force-dynamic";
 
 export default async function TrackingPage() {
-  const data = await loadPlaylistData();
-  return <TrackingDashboard data={data} />;
+  const [data, setup] = await Promise.all([loadPlaylistData(), loadWorkspaceSetupData()]);
+  return <TrackingDashboard data={data} setup={setup} />;
 }
