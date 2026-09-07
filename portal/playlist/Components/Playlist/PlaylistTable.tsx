@@ -7,15 +7,15 @@ const PRIORITY_COLORS: Record<string, { background: string; color: string }> = {
   LOW: { background: "#B2D3DE", color: "#163666" },
 };
 
-type ColorMap = Record<string, { background: string; color: string }>;
+type ColorMap = Record<string, { background?: string; color?: string }>;
 
 function configuredColors(settings: WorkspaceColorSetting[]): ColorMap {
   return Object.fromEntries(
     settings.map((setting) => [
       normalize(setting.label).toUpperCase(),
       {
-        background: setting.backgroundColor || "#FFFFFF",
-        color: setting.fontColor || "#163666",
+        background: setting.backgroundColor || undefined,
+        color: setting.fontColor || undefined,
       },
     ]),
   );
@@ -27,7 +27,11 @@ function Badge({ value, type, colors }: { value: string; type: "status" | "prior
   const fallback = type === "status"
     ? statusColors(label)
     : PRIORITY_COLORS[key] || { background: "#FFFFFF", color: "#163666" };
-  const resolved = colors[key] || fallback;
+  const configured = colors[key];
+  const resolved = {
+    background: configured?.background || fallback.background,
+    color: configured?.color || fallback.color,
+  };
 
   return (
     <span
