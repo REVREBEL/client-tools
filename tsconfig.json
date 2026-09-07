@@ -30,6 +30,8 @@
     "portal/metrics/app/**/*.jsx",
     "portal/playlist/app/**/*.ts",
     "portal/playlist/app/**/*.tsx",
+    "portal/playlist/Components/**/*.ts",
+    "portal/playlist/Components/**/*.tsx",
     "middleware.ts"
   ],
   "exclude": ["node_modules", "**/build/**", "**/.next/**", "portal/metrics/app/code/**"]
