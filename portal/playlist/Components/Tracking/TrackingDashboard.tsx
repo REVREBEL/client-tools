@@ -35,12 +35,19 @@ export default function TrackingDashboard({ data, setup }: { data: PlaylistData;
     (setup?.statuses || []).map((setting) => [
       normalize(setting.label).toUpperCase(),
       {
-        background: setting.backgroundColor || "#FFFFFF",
-        color: setting.fontColor || "#163666",
+        background: setting.backgroundColor || undefined,
+        color: setting.fontColor || undefined,
       },
     ]),
-  );
-  const resolvedStatusColors = (label: string) => configuredStatusColors[normalize(label).toUpperCase()] || statusColors(label);
+  ) as Record<string, { background?: string; color?: string }>;
+  const resolvedStatusColors = (label: string) => {
+    const fallback = statusColors(label);
+    const configured = configuredStatusColors[normalize(label).toUpperCase()];
+    return {
+      background: configured?.background || fallback.background,
+      color: configured?.color || fallback.color,
+    };
+  };
 
   const completed = data.rows.filter(isComplete).length;
   const overdue = data.rows.filter((row) => isOverdue(row)).length;
