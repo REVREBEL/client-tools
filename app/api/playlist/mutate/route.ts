@@ -7,6 +7,11 @@ import {
 
 export const dynamic = "force-dynamic";
 
+type SetupCell = {
+  column?: number;
+  value?: unknown;
+};
+
 export async function POST(request: Request) {
   const session = await auth();
   if (!session.userId) return NextResponse.json({ error: "Authentication required." }, { status: 401 });
@@ -27,12 +32,28 @@ export async function POST(request: Request) {
   }
 
   const body = (await request.json()) as {
-    action?: "updateRow" | "insertRow";
+    action?: "updateRow" | "insertRow" | "updateSetupCells";
     rowNumber?: number;
     values?: Record<string, unknown>;
+    cells?: SetupCell[];
   };
-  if (!body.action || !["updateRow", "insertRow"].includes(body.action)) {
+  if (!body.action || !["updateRow", "insertRow", "updateSetupCells"].includes(body.action)) {
     return NextResponse.json({ error: "Unsupported Playlist action." }, { status: 400 });
+  }
+
+  if (body.action === "updateSetupCells") {
+    if (!Number.isInteger(body.rowNumber) || (body.rowNumber || 0) < 2) {
+      return NextResponse.json({ error: "A valid Setup rowNumber is required." }, { status: 400 });
+    }
+    if (!Array.isArray(body.cells) || body.cells.length === 0) {
+      return NextResponse.json({ error: "At least one Setup cell update is required." }, { status: 400 });
+    }
+    const invalidCell = body.cells.some(
+      (cell) => !Number.isInteger(cell.column) || (cell.column || 0) < 1 || (cell.column || 0) > 100,
+    );
+    if (invalidCell) {
+      return NextResponse.json({ error: "Setup cell columns must be between 1 and 100." }, { status: 400 });
+    }
   }
 
   const user = await currentUser();
@@ -47,6 +68,7 @@ export async function POST(request: Request) {
         action: body.action,
         rowNumber: body.rowNumber,
         values: body.values || {},
+        cells: body.cells || [],
         requestedBy,
       }),
       cache: "no-store",
