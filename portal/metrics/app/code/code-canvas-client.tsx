@@ -17,7 +17,7 @@ import signInSource from "../sign-in/[[...sign-in]]/page.tsx?raw";
 import signUpSource from "../sign-up/[[...sign-up]]/page.tsx?raw";
 import sheetRouteSource from "../api/sheet/route.ts?raw";
 import sheetDashboardSource from "../sheet-dashboard.tsx?raw";
-import proxySource from "../../proxy.ts?raw";
+import middlewareSource from "../../middleware.ts?raw";
 
 const FILES = [
   { name: "app/sheet-dashboard.tsx", source: sheetDashboardSource },
@@ -34,7 +34,7 @@ const FILES = [
   { name: "app/sign-in/[[...sign-in]]/page.tsx", source: signInSource },
   { name: "app/sign-up/[[...sign-up]]/page.tsx", source: signUpSource },
   { name: "app/request-access/[[...request-access]]/page.tsx", source: requestAccessSource },
-  { name: "proxy.ts", source: proxySource },
+  { name: "middleware.ts", source: middlewareSource },
   { name: "app/globals.css", source: globalsSource },
 ];
 
