@@ -15,7 +15,7 @@ on:
       - "wrangler.json"
       - "tsconfig.json"
       - "postcss.config.mjs"
-      - "proxy.ts"
+      - "middleware.ts"
       - ".github/workflows/client-portal-build.yml"
   pull_request:
     paths:
@@ -29,7 +29,7 @@ on:
       - "wrangler.json"
       - "tsconfig.json"
       - "postcss.config.mjs"
-      - "proxy.ts"
+      - "middleware.ts"
       - ".github/workflows/client-portal-build.yml"
 
 jobs:
