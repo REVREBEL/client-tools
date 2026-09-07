@@ -1,4 +1,4 @@
-import type { PlaylistData, PlaylistRow } from "../../app/lib/google-sheets";
+import type { PlaylistData, PlaylistRow, WorkspaceSetupData } from "../../app/lib/google-sheets";
 import PlaylistHeader from "../Playlist/PlaylistHeader";
 import { groupCounts, isComplete, isOverdue, normalize, parseDueDate, statusColors } from "../playlist-utils";
 
@@ -18,7 +18,7 @@ function upcomingRows(rows: PlaylistRow[]) {
     .slice(0, 8);
 }
 
-export default function TrackingDashboard({ data }: { data: PlaylistData }) {
+export default function TrackingDashboard({ data, setup }: { data: PlaylistData; setup?: WorkspaceSetupData }) {
   if (!data.configured || data.error) {
     return (
       <main className="playlist-page">
@@ -30,6 +30,17 @@ export default function TrackingDashboard({ data }: { data: PlaylistData }) {
       </main>
     );
   }
+
+  const configuredStatusColors = Object.fromEntries(
+    (setup?.statuses || []).map((setting) => [
+      normalize(setting.label).toUpperCase(),
+      {
+        background: setting.backgroundColor || "#FFFFFF",
+        color: setting.fontColor || "#163666",
+      },
+    ]),
+  );
+  const resolvedStatusColors = (label: string) => configuredStatusColors[normalize(label).toUpperCase()] || statusColors(label);
 
   const completed = data.rows.filter(isComplete).length;
   const overdue = data.rows.filter((row) => isOverdue(row)).length;
@@ -82,7 +93,7 @@ export default function TrackingDashboard({ data }: { data: PlaylistData }) {
             </header>
             <div className="tracking-status-list">
               {statuses.map((item) => {
-                const colors = statusColors(item.label);
+                const colors = resolvedStatusColors(item.label);
                 const share = data.rows.length ? Math.round((item.count / data.rows.length) * 100) : 0;
                 return (
                   <div className="tracking-status-row" key={item.label}>
