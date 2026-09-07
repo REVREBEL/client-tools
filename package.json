@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint app portal/docs/app portal/metrics/app portal/playlist/app proxy.ts"
+    "lint": "eslint app portal/docs/app portal/metrics/app portal/playlist/app middleware.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.6.0",
