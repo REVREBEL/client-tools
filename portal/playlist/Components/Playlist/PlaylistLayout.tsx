@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { PlaylistData } from "../../app/lib/google-sheets";
+import type { PlaylistData, WorkspaceSetupData } from "../../app/lib/google-sheets";
 import { normalize } from "../playlist-utils";
 import PlaylistFilters from "./PlaylistFilters";
 import PlaylistHeader from "./PlaylistHeader";
@@ -37,7 +37,7 @@ function ErrorState({ data }: { data: PlaylistData }) {
   return null;
 }
 
-export default function PlaylistLayout({ data }: { data: PlaylistData }) {
+export default function PlaylistLayout({ data, setup }: { data: PlaylistData; setup?: WorkspaceSetupData }) {
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("");
   const [teamLead, setTeamLead] = useState("");
@@ -104,6 +104,8 @@ export default function PlaylistLayout({ data }: { data: PlaylistData }) {
           rows={rows}
           showPriority={data.headers.includes("PRIORITY")}
           showDependency={data.headers.includes("ACTION ITEM DEPENDENCY")}
+          statusSettings={setup?.statuses || []}
+          prioritySettings={setup?.priorities || []}
         />
       </div>
     </main>
