@@ -1,9 +1,9 @@
-import PlaylistBoard from "./playlist-board";
+import PlaylistLayout from "../Components/Playlist/PlaylistLayout";
 import { loadPlaylistData } from "./lib/google-sheets";
 
 export const dynamic = "force-dynamic";
 
 export default async function PlaylistPage() {
   const data = await loadPlaylistData();
-  return <PlaylistBoard data={data} />;
+  return <PlaylistLayout data={data} />;
 }
