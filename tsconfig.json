@@ -30,7 +30,7 @@
     "portal/metrics/app/**/*.jsx",
     "portal/playlist/app/**/*.ts",
     "portal/playlist/app/**/*.tsx",
-    "proxy.ts"
+    "middleware.ts"
   ],
   "exclude": ["node_modules", "**/build/**", "**/.next/**", "portal/metrics/app/code/**"]
 }
