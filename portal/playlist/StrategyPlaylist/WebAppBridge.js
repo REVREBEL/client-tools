@@ -30,6 +30,11 @@ function doPost(e) {
       return apiJsonResponse_({ ok: true, result: result }, 201);
     }
 
+    if (action === "updateSetupCells") {
+      const result = apiUpdateSetupCells_(payload.rowNumber, payload.cells || [], requestedBy);
+      return apiJsonResponse_({ ok: true, result: result }, 200);
+    }
+
     return apiJsonResponse_({ ok: false, error: "Unsupported action" }, 400);
   } catch (error) {
     console.error(">>> [WebAppBridge] API error:", error);
@@ -109,6 +114,49 @@ function apiInsertPlaylistRow_(values, requestedBy) {
   }
 
   return { rowNumber: rowNumber };
+}
+
+function apiUpdateSetupCells_(rowNumber, cells, requestedBy) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheetName = (typeof SETUP_SHEET_NAME !== "undefined" && SETUP_SHEET_NAME) ? SETUP_SHEET_NAME : "Setup";
+  const sheet = ss.getSheetByName(sheetName);
+  if (!sheet) throw new Error(`Sheet "${sheetName}" was not found.`);
+
+  const row = Number(rowNumber);
+  if (!Number.isInteger(row) || row < 2 || row > 10000) {
+    throw new Error("A valid Setup rowNumber is required.");
+  }
+  if (!Array.isArray(cells) || cells.length === 0 || cells.length > 50) {
+    throw new Error("One to fifty Setup cell updates are required.");
+  }
+
+  if (row > sheet.getMaxRows()) {
+    sheet.insertRowsAfter(sheet.getMaxRows(), row - sheet.getMaxRows());
+  }
+
+  const changes = [];
+  cells.forEach(function(update) {
+    const column = Number(update && update.column);
+    if (!Number.isInteger(column) || column < 1 || column > 100) {
+      throw new Error("Setup cell columns must be between 1 and 100.");
+    }
+    if (column > sheet.getMaxColumns()) {
+      sheet.insertColumnsAfter(sheet.getMaxColumns(), column - sheet.getMaxColumns());
+    }
+
+    const cell = sheet.getRange(row, column);
+    const oldValue = cell.getValue();
+    const newValue = update && Object.prototype.hasOwnProperty.call(update, "value") ? update.value : "";
+    const oldText = oldValue === null || oldValue === undefined ? "" : String(oldValue);
+    const newText = newValue === null || newValue === undefined ? "" : String(newValue);
+    if (oldText === newText) return;
+
+    cell.setValue(newValue === null || newValue === undefined ? "" : newValue);
+    changes.push({ column: column, oldValue: oldText, newValue: newText });
+  });
+
+  SpreadsheetApp.flush();
+  return { rowNumber: row, changes: changes, requestedBy: requestedBy };
 }
 
 function apiJsonResponse_(payload, status) {
