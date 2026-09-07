@@ -134,3 +134,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+/client-docs-hub/.sites-runtime
+/client-metrics/.sites-runtime
+client-docs-hub/.wrangler/deploy/config.json
+/client-docs-hub/.wrangler
+/client-metrics/.wrangler
