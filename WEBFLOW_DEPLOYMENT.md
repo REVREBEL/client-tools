@@ -20,7 +20,7 @@ app/                      # Next.js App Router and shared portal shell
   (portal)/
     docs/                  # /docs inside the mounted application
     metrics/               # /metrics inside the mounted application
-    playlist/              # /playlist inside the mounted application
+    playlist/              # /playlist, /playlist/tracking, /playlist/setup
 portal/
   docs/                    # Docs Hub source module
   metrics/                 # Metrics source module
@@ -38,6 +38,8 @@ Because Webflow mounts the whole application at `/portal`, the public URLs are:
 - `/portal/docs`
 - `/portal/metrics`
 - `/portal/playlist`
+- `/portal/playlist/tracking`
+- `/portal/playlist/setup`
 - `/portal/docs/manage`
 
 The physical `app/` directory is a Next.js framework convention. It does not create an `/app` URL and does not conflict with another Webflow Cloud application mounted at `/app`.
@@ -58,11 +60,14 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 ### Google Sheets
 
 - `GOOGLE_SERVICE_ACCOUNT`
-- `SPREADSHEET_ID`
-- `DOCS_SPREADSHEET_ID`
+- `SPREADSHEET_ID` — Metrics source spreadsheet
+- `DOCS_SPREADSHEET_ID` — Docs Hub source spreadsheet
 - `DOCS_SPREADSHEET_GID`
-- `PLAYLIST_SPREADSHEET_ID`
-- `PLAYLIST_DATA_SHEET`
+- `PLAYLIST_SPREADSHEET_ID` — Playlist source spreadsheet
+- `PLAYLIST_DATA_SHEET` — Action Item tab, normally `Action Items`
+- `PLAYLIST_SETUP_SHEET` — optional; defaults to `Setup`
+
+The Metrics, Docs Hub, and Playlist spreadsheet IDs remain intentionally separate so each tool can move to its own workbook without application-code changes.
 
 ### Playlist write bridge
 
@@ -70,6 +75,8 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 - `PLAYLIST_APPS_SCRIPT_TOKEN`
 
 The Apps Script Script Property `PORTAL_API_TOKEN` must match `PLAYLIST_APPS_SCRIPT_TOKEN`.
+
+The Playlist write bridge supports both Action Item mutations and Workspace Setup cell updates. If the Apps Script project is maintained separately from this GitHub repository, changes to `portal/playlist/StrategyPlaylist/WebAppBridge.js` must also be synced to that Apps Script project and the web-app deployment updated before the new Setup write actions are available in production.
 
 ## Docs Object Storage
 
