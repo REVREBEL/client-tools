@@ -1,12 +1,13 @@
-import { getConfiguredSpreadsheetId, loadGoogleSheetValues } from "./google-sheets";
+import {
+  getConfiguredMetricsSheetConfig,
+  getConfiguredSpreadsheetId,
+  loadGoogleSheetValues,
+} from "./google-sheets";
 
 export type DashboardRow = {
   index_: number;
   row: (string | number)[];
 };
-
-const SEGMENT_SHEET_GID = "1941800013";
-const SOURCE_SHEET_GID = "1319180770";
 
 const HEADER_ALIASES: Record<string, string> = {
   dow_month: "dow_stay_month",
@@ -55,9 +56,10 @@ async function loadSheetTab(gid: string, range = "") {
 }
 
 export async function loadInitialSheetData() {
+  const { segmentGid, sourceGid } = getConfiguredMetricsSheetConfig();
   const [segment, source] = await Promise.all([
-    loadSheetTab(SEGMENT_SHEET_GID),
-    loadSheetTab(SOURCE_SHEET_GID),
+    loadSheetTab(segmentGid),
+    loadSheetTab(sourceGid),
   ]);
 
   return {
