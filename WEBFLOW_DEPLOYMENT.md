@@ -11,7 +11,14 @@ This repository is a single Next.js application built by Webflow Cloud from the 
 
 `package.json`, `next.config.ts`, `webflow.json`, `wrangler.json`, `app/`, `public/`, and the shared build configuration all live at the repository root.
 
-Do not hard-code `basePath` or `assetPrefix` in `next.config.ts`. Webflow Cloud injects both values from the environment mount path during its production build. Set `NEXT_PUBLIC_BASE_PATH=/portal` for browser-side `fetch()` calls and other raw URLs that Next.js cannot prefix automatically.
+Do not hard-code `basePath` or `assetPrefix` in `next.config.ts`. Webflow Cloud injects both values from the environment mount path during its production build.
+
+Set `NEXT_PUBLIC_BASE_PATH=/portal` only for browser-side `fetch()` calls and other raw browser URLs that Next.js cannot prefix automatically. Internal Next.js navigation must stay relative to the application root:
+
+- `<Link href="/playlist">` becomes `/portal/playlist` after Webflow mounts the app.
+- `redirect("/sign-in")` becomes `/portal/sign-in`.
+- Do **not** build Next.js links as `${NEXT_PUBLIC_BASE_PATH}/playlist`; that produces `/portal/portal/playlist`.
+- Raw `fetch()`, plain asset URLs, and third-party redirect properties can use `NEXT_PUBLIC_BASE_PATH` when they need the externally mounted URL.
 
 ## Repository layout
 
@@ -20,7 +27,7 @@ app/                      # Next.js App Router and shared portal shell
   (portal)/
     docs/                  # /docs inside the mounted application
     metrics/               # /metrics inside the mounted application
-    playlist/              # /playlist, /playlist/tracking, /playlist/setup
+    playlist/              # /playlist and Playlist child views
 portal/
   docs/                    # Docs Hub source module
   metrics/                 # Metrics source module
@@ -39,6 +46,7 @@ Because Webflow mounts the whole application at `/portal`, the public URLs are:
 - `/portal/metrics`
 - `/portal/playlist`
 - `/portal/playlist/tracking`
+- `/portal/playlist/sequencer`
 - `/portal/playlist/setup`
 - `/portal/docs/manage`
 
@@ -61,13 +69,15 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 
 - `GOOGLE_SERVICE_ACCOUNT`
 - `SPREADSHEET_ID` — Metrics source spreadsheet
+- `METRICS_SEGMENT_GID` — Metrics `segment_dataset` tab GID
+- `METRICS_SOURCE_GID` — Metrics `source_dataset` tab GID
 - `DOCS_SPREADSHEET_ID` — Docs Hub source spreadsheet
-- `DOCS_SPREADSHEET_GID`
+- `DOCS_SPREADSHEET_GID` — Docs Hub source tab GID
 - `PLAYLIST_SPREADSHEET_ID` — Playlist source spreadsheet
 - `PLAYLIST_DATA_SHEET` — Action Item tab, normally `Action Items`
 - `PLAYLIST_SETUP_SHEET` — optional; defaults to `Setup`
 
-The Metrics, Docs Hub, and Playlist spreadsheet IDs remain intentionally separate so each tool can move to its own workbook without application-code changes.
+The Metrics, Docs Hub, and Playlist spreadsheet IDs remain intentionally separate so each tool can move to its own workbook without application-code changes. Metrics keeps the existing generic `SPREADSHEET_ID` name for backward compatibility, while its tab GIDs are now explicit Webflow environment values instead of code constants.
 
 ### Playlist write bridge
 
@@ -88,5 +98,9 @@ After the first successful deployment, an organization admin can use `/portal/do
 
 ```bash
 npm install
-NEXT_PUBLIC_BASE_PATH=/portal npm run build
+NEXT_PUBLIC_BASE_PATH=/portal \
+SPREADSHEET_ID=build-only-metrics-sheet \
+METRICS_SEGMENT_GID=1 \
+METRICS_SOURCE_GID=2 \
+npm run build
 ```
