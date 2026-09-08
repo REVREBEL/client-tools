@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, ListChecks, SlidersHorizontal } from "lucide-react";
+import { ArrowUpDown, BarChart3, ListChecks, SlidersHorizontal } from "lucide-react";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -11,7 +11,7 @@ type PlaylistHeaderProps = {
   syncedAt: string | null;
   rowCount: number;
   countLabel?: string;
-  active: "playlist" | "tracking" | "setup";
+  active: "dashboard" | "tracking" | "sequencer" | "setup";
 };
 
 export default function PlaylistHeader({
@@ -41,13 +41,17 @@ export default function PlaylistHeader({
       </header>
 
       <nav className="playlist-section-nav" aria-label="Playlist views">
-        <Link href={`${BASE_PATH}/playlist`} data-active={active === "playlist" ? "true" : "false"}>
+        <Link href={`${BASE_PATH}/playlist`} data-active={active === "dashboard" ? "true" : "false"}>
           <ListChecks aria-hidden="true" />
-          Playlist
+          Strategy Items
         </Link>
         <Link href={`${BASE_PATH}/playlist/tracking`} data-active={active === "tracking" ? "true" : "false"}>
           <BarChart3 aria-hidden="true" />
           Tracking Dashboard
+        </Link>
+        <Link href={`${BASE_PATH}/playlist/sequencer`} data-active={active === "sequencer" ? "true" : "false"}>
+          <ArrowUpDown aria-hidden="true" />
+          Sequence Arranger
         </Link>
         <Link href={`${BASE_PATH}/playlist/setup`} data-active={active === "setup" ? "true" : "false"}>
           <SlidersHorizontal aria-hidden="true" />
