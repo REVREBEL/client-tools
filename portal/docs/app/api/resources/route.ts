@@ -1,10 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const SHEET_ID = process.env.DOCS_SPREADSHEET_ID || "1DUKyQPbnQuNKJfU40fygxZ1eqNR0SExWgGAK358ulQw";
-const SHEET_GID = process.env.DOCS_SPREADSHEET_GID || "1388513406";
-const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${SHEET_GID}&range=C:K`;
-
 const localFallbacks: Array<[string, string]> = [
   ["segment definition + hierarchy", "segment-code-library.pdf"],
   ["room type & amenity descriptions", "rooms-page-copy.pdf"],
@@ -21,6 +17,16 @@ const localFallbacks: Array<[string, string]> = [
   ["enhancing visibility", "product-conversion-strategy.pdf"],
   ["layout recommendations", "layout-recommendations.pdf"],
 ];
+
+function getDocsSheetUrl() {
+  const sheetId = process.env.DOCS_SPREADSHEET_ID?.trim();
+  const sheetGid = process.env.DOCS_SPREADSHEET_GID?.trim();
+  if (!sheetId) throw new Error("DOCS_SPREADSHEET_ID is not configured.");
+  if (!sheetGid || !/^\d+$/.test(sheetGid)) {
+    throw new Error("DOCS_SPREADSHEET_GID must be configured with the numeric Google Sheet tab GID.");
+  }
+  return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&gid=${sheetGid}&range=C:K`;
+}
 
 function parseCsv(input: string) {
   const rows: string[][] = [];
@@ -89,7 +95,7 @@ export async function GET() {
   }
 
   try {
-    const response = await fetch(CSV_URL, { cache: "no-store" });
+    const response = await fetch(getDocsSheetUrl(), { cache: "no-store" });
     if (!response.ok) throw new Error(`Resource Hub returned ${response.status}`);
     const rows = parseCsv(await response.text());
     const headers = rows.shift()?.map(clean) ?? [];
