@@ -1,10 +1,3 @@
-const DEFAULT_SPREADSHEET_ID = "1MD-PF0GScwSG3m9wTwAzTHjl2kownwFNEppz3VmuyK0";
-
-const SHEET_NAMES_BY_GID: Record<string, string> = {
-  "1941800013": "segment_dataset",
-  "1319180770": "source_dataset",
-};
-
 type ServiceAccountCredentials = {
   client_email?: string;
   private_key?: string;
@@ -16,6 +9,13 @@ type AccessTokenResponse = {
   expires_in?: number;
   error?: string;
   error_description?: string;
+};
+
+export type MetricsSheetConfig = {
+  spreadsheetId: string;
+  segmentGid: string;
+  sourceGid: string;
+  sheetUrl: string;
 };
 
 let cachedAccessToken: { value: string; expiresAt: number } | null = null;
@@ -132,8 +132,40 @@ async function createAccessToken() {
   return result.access_token;
 }
 
+function requireNumericGid(name: string) {
+  const value = process.env[name]?.trim();
+  if (!value || !/^\d+$/.test(value)) {
+    throw new Error(`${name} must be configured with the numeric Google Sheet tab GID.`);
+  }
+  return value;
+}
+
+export function getConfiguredMetricsSheetConfig(): MetricsSheetConfig {
+  const spreadsheetId = process.env.SPREADSHEET_ID?.trim();
+  if (!spreadsheetId) {
+    throw new Error("SPREADSHEET_ID is not configured for the Metrics dashboard.");
+  }
+
+  const segmentGid = requireNumericGid("METRICS_SEGMENT_GID");
+  const sourceGid = requireNumericGid("METRICS_SOURCE_GID");
+
+  return {
+    spreadsheetId,
+    segmentGid,
+    sourceGid,
+    sheetUrl: `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`,
+  };
+}
+
 export function getConfiguredSpreadsheetId() {
-  return process.env.SPREADSHEET_ID || DEFAULT_SPREADSHEET_ID;
+  return getConfiguredMetricsSheetConfig().spreadsheetId;
+}
+
+function getSheetNameForGid(gid: string) {
+  const { segmentGid, sourceGid } = getConfiguredMetricsSheetConfig();
+  if (gid === segmentGid) return "segment_dataset";
+  if (gid === sourceGid) return "source_dataset";
+  return null;
 }
 
 export async function loadGoogleSheetValues({
@@ -149,7 +181,7 @@ export async function loadGoogleSheetValues({
     throw new Error("This dashboard can only read its configured Google Sheet.");
   }
 
-  const sheetName = SHEET_NAMES_BY_GID[gid];
+  const sheetName = getSheetNameForGid(gid);
   if (!sheetName) {
     throw new Error("The requested Google Sheet tab is not configured.");
   }
