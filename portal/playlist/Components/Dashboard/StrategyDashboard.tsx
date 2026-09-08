@@ -1,7 +1,7 @@
 "use client";
 
 import { Calendar, ChevronDown, Edit2, FileText, Notebook, Search, Star, Trash2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import type { WorkspaceTeamMember } from "../../app/lib/google-sheets";
 import type { DashboardColorMap, DashboardTask } from "./dashboard-types";
 import { getDependencyStatus, getInitials, groupStrategies, normalizedKey } from "./dashboard-utils";
@@ -49,7 +49,7 @@ export default function StrategyDashboard({
   const [priorityOpen, setPriorityOpen] = useState(false);
   const [expandedStrategies, setExpandedStrategies] = useState<Record<string, boolean>>({});
   const [expandedTasks, setExpandedTasks] = useState<Record<number, boolean>>({});
-  const [tacticalFilters, setTacticalFilters] = useState<Record<string, string>>( {} );
+  const [tacticalFilters, setTacticalFilters] = useState<Record<string, string>>({});
 
   const availablePriorities = useMemo(
     () => Array.from(new Set(tasks.map((task) => task.priority).filter(Boolean))).sort(),
@@ -208,8 +208,8 @@ export default function StrategyDashboard({
                           const canExpand = Boolean(task.notes || task.actionDescription);
 
                           return (
-                            <>
-                              <tr key={task.id} className={canExpand ? "strategy-task-row strategy-task-row--expandable" : "strategy-task-row"} onClick={() => canExpand && setExpandedTasks((current) => ({ ...current, [task.id]: !detailsOpen }))}>
+                            <Fragment key={task.id}>
+                              <tr className={canExpand ? "strategy-task-row strategy-task-row--expandable" : "strategy-task-row"} onClick={() => canExpand && setExpandedTasks((current) => ({ ...current, [task.id]: !detailsOpen }))}>
                                 <td><button type="button" className="strategy-status-chip" disabled={busy} onClick={(event) => { event.stopPropagation(); void onCycleStatus(task); }} style={{ backgroundColor: statusColor.background, color: statusColor.color, borderColor: statusColor.color }}>{task.status}</button></td>
                                 <td>
                                   <div className="strategy-task-title">{task.coreFunction ? <Star aria-hidden="true" /> : null}<span>{task.action}</span></div>
@@ -233,14 +233,14 @@ export default function StrategyDashboard({
                                 </td>
                               </tr>
                               {detailsOpen && canExpand ? (
-                                <tr className="strategy-task-details" key={`${task.id}-details`}>
+                                <tr className="strategy-task-details">
                                   <td colSpan={7}>
                                     {task.actionDescription ? <div><h3><FileText aria-hidden="true" /> Action Item Description</h3><p>{textWithLinks(task.actionDescription)}</p></div> : null}
                                     {task.notes ? <div><h3><Notebook aria-hidden="true" /> Strategy Notes</h3><p>{textWithLinks(task.notes)}</p></div> : null}
                                   </td>
                                 </tr>
                               ) : null}
-                            </>
+                            </Fragment>
                           );
                         })}
                       </tbody>
