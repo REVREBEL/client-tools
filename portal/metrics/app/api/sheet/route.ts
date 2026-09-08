@@ -1,17 +1,15 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-import { getConfiguredSpreadsheetId, loadGoogleSheetValues } from "../../lib/google-sheets";
+import {
+  getConfiguredMetricsSheetConfig,
+  loadGoogleSheetValues,
+} from "../../lib/google-sheets";
 import {
   GOOGLE_SHEET_URL_PERMISSION,
   GOOGLE_SHEET_URL_PERMISSION_UNSCOPED,
 } from "../../permissions";
 
 export const dynamic = "force-dynamic";
-
-const DEFAULT_SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/1MD-PF0GScwSG3m9wTwAzTHjl2kownwFNEppz3VmuyK0/edit";
-const DEFAULT_SHEET_GID = "1941800013";
-const SOURCE_DATASET_GID = "1319180770";
 
 function extractSheetId(value: string) {
   const standard = value.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
@@ -115,36 +113,35 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Sign in to access the dashboard data." }, { status: 401 });
   }
 
-  const requestedUrl =
-    request.nextUrl.searchParams.get("url") ||
-    process.env.GOOGLE_SHEET_URL ||
-    DEFAULT_SHEET_URL;
-  const gid =
-    request.nextUrl.searchParams.get("gid") ||
-    process.env.GOOGLE_SHEET_GID ||
-    DEFAULT_SHEET_GID;
+  let config;
+  try {
+    config = getConfiguredMetricsSheetConfig();
+  } catch (error) {
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Metrics configuration is incomplete." },
+      { status: 503 },
+    );
+  }
+
+  const requestedUrl = request.nextUrl.searchParams.get("url") || config.sheetUrl;
+  const gid = request.nextUrl.searchParams.get("gid") || config.segmentGid;
   const requestedRange = request.nextUrl.searchParams.get("range") || "";
   const range = /^[A-Z]+(?::[A-Z]+)?$/.test(requestedRange) ? requestedRange : "";
-  const spreadsheetId = extractSheetId(requestedUrl) || getConfiguredSpreadsheetId();
+  const spreadsheetId = extractSheetId(requestedUrl) || config.spreadsheetId;
 
   if (!spreadsheetId || !/^\d+$/.test(gid)) {
     return NextResponse.json({ error: "Use a valid Google Sheet URL and numeric tab GID." }, { status: 400 });
   }
 
-  const configuredSpreadsheetId =
-    getConfiguredSpreadsheetId() || extractSheetId(DEFAULT_SHEET_URL);
   const isStandardDashboardRead =
-    spreadsheetId === configuredSpreadsheetId &&
+    spreadsheetId === config.spreadsheetId &&
     range === "" &&
-    (gid === DEFAULT_SHEET_GID || gid === SOURCE_DATASET_GID);
+    (gid === config.segmentGid || gid === config.sourceGid);
   const canChangeSheetSource =
     has({ permission: GOOGLE_SHEET_URL_PERMISSION }) ||
     has({ permission: GOOGLE_SHEET_URL_PERMISSION_UNSCOPED });
 
-  if (
-    !isStandardDashboardRead &&
-    !canChangeSheetSource
-  ) {
+  if (!isStandardDashboardRead && !canChangeSheetSource) {
     return NextResponse.json(
       { error: "You do not have permission to change the Google Sheet source." },
       { status: 403 },
