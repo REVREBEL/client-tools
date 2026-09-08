@@ -1,186 +1,140 @@
-import type { PlaylistData, PlaylistRow, WorkspaceSetupData } from "../../app/lib/google-sheets";
+"use client";
+
+import { useMemo, useState } from "react";
+import type { PlaylistData, WorkspaceSetupData } from "../../app/lib/google-sheets";
+import MetricsRibbon from "../Dashboard/MetricsRibbon";
+import { getDependencyStatus, isComplete, normalizedKey, parseDashboardTasks, statusColorMap } from "../Dashboard/dashboard-utils";
 import PlaylistHeader from "../Playlist/PlaylistHeader";
-import { groupCounts, isComplete, isOverdue, normalize, parseDueDate, statusColors } from "../playlist-utils";
-
-function completionPercent(rows: PlaylistRow[]) {
-  if (!rows.length) return 0;
-  return Math.round((rows.filter(isComplete).length / rows.length) * 100);
-}
-
-function upcomingRows(rows: PlaylistRow[]) {
-  return rows
-    .filter((row) => !isComplete(row) && parseDueDate(row.values["DUE DATE"]))
-    .sort((a, b) => {
-      const left = parseDueDate(a.values["DUE DATE"])?.getTime() || Number.MAX_SAFE_INTEGER;
-      const right = parseDueDate(b.values["DUE DATE"])?.getTime() || Number.MAX_SAFE_INTEGER;
-      return left - right;
-    })
-    .slice(0, 8);
-}
 
 export default function TrackingDashboard({ data, setup }: { data: PlaylistData; setup?: WorkspaceSetupData }) {
+  const [subtab, setSubtab] = useState<"overview" | "team">("overview");
+  const tasks = useMemo(() => parseDashboardTasks(data), [data]);
+  const colors = useMemo(() => statusColorMap(setup), [setup]);
+
   if (!data.configured || data.error) {
     return (
       <main className="playlist-page">
         <section className={`playlist-empty${data.error ? " playlist-empty--error" : ""}`}>
           <p className="playlist-eyebrow">Tracking Dashboard</p>
           <h1>{data.error ? "Playlist connection error" : "Connect the Playlist Sheet"}</h1>
-          <p>{data.error || "The tracking dashboard uses the same Action Items data source as the Strategy Playlist."}</p>
+          <p>{data.error || "The tracking dashboard uses the same Action Items data source as The Playlist."}</p>
         </section>
       </main>
     );
   }
 
-  const configuredStatusColors = Object.fromEntries(
-    (setup?.statuses || []).map((setting) => [
-      normalize(setting.label).toUpperCase(),
-      {
-        background: setting.backgroundColor || undefined,
-        color: setting.fontColor || undefined,
-      },
-    ]),
-  ) as Record<string, { background?: string; color?: string }>;
-  const resolvedStatusColors = (label: string) => {
-    const fallback = statusColors(label);
-    const configured = configuredStatusColors[normalize(label).toUpperCase()];
-    return {
-      background: configured?.background || fallback.background,
-      color: configured?.color || fallback.color,
-    };
-  };
+  const dependencies = tasks.filter((task) => task.dependency);
+  const dependenciesMet = dependencies.filter((task) => getDependencyStatus(tasks, task.dependency) === "COMPLETED").length;
+  const dependencyPercent = dependencies.length ? Math.round((dependenciesMet / dependencies.length) * 100) : 100;
+  const waitingOnHold = tasks.filter((task) => ["WAITING", "ON-HOLD"].includes(normalizedKey(task.status))).length;
+  const blockingItems = tasks.filter((task) => {
+    const blocksSomething = tasks.some((candidate) => {
+      const match = candidate.dependency.trim().match(/^([A-Z]+0*\d+)/i);
+      return match ? match[1].toUpperCase() === task.sort.toUpperCase() : false;
+    });
+    return blocksSomething && !isComplete(task);
+  }).length;
 
-  const completed = data.rows.filter(isComplete).length;
-  const overdue = data.rows.filter((row) => isOverdue(row)).length;
-  const active = data.rows.length - completed;
-  const percent = completionPercent(data.rows);
-  const statuses = groupCounts(data.rows, "STATUS");
-  const teamLeads = groupCounts(data.rows.filter((row) => !isComplete(row)), "TEAM LEAD").slice(0, 8);
-  const workstreams = groupCounts(data.rows.filter((row) => !isComplete(row)), "TACTICAL ITEM").slice(0, 8);
-  const upcoming = upcomingRows(data.rows);
+  const parentProgress = Array.from(
+    tasks.reduce((map, task) => {
+      const entry = map.get(task.strategy) || { name: task.strategy, total: 0, completed: 0 };
+      entry.total += 1;
+      if (isComplete(task)) entry.completed += 1;
+      map.set(task.strategy, entry);
+      return map;
+    }, new Map<string, { name: string; total: number; completed: number }>()).values(),
+  )
+    .map((entry) => ({ ...entry, percentage: entry.total ? Math.round((entry.completed / entry.total) * 100) : 0 }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const teamNames = setup?.teamMembers.length
+    ? setup.teamMembers.map((member) => member.fullName)
+    : Array.from(new Set(tasks.map((task) => task.lead).filter((lead) => lead && normalizedKey(lead) !== "UNASSIGNED"))).sort();
+
+  const teamProgress = teamNames.map((fullName) => {
+    const owned = tasks.filter((task) => task.lead === fullName);
+    return {
+      fullName,
+      total: owned.length,
+      notStarted: owned.filter((task) => normalizedKey(task.status) === "NOT STARTED").length,
+      waiting: owned.filter((task) => ["WAITING", "ON-HOLD"].includes(normalizedKey(task.status))).length,
+      inProgress: owned.filter((task) => ["IN-PROGRESS", "VERIFICATION CHECKS"].includes(normalizedKey(task.status))).length,
+      completed: owned.filter(isComplete).length,
+    };
+  }).filter((member) => member.total > 0);
 
   return (
-    <main className="playlist-page">
-      <div className="playlist-shell">
+    <main className="playlist-page playlist-page--dashboard">
+      <div className="playlist-shell playlist-shell--wide">
         <PlaylistHeader
           title="Tracking Dashboard"
           eyebrow="Project Progress & Accountability"
           syncedAt={data.syncedAt}
-          rowCount={data.rows.length}
+          rowCount={tasks.length}
           active="tracking"
         />
 
-        <section className="tracking-kpis" aria-label="Playlist progress summary">
-          <article className="tracking-kpi tracking-kpi--primary">
-            <span>Completion</span>
-            <strong>{percent}%</strong>
-            <small>{completed.toLocaleString()} of {data.rows.length.toLocaleString()} complete</small>
-          </article>
-          <article className="tracking-kpi">
-            <span>Open Items</span>
-            <strong>{active.toLocaleString()}</strong>
-            <small>Remaining across all workstreams</small>
-          </article>
-          <article className="tracking-kpi tracking-kpi--alert">
-            <span>Past Due</span>
-            <strong>{overdue.toLocaleString()}</strong>
-            <small>Open items beyond their due date</small>
-          </article>
-          <article className="tracking-kpi">
-            <span>Workstreams</span>
-            <strong>{groupCounts(data.rows, "TACTICAL ITEM").filter((item) => item.label !== "Unspecified").length}</strong>
-            <small>Distinct tactical workstreams</small>
-          </article>
-        </section>
+        <MetricsRibbon tasks={tasks} colors={colors} />
 
-        <section className="tracking-grid">
-          <article className="tracking-panel tracking-panel--status">
-            <header>
-              <p>Status Mix</p>
-              <h2>Where the Work Stands</h2>
-            </header>
-            <div className="tracking-status-list">
-              {statuses.map((item) => {
-                const colors = resolvedStatusColors(item.label);
-                const share = data.rows.length ? Math.round((item.count / data.rows.length) * 100) : 0;
-                return (
-                  <div className="tracking-status-row" key={item.label}>
-                    <span className="tracking-status-swatch" style={{ backgroundColor: colors.background }} aria-hidden="true" />
-                    <strong>{item.label}</strong>
-                    <div className="tracking-status-bar" aria-hidden="true">
-                      <span style={{ width: `${share}%`, backgroundColor: colors.background }} />
+        <div className="tracking-subnav" role="tablist" aria-label="Tracking dashboard views">
+          <button type="button" role="tab" aria-selected={subtab === "overview"} data-active={subtab === "overview"} onClick={() => setSubtab("overview")}>Overview</button>
+          <button type="button" role="tab" aria-selected={subtab === "team"} data-active={subtab === "team"} onClick={() => setSubtab("team")}>Team Progress</button>
+        </div>
+
+        {subtab === "overview" ? (
+          <section className="tracking-overview">
+            <div className="tracking-overview__metrics">
+              <article className="tracking-square-metric">
+                <strong>{blockingItems}</strong>
+                <span>Blocking<br />Items</span>
+              </article>
+              <article className="tracking-dependency-metric">
+                <div><strong>{dependenciesMet}</strong><div><span>{dependencyPercent}%</span><div><b style={{ width: `${dependencyPercent}%` }} /></div></div></div>
+                <h2>Dependencies<br />Met</h2>
+              </article>
+              <article className="tracking-square-metric tracking-square-metric--waiting">
+                <strong>{waitingOnHold}</strong>
+                <span>Waiting<br />On-Hold</span>
+              </article>
+            </div>
+
+            <article className="tracking-parent-progress">
+              <header><p>Strategic Progress</p><h2>Progress by Parent Item</h2></header>
+              <div>
+                {parentProgress.map((parent) => {
+                  const radius = 18;
+                  const circumference = 2 * Math.PI * radius;
+                  const offset = circumference - (parent.percentage / 100) * circumference;
+                  return (
+                    <div className="tracking-parent-row" key={parent.name}>
+                      <strong>{parent.name}</strong>
+                      <div><svg viewBox="0 0 44 44" aria-hidden="true"><circle className="tracking-ring-base" strokeWidth="4" fill="transparent" r={radius} cx="22" cy="22" /><circle className="tracking-ring-value" strokeWidth="4" strokeDasharray={circumference} strokeDashoffset={offset} fill="transparent" r={radius} cx="22" cy="22" /></svg><span>{parent.percentage}%</span></div>
                     </div>
-                    <span>{item.count}</span>
-                    <small>{share}%</small>
+                  );
+                })}
+              </div>
+            </article>
+          </section>
+        ) : (
+          <section className="tracking-team-progress">
+            <h2>Team Progress</h2>
+            <div>
+              {teamProgress.map((member) => (
+                <article className="tracking-team-row" key={member.fullName}>
+                  <div className="tracking-team-total"><strong>{member.total}</strong><span>Total Items</span></div>
+                  <div className="tracking-team-statuses">
+                    <div style={{ backgroundColor: colors["NOT STARTED"]?.background, color: colors["NOT STARTED"]?.color }}><strong>{member.notStarted}</strong><span>Not Started</span></div>
+                    <div style={{ backgroundColor: colors.WAITING?.background, color: colors.WAITING?.color }}><strong>{member.waiting}</strong><span>Waiting</span></div>
+                    <div style={{ backgroundColor: colors["IN-PROGRESS"]?.background, color: colors["IN-PROGRESS"]?.color }}><strong>{member.inProgress}</strong><span>In Progress</span></div>
+                    <div style={{ backgroundColor: colors.COMPLETED?.background, color: colors.COMPLETED?.color }}><strong>{member.completed}</strong><span>Completed</span></div>
                   </div>
-                );
-              })}
-            </div>
-          </article>
-
-          <article className="tracking-panel">
-            <header>
-              <p>Ownership</p>
-              <h2>Open Items by Team Lead</h2>
-            </header>
-            <div className="tracking-ranked-list">
-              {teamLeads.map((item, index) => (
-                <div key={item.label}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{item.label}</strong>
-                  <b>{item.count}</b>
-                </div>
+                  <h3>{member.fullName.split(/\s+/)[0]}</h3>
+                </article>
               ))}
+              {!teamProgress.length ? <div className="playlist-no-results">No team members have assigned action items.</div> : null}
             </div>
-          </article>
-
-          <article className="tracking-panel">
-            <header>
-              <p>Workstream Load</p>
-              <h2>Open Items by Workstream</h2>
-            </header>
-            <div className="tracking-ranked-list">
-              {workstreams.map((item, index) => (
-                <div key={item.label}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{item.label}</strong>
-                  <b>{item.count}</b>
-                </div>
-              ))}
-            </div>
-          </article>
-
-          <article className="tracking-panel tracking-panel--wide">
-            <header>
-              <p>Due Date Watch</p>
-              <h2>Next Up</h2>
-            </header>
-            <div className="tracking-due-table-wrap">
-              <table className="tracking-due-table">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Action Item</th>
-                    <th>Team Lead</th>
-                    <th>Status</th>
-                    <th>Due Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {upcoming.map((row) => (
-                    <tr key={row.rowNumber} data-overdue={isOverdue(row) ? "true" : "false"}>
-                      <td>{row.values["ITEM SORT"] || "—"}</td>
-                      <td>{normalize(row.values["ACTION ITEM"]) || "—"}</td>
-                      <td>{normalize(row.values["TEAM LEAD"]) || "—"}</td>
-                      <td>{normalize(row.values.STATUS) || "Unspecified"}</td>
-                      <td>{normalize(row.values["DUE DATE"]) || "—"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {!upcoming.length && <div className="playlist-no-results">No open items have due dates.</div>}
-            </div>
-          </article>
-        </section>
+          </section>
+        )}
       </div>
     </main>
   );
