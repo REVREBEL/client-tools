@@ -118,8 +118,10 @@ export function parseDashboardTasks(data: PlaylistData): DashboardTask[] {
 export function taskPayloadToSheetValues(payload: DashboardTaskPayload) {
   return {
     "STRATEGY PARENT ITEM": payload.strategy,
+    "MAIN STRATEGY": payload.strategy,
     "TACTICAL ITEM": payload.tactical,
     "TEAM LEAD": payload.lead,
+    ASSIGNED: payload.lead,
     "ACTION ITEM": payload.action,
     "ACTION ITEM DESCRIPTION": payload.actionDescription,
     NOTES: payload.notes,
@@ -129,6 +131,7 @@ export function taskPayloadToSheetValues(payload: DashboardTaskPayload) {
     PRIORITY: payload.priority,
     STATUS: payload.status,
     "ITEM SORT": payload.sort,
+    "ITEM NO": payload.sort,
     "ACTION ITEM DEPENDENCY": payload.dependency,
   };
 }
