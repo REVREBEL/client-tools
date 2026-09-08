@@ -84,7 +84,7 @@ export default function PlaylistLayout({ data, setup }: { data: PlaylistData; se
           eyebrow="Revenue Strategy Action Plan"
           syncedAt={data.syncedAt}
           rowCount={data.rows.length}
-          active="playlist"
+          active="dashboard"
         />
 
         <PlaylistFilters
