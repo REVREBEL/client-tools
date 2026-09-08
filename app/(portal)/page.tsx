@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PortalHome() {
   return (
     <main style={{ padding: "2rem", fontFamily: "system-ui, sans-serif" }}>
@@ -6,13 +8,13 @@ export default function PortalHome() {
 
       <ul>
         <li>
-          <a href="/portal/docs">Docs Hub</a>
+          <Link href="/docs">Docs Hub</Link>
         </li>
         <li>
-          <a href="/portal/metrics">Client Metrics</a>
+          <Link href="/metrics">Client Metrics</Link>
         </li>
         <li>
-          <a href="/portal/playlist">Strategy Playlist</a>
+          <Link href="/playlist">Strategy Playlist</Link>
         </li>
         <li>
           <a href="/onboard">Onboard</a>
