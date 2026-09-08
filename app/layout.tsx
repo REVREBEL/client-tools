@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { portalPublicUrl } from "./lib/portal-urls";
+import { portalPath, portalPublicUrl } from "./lib/portal-urls";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SIGN_IN_URL = portalPublicUrl("/sign-in");
+const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || portalPath("/sign-in");
 const REQUEST_ACCESS_URL = portalPublicUrl("/request-access");
 const PORTAL_HOME_URL = portalPublicUrl();
 
