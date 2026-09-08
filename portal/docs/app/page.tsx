@@ -25,8 +25,6 @@ type ResourceResponse = {
 };
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/1DUKyQPbnQuNKJfU40fygxZ1eqNR0SExWgGAK358ulQw/edit?coid=1661698131&gid=0#gid=0";
 
 function normalize(value: string) {
   return value.toLowerCase().replace(/\s+/g, " ").trim();
@@ -40,7 +38,7 @@ function resourceUrl(href: string) {
   return href.startsWith("/api/") ? `${BASE_PATH}${href}` : href;
 }
 
-export default function Home() {
+export default function Home({ sheetUrl }: { sheetUrl: string }) {
   const [data, setData] = useState<ResourceResponse | null>(null);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
@@ -182,7 +180,7 @@ export default function Home() {
             </div>
             <div className="toolbar-actions">
               <span>{filtered.length} results</span>
-              <a href={SHEET_URL} target="_blank" rel="noreferrer">Access Playlist</a>
+              <a href={sheetUrl} target="_blank" rel="noreferrer">Access Playlist</a>
             </div>
           </div>
 
@@ -197,7 +195,7 @@ export default function Home() {
             <div className="empty-state">
               <h3>The live resource feed is temporarily unavailable</h3>
               <p>{error} Use the Strategy Playlist while the connection is restored.</p>
-              <a href={SHEET_URL} target="_blank" rel="noreferrer">Access Playlist</a>
+              <a href={sheetUrl} target="_blank" rel="noreferrer">Access Playlist</a>
             </div>
           )}
 
