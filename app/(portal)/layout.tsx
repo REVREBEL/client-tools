@@ -1,12 +1,13 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import PortalNav from "../components/portal-nav";
+import { portalPublicUrl } from "../lib/portal-urls";
 
 export const dynamic = "force-dynamic";
 
 export default async function PortalLayout({ children }: { children: React.ReactNode }) {
   const { userId } = await auth();
-  if (!userId) redirect("/sign-in");
+  if (!userId) redirect(portalPublicUrl("/sign-in"));
 
   return (
     <div className="rr-client-portal">
