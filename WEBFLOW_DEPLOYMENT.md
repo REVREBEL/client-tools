@@ -13,12 +13,13 @@ This repository is a single Next.js application built by Webflow Cloud from the 
 
 Do not hard-code `basePath` or `assetPrefix` in `next.config.ts`. Webflow Cloud injects both values from the environment mount path during its production build.
 
-Set `NEXT_PUBLIC_BASE_PATH=/portal` only for browser-side `fetch()` calls and other raw browser URLs that Next.js cannot prefix automatically. Internal Next.js navigation must stay relative to the application root:
+Set `NEXT_PUBLIC_BASE_PATH=/portal` only for browser-side `fetch()` calls, raw asset URLs, and third-party paths that Next.js cannot prefix automatically. Internal Next.js navigation must stay relative to the application root:
 
 - `<Link href="/playlist">` becomes `/portal/playlist` after Webflow mounts the app.
-- `redirect("/sign-in")` becomes `/portal/sign-in`.
 - Do **not** build Next.js links as `${NEXT_PUBLIC_BASE_PATH}/playlist`; that produces `/portal/portal/playlist`.
 - Raw `fetch()`, plain asset URLs, and third-party redirect properties can use `NEXT_PUBLIC_BASE_PATH` when they need the externally mounted URL.
+
+Server-side authentication redirects are a separate case. Webflow Cloud executes the Next.js app behind its `*.wf-app-prod.cosmic.webflow.services` service origin, so a server redirect can otherwise expose that internal hostname to the browser. `PORTAL_PUBLIC_ORIGIN` provides the canonical browser origin for Clerk and protected-route redirects.
 
 ## Repository layout
 
@@ -57,6 +58,9 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 ### Routing
 
 - `NEXT_PUBLIC_BASE_PATH=/portal`
+- `PORTAL_PUBLIC_ORIGIN=https://www.revrebel.io`
+
+`PORTAL_PUBLIC_ORIGIN` is intentionally environment-driven rather than hard-coded. It is used for server-side Clerk redirects so users remain on the public Webflow domain instead of being sent to the internal Webflow Cloud service hostname.
 
 ### Clerk
 
@@ -64,6 +68,7 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 - `CLERK_SECRET_KEY`
 - `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/portal/sign-in`
 - `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/portal/request-access`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/portal`
 
 ### Google Sheets
 
@@ -77,7 +82,7 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 - `PLAYLIST_DATA_SHEET` — Action Item tab, normally `Action Items`
 - `PLAYLIST_SETUP_SHEET` — optional; defaults to `Setup`
 
-The Metrics, Docs Hub, and Playlist spreadsheet IDs remain intentionally separate so each tool can move to its own workbook without application-code changes. Metrics keeps the existing generic `SPREADSHEET_ID` name for backward compatibility, while its tab GIDs are now explicit Webflow environment values instead of code constants.
+The Metrics, Docs Hub, and Playlist spreadsheet IDs remain intentionally separate so each tool can move to its own workbook without application-code changes. Metrics keeps the existing generic `SPREADSHEET_ID` name for backward compatibility, while its tab GIDs are explicit Webflow environment values instead of code constants.
 
 ### Playlist write bridge
 
@@ -98,9 +103,5 @@ After the first successful deployment, an organization admin can use `/portal/do
 
 ```bash
 npm install
-NEXT_PUBLIC_BASE_PATH=/portal \
-SPREADSHEET_ID=build-only-metrics-sheet \
-METRICS_SEGMENT_GID=1 \
-METRICS_SOURCE_GID=2 \
-npm run build
+NEXT_PUBLIC_BASE_PATH=/portal PORTAL_PUBLIC_ORIGIN=http://localhost:3000 npm run build
 ```
