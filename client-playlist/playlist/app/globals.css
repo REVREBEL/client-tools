@@ -1,0 +1,101 @@
+/* Import the Tailwind CSS framework */
+@import "tailwindcss";
+
+/* 
+  Define your custom theme variables.
+  These will automatically generate utility classes like `bg-brand-primary` or `text-brand-cyan`.
+*/
+  
+  
+@import "tailwindcss";
+
+:root {
+  --background: #EFF5F6;;
+  --foreground: #163666;
+  --primary: #163666;
+  --teal: #047C97;
+  --cyan: #00A6B6;
+  --aqua: #71c9c5;
+  --powder: #B2D3DE;
+  --yellow: #FACA78;
+  --orange: #F37D59;
+  --red: #E05047;
+  --purple: #8E456A;
+  --frost: #EFF5F6;
+  --smoke: #FAFAFA;
+  --successGreen: #71c9c5;
+
+  /* Custom Font Families */
+  --font-khand: 'Khand', 'Fallback-Bahnschrift', 'Avenir Next Condensed', 'Oswald', 'Helvetica Neue Condensed', 'Franklin Gothic Demi Cond', 'Fallback-Arial-Narrow', sans-serif;
+  --font-roboto: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-khand);
+  --font-mono: var(--font-roboto);
+}
+
+@theme {
+  --color-brand-primary: var(--primary);
+  --color-brand-teal: var(--teal);
+  --color-brand-cyan: var(--cyan); 
+  --color-brand-aqua: var(--aqua); 
+  --color-brand-powder: var(--powder);
+  --color-brand-yellow: var(--yellow);
+  --color-brand-orange: var(--orange);
+  --color-brand-red: var(--red);
+  --color-brand-purple: var(--purple);
+  --color-brand-frost: var(--frost);
+  --color-brand-smoke: var(--smoke); 
+  --color-brand-successGreen: var(--successGreen);
+
+  /* Custom Font Families */
+  --font-khand: 'Khand', 'Fallback-Bahnschrift', 'Avenir Next Condensed', 'Oswald', 'Helvetica Neue Condensed', 'Franklin Gothic Demi Cond', 'Fallback-Arial-Narrow', sans-serif;
+  --font-roboto: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* 
+  Your local fallback overrides 
+*/
+@font-face {
+  font-family: 'Fallback-Arial-Narrow';
+  src: local('Arial Narrow');
+  size-adjust: 105%;
+  ascent-override: 90%;
+  descent-override: 15%;
+}
+
+@font-face {
+  font-family: 'Fallback-Bahnschrift';
+  src: local('Bahnschrift');
+  size-adjust: 95%;
+  font-weight: 700;
+  font-stretch: condensed;
+}
+
+/* 
+  Your custom utilities that aren't natively supported by Tailwind
+*/
+@layer utilities {
+  .border-3 { border-width: 3px; }
+  
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  
+  .animate-in { animation: fadeIn 0.15s ease-out; }
+  
+  @keyframes fadeIn { 
+    from { opacity: 0; } 
+    to { opacity: 1; } 
+  }
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
