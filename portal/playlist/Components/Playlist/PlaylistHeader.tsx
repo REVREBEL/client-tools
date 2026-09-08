@@ -41,19 +41,19 @@ export default function PlaylistHeader({
       </header>
 
       <nav className="playlist-section-nav" aria-label="Playlist views">
-        <Link href={`${BASE_PATH}/playlist`} data-active={active === "dashboard" ? "true" : "false"}>
+        <Link href="/playlist" data-active={active === "dashboard" ? "true" : "false"}>
           <ListChecks aria-hidden="true" />
           Strategy Items
         </Link>
-        <Link href={`${BASE_PATH}/playlist/tracking`} data-active={active === "tracking" ? "true" : "false"}>
+        <Link href="/playlist/tracking" data-active={active === "tracking" ? "true" : "false"}>
           <BarChart3 aria-hidden="true" />
           Tracking Dashboard
         </Link>
-        <Link href={`${BASE_PATH}/playlist/sequencer`} data-active={active === "sequencer" ? "true" : "false"}>
+        <Link href="/playlist/sequencer" data-active={active === "sequencer" ? "true" : "false"}>
           <ArrowUpDown aria-hidden="true" />
           Sequence Arranger
         </Link>
-        <Link href={`${BASE_PATH}/playlist/setup`} data-active={active === "setup" ? "true" : "false"}>
+        <Link href="/playlist/setup" data-active={active === "setup" ? "true" : "false"}>
           <SlidersHorizontal aria-hidden="true" />
           Workspace Setup
         </Link>
