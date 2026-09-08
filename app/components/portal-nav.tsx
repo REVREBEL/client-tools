@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const portalHref = (path = "") => `${BASE_PATH}${path}` || "/";
+const rawPortalUrl = (path = "") => `${BASE_PATH}${path}` || "/";
 
 const tools = [
   { path: "/docs", label: "Docs Hub" },
@@ -21,8 +21,8 @@ export default function PortalNav() {
 
   return (
     <nav className="rr-client-portal-nav" aria-label="REVREBEL client tools">
-      <Link className="rr-client-portal-nav__brand" href={portalHref()}>
-        <img src={portalHref("/revrebel-logo-white.svg")} alt="REVREBEL" />
+      <Link className="rr-client-portal-nav__brand" href="/">
+        <img src={rawPortalUrl("/revrebel-logo-white.svg")} alt="REVREBEL" />
         <span>Client Tools</span>
       </Link>
 
@@ -30,7 +30,7 @@ export default function PortalNav() {
         {tools.map((tool) => {
           const active = portalPath === tool.path || portalPath.startsWith(`${tool.path}/`);
           return (
-            <Link key={tool.path} href={portalHref(tool.path)} data-active={active ? "true" : "false"}>
+            <Link key={tool.path} href={tool.path} data-active={active ? "true" : "false"}>
               {tool.label}
             </Link>
           );
@@ -40,7 +40,7 @@ export default function PortalNav() {
       <div className="rr-client-portal-nav__account">
         <OrganizationSwitcher
           hidePersonal
-          afterSelectOrganizationUrl={portalHref()}
+          afterSelectOrganizationUrl={rawPortalUrl()}
           appearance={{
             elements: {
               organizationSwitcherTrigger: { color: "#b2d3de", minHeight: "30px" },
