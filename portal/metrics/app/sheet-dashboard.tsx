@@ -27,13 +27,10 @@ type SheetConnection = {
 
 const STORAGE_KEY = "revrebel-segment-dashboard-sheet";
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const DEFAULT_CONNECTION: SheetConnection = {
-  url: "https://docs.google.com/spreadsheets/d/1MD-PF0GScwSG3m9wTwAzTHjl2kownwFNEppz3VmuyK0/edit",
-  gid: "1941800013",
-};
-const SOURCE_DATASET_GID = "1319180770";
 
 export default function SheetDashboard({
+  defaultConnection,
+  sourceDatasetGid,
   initialData = [],
   initialRowCount = 0,
   initialSyncedAt = null,
@@ -41,6 +38,8 @@ export default function SheetDashboard({
   initialSourceRowCount = 0,
   initialChannelData = [],
 }: {
+  defaultConnection: SheetConnection;
+  sourceDatasetGid: string;
   initialData?: SheetRow[];
   initialRowCount?: number;
   initialSyncedAt?: string | null;
@@ -53,9 +52,9 @@ export default function SheetDashboard({
   const [sourceData, setSourceData] = useState<SheetRow[]>(initialSourceData);
   const [channelData, setChannelData] = useState<SheetRow[]>(initialChannelData);
   const [dashboardMode, setDashboardMode] = useState<"segments" | "channels">("segments");
-  const [connection, setConnection] = useState<SheetConnection | null>(DEFAULT_CONNECTION);
-  const [draftUrl, setDraftUrl] = useState(DEFAULT_CONNECTION.url);
-  const [draftGid, setDraftGid] = useState(DEFAULT_CONNECTION.gid);
+  const [connection, setConnection] = useState<SheetConnection | null>(defaultConnection);
+  const [draftUrl, setDraftUrl] = useState(defaultConnection.url);
+  const [draftGid, setDraftGid] = useState(defaultConnection.gid);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(!hasInitialData);
   const [error, setError] = useState("");
@@ -77,11 +76,11 @@ export default function SheetDashboard({
     try {
       if (!active) throw new Error("No Google Sheet is configured.");
 
-      const loadTab = async (connection: SheetConnection) => {
+      const loadTab = async (tabConnection: SheetConnection) => {
         const query =
-          `?url=${encodeURIComponent(connection.url)}` +
-          `&gid=${encodeURIComponent(connection.gid || "0")}` +
-          `${connection.range ? `&range=${encodeURIComponent(connection.range)}` : ""}` +
+          `?url=${encodeURIComponent(tabConnection.url)}` +
+          `&gid=${encodeURIComponent(tabConnection.gid || "0")}` +
+          `${tabConnection.range ? `&range=${encodeURIComponent(tabConnection.range)}` : ""}` +
           `&refresh=${Date.now()}`;
         const response = await fetch(`${BASE_PATH}/api/metrics/sheet${query}`, { cache: "no-store" });
 
@@ -99,7 +98,7 @@ export default function SheetDashboard({
 
       const [segmentResult, sourceResult] = await Promise.all([
         loadTab(active),
-        loadTab({ ...active, gid: SOURCE_DATASET_GID }),
+        loadTab({ ...active, gid: sourceDatasetGid }),
       ]);
 
       if (!segmentResult.rows || segmentResult.rows.length < 3) {
@@ -146,16 +145,16 @@ export default function SheetDashboard({
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [sourceDatasetGid]);
 
   useEffect(() => {
     queueMicrotask(() => {
-      setConnection(DEFAULT_CONNECTION);
-      setDraftUrl(DEFAULT_CONNECTION.url);
-      setDraftGid(DEFAULT_CONNECTION.gid);
-      void loadSheet(DEFAULT_CONNECTION);
+      setConnection(defaultConnection);
+      setDraftUrl(defaultConnection.url);
+      setDraftGid(defaultConnection.gid);
+      void loadSheet(defaultConnection);
     });
-  }, [loadSheet]);
+  }, [defaultConnection, loadSheet]);
 
   const statusText = useMemo(() => {
     if (isLoading) return "SYNCING";
@@ -182,13 +181,13 @@ export default function SheetDashboard({
 
   const disconnect = () => {
     window.localStorage.removeItem(STORAGE_KEY);
-    setConnection(DEFAULT_CONNECTION);
-    setDraftUrl(DEFAULT_CONNECTION.url);
-    setDraftGid(DEFAULT_CONNECTION.gid);
+    setConnection(defaultConnection);
+    setDraftUrl(defaultConnection.url);
+    setDraftGid(defaultConnection.gid);
     setLastSync(null);
     setError("");
     setIsOpen(false);
-    void loadSheet(DEFAULT_CONNECTION);
+    void loadSheet(defaultConnection);
   };
 
   if (data.length === 0) {
@@ -201,7 +200,7 @@ export default function SheetDashboard({
           {error || "Reading segment_dataset and source_dataset from Google Sheets…"}
         </p>
         {error ? (
-          <button type="button" className="sheet-button sheet-button--primary" onClick={() => void loadSheet(DEFAULT_CONNECTION)}>
+          <button type="button" className="sheet-button sheet-button--primary" onClick={() => void loadSheet(defaultConnection)}>
             Retry Sheet
           </button>
         ) : (
@@ -355,7 +354,7 @@ export default function SheetDashboard({
               placeholder="0"
             />
             <p className="sheet-modal__hint">
-              The source_dataset tab uses GID {SOURCE_DATASET_GID}.
+              The source_dataset tab uses GID {sourceDatasetGid}.
             </p>
 
             {error && <p className="sheet-modal__error">{error}</p>}
