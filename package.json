@@ -16,14 +16,14 @@
     "@opennextjs/cloudflare": "^1.20.6",
     "lucide-react": "^0.468.0",
     "next": "16.3.3",
-    "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.3",
     "tailwindcss": "4.2.1",
