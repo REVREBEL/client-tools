@@ -21,6 +21,13 @@
 
 @font-face {
   font-family: "Inter";
+  src: url("/fonts/inter-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
   src: url("/fonts/inter-600.woff2") format("woff2");
   font-weight: 600;
   font-display: swap;
@@ -246,39 +253,13 @@ body {
   padding: 48px 24px;
   display: grid;
   place-items: center;
-  background:
-    linear-gradient(rgba(22, 54, 102, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(22, 54, 102, 0.04) 1px, transparent 1px),
-    var(--rr-frost);
-  background-size: 42px 42px;
+  background: #fafafa;
 }
 
 .auth-card-frame {
+  width: min(480px, 100%);
   display: grid;
-  justify-items: center;
-  gap: 18px;
-}
-
-.auth-secured {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: rgba(22, 54, 102, 0.55);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.auth-secured strong {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.auth-secured svg {
-  width: 13px;
-  height: 13px;
-  fill: currentColor;
+  justify-items: stretch;
 }
 
 @media (max-width: 900px) {
@@ -311,5 +292,9 @@ body {
 
   .rr-portal-home {
     padding-inline: 18px;
+  }
+
+  .auth-page {
+    padding: 24px 16px;
   }
 }
