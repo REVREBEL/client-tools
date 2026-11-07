@@ -1,0 +1,112 @@
+<!--
+  REVREBEL Client Hub Clerk guard
+  Webflow page: /client-hub
+
+  Replace REPLACE_WITH_CLERK_PUBLISHABLE_KEY with the same Clerk publishable
+  key used by the Client Tools Cloud apps before publishing.
+-->
+<style>
+html.client-tools-auth-pending body {
+  visibility: hidden;
+}
+</style>
+<script>
+(() => {
+  const CLERK_PUBLISHABLE_KEY = "REPLACE_WITH_CLERK_PUBLISHABLE_KEY";
+  const SIGN_IN_URL = "/sign-in";
+  const HUB_URL = "/client-hub";
+
+  if (
+    !CLERK_PUBLISHABLE_KEY.startsWith("pk_") ||
+    CLERK_PUBLISHABLE_KEY.includes("REPLACE_WITH")
+  ) {
+    console.warn("[Client Hub] Clerk publishable key has not been configured yet.");
+    return;
+  }
+
+  document.documentElement.classList.add("client-tools-auth-pending");
+
+  const failClosed = (error) => {
+    console.error("[Client Hub] Clerk failed to initialize.", error);
+
+    const renderError = () => {
+      document.body.innerHTML =
+        '<main style="min-height:100vh;display:grid;place-items:center;padding:2rem;font-family:system-ui,sans-serif"><div><h1>Client Tools unavailable</h1><p>Authentication could not be verified. Refresh the page or contact REVREBEL.</p></div></main>';
+      document.documentElement.classList.remove("client-tools-auth-pending");
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", renderError, { once: true });
+    } else {
+      renderError();
+    }
+  };
+
+  const loadScript = (src, attributes = {}) =>
+    new Promise((resolve, reject) => {
+      const existing = document.querySelector('script[src="' + src + '"]');
+
+      if (existing) {
+        if (existing.dataset.clientToolsLoaded === "true") {
+          resolve();
+          return;
+        }
+
+        existing.addEventListener("load", resolve, { once: true });
+        existing.addEventListener("error", reject, { once: true });
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.crossOrigin = "anonymous";
+
+      Object.entries(attributes).forEach(([name, value]) => {
+        script.setAttribute(name, value);
+      });
+
+      script.addEventListener(
+        "load",
+        () => {
+          script.dataset.clientToolsLoaded = "true";
+          resolve();
+        },
+        { once: true },
+      );
+      script.addEventListener("error", reject, { once: true });
+      document.head.appendChild(script);
+    });
+
+  (async () => {
+    try {
+      const clerkDomain = atob(CLERK_PUBLISHABLE_KEY.split("_")[2]).slice(0, -1);
+
+      await loadScript(
+        "https://" + clerkDomain + "/npm/@clerk/ui@1/dist/ui.browser.js",
+      );
+      await loadScript(
+        "https://" + clerkDomain + "/npm/@clerk/clerk-js@6/dist/clerk.browser.js",
+        { "data-clerk-publishable-key": CLERK_PUBLISHABLE_KEY },
+      );
+
+      await window.Clerk.load({
+        ui: { ClerkUI: window.__internal_ClerkUICtor },
+        signInUrl: SIGN_IN_URL,
+        signInForceRedirectUrl: HUB_URL,
+        signInFallbackRedirectUrl: HUB_URL,
+      });
+
+      if (!window.Clerk.isSignedIn) {
+        window.location.replace(SIGN_IN_URL);
+        return;
+      }
+
+      window.__CLIENT_TOOLS_CLERK__ = window.Clerk;
+      document.documentElement.classList.remove("client-tools-auth-pending");
+    } catch (error) {
+      failClosed(error);
+    }
+  })();
+})();
+</script>
