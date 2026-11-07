@@ -1,8 +1,9 @@
 packages:
   - "apps/*"
   - "packages/*"
-
 allowBuilds:
+  '-': true
+  all: true
   core-js: true
   esbuild: true
   sharp: true
