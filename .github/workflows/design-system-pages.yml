@@ -30,9 +30,6 @@ jobs:
         with:
           node-version: 22
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
-
       - name: Install dependencies
         working-directory: design-system
         run: npm install --no-audit --no-fund
@@ -40,6 +37,9 @@ jobs:
       - name: Build static Fumadocs site
         working-directory: design-system
         run: npm run build
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
