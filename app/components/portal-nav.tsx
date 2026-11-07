@@ -21,10 +21,10 @@ export default function PortalNav() {
 
   return (
     <nav className="rr-client-portal-nav" aria-label="REVREBEL client tools">
-      <Link className="rr-client-portal-nav__brand" href="/playlist">
+      <a className="rr-client-portal-nav__brand" href="/client-hub">
         <img src={rawPortalUrl("/revrebel-logo-white.svg")} alt="REVREBEL" />
         <span>Client Tools</span>
-      </Link>
+      </a>
 
       <div className="rr-client-portal-nav__links">
         {tools.map((tool) => {
@@ -40,7 +40,7 @@ export default function PortalNav() {
       <div className="rr-client-portal-nav__account">
         <OrganizationSwitcher
           hidePersonal
-          afterSelectOrganizationUrl={rawPortalUrl("/playlist")}
+          afterSelectOrganizationUrl="/client-hub"
           appearance={{
             elements: {
               organizationSwitcherTrigger: { color: "#b2d3de", minHeight: "30px" },
