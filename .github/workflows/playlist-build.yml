@@ -1,0 +1,41 @@
+name: Playlist Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/playlist/**"
+      - ".github/workflows/playlist-build.yml"
+  pull_request:
+    paths:
+      - "apps/playlist/**"
+      - ".github/workflows/playlist-build.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_ZmFrZS5jbGVyay5hY2NvdW50cy5kZXYk
+      CLERK_SECRET_KEY: sk_test_fake_for_build_only
+      NEXT_PUBLIC_CLERK_SIGN_IN_URL: https://www.revrebel.io/sign-in
+      NEXT_PUBLIC_CLIENT_HUB_URL: https://www.revrebel.io/client-hub
+      NEXT_PUBLIC_BASE_PATH: /playlist
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/playlist/package-lock.json
+
+      - name: Install dependencies
+        working-directory: apps/playlist
+        run: npm install --no-audit --no-fund
+
+      - name: Build Playlist
+        working-directory: apps/playlist
+        run: npm run build

@@ -1,0 +1,37 @@
+name: Onboard Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/onboard/**"
+      - ".github/workflows/onboard-build.yml"
+  pull_request:
+    paths:
+      - "apps/onboard/**"
+      - ".github/workflows/onboard-build.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VITE_INDEX_ACCESS_CODE: build-only-access-code
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/onboard/package-lock.json
+
+      - name: Install dependencies
+        working-directory: apps/onboard
+        run: npm install --no-audit --no-fund
+
+      - name: Build Onboard
+        working-directory: apps/onboard
+        run: npm run build

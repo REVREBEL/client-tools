@@ -1,0 +1,40 @@
+name: Monorepo pnpm Workspace
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "turbo.json"
+      - "apps/*/package.json"
+      - ".github/workflows/monorepo-pnpm.yml"
+  pull_request:
+    paths:
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "turbo.json"
+      - "apps/*/package.json"
+      - ".github/workflows/monorepo-pnpm.yml"
+  workflow_dispatch:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.18.0
+          run_install: false
+
+      - name: Validate workspace install
+        run: pnpm install --no-frozen-lockfile
