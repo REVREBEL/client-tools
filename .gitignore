@@ -26,7 +26,7 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-a-task-directory)
 .grunt
 
 # Bower dependency directory (https://bower.io/)
@@ -35,7 +35,7 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (https://nodejs.org/api/addons.html)
+# Compiled binary addons (https://nodejs.org/api/addons)
 build/Release
 
 # Dependency directories
@@ -86,6 +86,9 @@ web_modules/
 # Next.js build output
 .next
 out
+
+# Fumadocs generated content
+**/.source/
 
 # Nuxt.js build / generate output
 .nuxt
