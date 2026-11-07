@@ -3,9 +3,13 @@ import { fileURLToPath } from 'node:url';
 import { createNextStory } from '@fumadocs/story/next';
 import { createMDX } from 'fumadocs-mdx/next';
 
-const withMDX = createMDX();
-const withStory = createNextStory();
 const projectRoot = dirname(fileURLToPath(import.meta.url));
+const storyFilter = `${projectRoot}/**/*.story.{js,jsx,ts,tsx}`;
+
+const withMDX = createMDX();
+const withStory = createNextStory({
+  filter: storyFilter,
+});
 
 const githubPagesBasePath = process.env.GITHUB_ACTIONS === 'true' ? '/client-tools' : '';
 
