@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>REVREBEL | Client Onboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link
+    rel="preload"
+    as="style"
+    href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css"
+    type="text/css"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css"
+  >
+
+  <style>
+    :root {
+      --primary: #163666;
+      --primary-inverse: #b2d3de;
+      --primary-fade: color-mix(in srgb, var(--primary) 80%, white 20%);
+      --light-1: #fafafa;
+      --color-1: #047c97;
+      --color-7: #e05047;
+
+      --font-base: 'General Sans', Tahoma, system-ui, sans-serif;
+      --font-headline: 'Khand', Oswald, Impact, sans-serif;
+
+      --h1-font-size: clamp(4rem, 10vw, 10.75rem);
+      --h1-font-weight: 700;
+      --h1-letter-spacing: -0.01em;
+      --h1-line-height: 0.8;
+
+      --btn-font: var(--font-headline);
+      --btn-font-size: 1.1rem;
+      --btn-font-weight: 700;
+      --btn-letter-spacing: 0.05em;
+      --btn-line-height: 1;
+      --btn-padding: 1.25rem 1.15rem;
+      --btn-border-radius: 0.1em;
+
+      --gap-base: 1rem;
+      --transition: 200ms cubic-bezier(.2, .6, .2, 1);
+      --shadow-sm: 0 1px 2px rgb(0 0 0 / 6%);
+      --shadow-md: 0 4px 10px rgb(0 0 0 / 8%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: clamp(2rem, 5vw, 4rem);
+      background: #eff5f6;
+      color: var(--primary);
+      font-family: var(--font-base);
+    }
+
+    .survey-home {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .survey-home[hidden],
+    .login-gate[hidden] {
+      display: none;
+    }
+
+    .login-gate {
+      display: grid;
+      min-height: calc(100vh - clamp(4rem, 10vw, 8rem));
+      place-items: center;
+    }
+
+    .login-gate__panel {
+      width: min(100%, 440px);
+      border: 4px solid var(--primary);
+      background: var(--light-1);
+      box-shadow: var(--shadow-md);
+      padding: clamp(1.5rem, 4vw, 2.25rem);
+    }
+
+    .login-gate__title {
+      margin: 0 0 0.75rem;
+      color: var(--primary);
+      font-family: var(--font-headline);
+      font-size: clamp(2.25rem, 8vw, 4rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+
+    .login-gate__copy {
+      margin: 0 0 1.5rem;
+      color: rgb(22 54 102 / 78%);
+      line-height: 1.45;
+    }
+
+    .login-gate__form {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .login-gate__label {
+      display: grid;
+      gap: 0.4rem;
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .login-gate__input {
+      width: 100%;
+      min-height: 52px;
+      border: 2px solid var(--primary);
+      border-radius: 0;
+      background: #ffffff;
+      color: var(--primary);
+      font: inherit;
+      padding: 0 0.9rem;
+    }
+
+    .login-gate__input:focus {
+      border-color: var(--color-1);
+      outline: 3px solid rgb(4 124 151 / 18%);
+    }
+
+    .login-gate__submit {
+      min-height: 56px;
+      border: 4px solid var(--primary);
+      border-radius: var(--btn-border-radius);
+      background: var(--primary);
+      color: var(--primary-inverse);
+      cursor: pointer;
+      font-family: var(--btn-font);
+      font-size: var(--btn-font-size);
+      font-weight: var(--btn-font-weight);
+      letter-spacing: var(--btn-letter-spacing);
+      text-transform: uppercase;
+      transition:
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
+    }
+
+    .login-gate__submit:hover,
+    .login-gate__submit:focus-visible {
+      background: var(--primary-fade);
+      color: var(--light-1);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .login-gate__status {
+      min-height: 1.25rem;
+      margin: 0;
+      color: var(--color-7);
+      font-weight: 700;
+    }
+
+    .survey-home__header {
+      margin-bottom: 2rem;
+    }
+
+    .survey-home__title {
+      margin: 0;
+      color: var(--primary);
+      font-family: var(--font-headline);
+      font-size: var(--h1-font-size);
+      font-weight: var(--h1-font-weight);
+      letter-spacing: var(--h1-letter-spacing);
+      line-height: var(--h1-line-height);
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .survey-home__buttons {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap-base);
+      margin-top: 2rem;
+    }
+
+    .survey-home__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 72px;
+      padding: var(--btn-padding);
+      border: 4px solid var(--primary);
+      border-radius: var(--btn-border-radius);
+      background: transparent;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+      font-family: var(--btn-font);
+      font-size: var(--btn-font-size);
+      font-weight: var(--btn-font-weight);
+      letter-spacing: var(--btn-letter-spacing);
+      line-height: var(--btn-line-height);
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition:
+        background var(--transition),
+        color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition);
+    }
+
+    .survey-home__button:hover,
+    .survey-home__button:focus-visible {
+      background: var(--primary);
+      color: var(--primary-inverse);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .survey-home__button--accent {
+      border-color: var(--color-1);
+      color: var(--color-1);
+    }
+
+    .survey-home__button--accent:hover,
+    .survey-home__button--accent:focus-visible {
+      background: var(--color-1);
+      color: var(--light-1);
+    }
+
+    .survey-home__button--alert {
+      border-color: var(--color-7);
+      color: var(--color-7);
+    }
+
+    .survey-home__button--alert:hover,
+    .survey-home__button--alert:focus-visible {
+      background: var(--color-7);
+      color: var(--light-1);
+    }
+
+    @media (max-width: 760px) {
+      .survey-home__buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .survey-home__button {
+        min-height: 64px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main id="loginGate" class="login-gate">
+    <section class="login-gate__panel" aria-labelledby="loginTitle">
+      <h1 id="loginTitle" class="login-gate__title">REVREBEL Onboard</h1>
+      <p class="login-gate__copy">
+        Enter the access code to continue.
+      </p>
+      <form id="loginForm" class="login-gate__form" autocomplete="off">
+        <label class="login-gate__label" for="accessCode">
+          Access code
+          <input
+            id="accessCode"
+            class="login-gate__input"
+            name="accessCode"
+            type="password"
+            autocomplete="current-password"
+            required
+          >
+        </label>
+        <button class="login-gate__submit" type="submit">Continue</button>
+        <p id="loginStatus" class="login-gate__status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <main id="surveyHome" class="survey-home" hidden>
+    <header class="survey-home__header">
+      <h1 class="survey-home__title">REVREBEL SurveyJS System</h1>
+    </header>
+
+    <nav class="survey-home__buttons" aria-label="SurveyJS system links">
+      <a class="survey-home__button" href="/onboard/admin.html">
+        Onboarding Admin
+      </a>
+
+      <a class="survey-home__button survey-home__button--accent" href="/onboard/creator.html">
+        Survey Creator
+      </a>
+
+      <a class="survey-home__button survey-home__button--alert" href="/onboard/runner.html">
+        Survey Runner
+      </a>
+    </nav>
+  </main>
+
+<script type="module">
+  const gateKey = "revrebel:onboard:index-gate";
+  const loginGate = document.getElementById("loginGate");
+  const surveyHome = document.getElementById("surveyHome");
+  const loginForm = document.getElementById("loginForm");
+  const accessCodeInput = document.getElementById("accessCode");
+  const loginStatus = document.getElementById("loginStatus");
+
+  const showHome = () => {
+    loginGate.hidden = true;
+    surveyHome.hidden = false;
+  };
+
+  const showGate = () => {
+    loginGate.hidden = false;
+    surveyHome.hidden = true;
+    accessCodeInput.focus();
+  };
+
+  if (window.sessionStorage.getItem(gateKey) === "granted") {
+    showHome();
+  } else {
+    showGate();
+  }
+
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const inputCode = accessCodeInput.value.trim();
+    loginStatus.textContent = "";
+
+    const base = import.meta.env.BASE_URL || "/onboard/";
+    const baseUrl = base.endsWith("/") ? base : `${base}/`;
+
+    try {
+      const response = await fetch(`${baseUrl}api/verify`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: inputCode })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        window.sessionStorage.setItem(gateKey, "granted");
+        accessCodeInput.value = "";
+        showHome();
+      } else {
+        loginStatus.textContent = "Access code is not valid.";
+        accessCodeInput.select();
+      }
+    } catch (err) {
+      loginStatus.textContent = "Verification error. Please try again.";
+    }
+  });
+</script>
+
+</body>
+</html>

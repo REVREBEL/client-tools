@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>REVREBEL | Onboard Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css">
+  <link rel="stylesheet" href="/src/styles.css"/>
+  <link rel="stylesheet" href="/node_modules/survey-core/defaultV2.css" />
+  <link rel="stylesheet" href="/node_modules/survey-creator-core/survey-creator-core.css" />
+</head>
+<body class="creator-page">
+  <header class="bar">
+    <div class="bar-brand">
+      <h1>REVREBEL | Onboard Creator</h1>
+      <nav class="app-nav" aria-label="Primary">
+        <a href="admin.html">Onboard Admin</a>
+        <a href="creator.html" class="is-active" aria-current="page">Onboard Creator</a>
+        <a href="runner.html">Onboard Runner</a>
+        <a href="stats.html">Onboard Stats</a>
+      </nav>
+    </div>
+    <div class="actions survey-controls">
+      <select id="surveyList">
+        <option value="">Load Saved...</option>
+      </select>
+      <input id="slug" placeholder="survey slug (e.g. guest-sat-v1)"/>
+      <input id="title" placeholder="title"/>
+      <button id="load">Load from DB</button>
+      <button id="save">Save to DB</button>
+      <button id="download">Download JSON</button>
+    </div>
+    <div class="actions survey-controls survey-controls-secondary">
+      <button id="deleteSurvey">Delete Survey</button>
+    </div>
+    <div class="actions theme-controls">
+      <select id="themeList">
+        <option value="">Load saved theme...</option>
+      </select>
+      <button id="loadTheme">Load Theme</button>
+      <button id="saveThemeDb">Save Theme</button>
+      <button id="deleteThemeDb">Delete Theme</button>
+    </div>
+  </header>
+  <div id="creator"></div>
+  <script type="module" src="/src/creator.js"></script>
+</body>
+</html>

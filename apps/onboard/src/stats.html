@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>REVREBEL | Onboard Stats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css">
+  <link rel="stylesheet" href="/src/styles.css"/>
+  <link rel="stylesheet" href="/node_modules/survey-core/defaultV2.css" />
+</head>
+<body>
+  <header class="bar stats-bar">
+    <div class="bar-brand">
+      <h1>Onboard Progress</h1>
+      <nav class="app-nav" aria-label="Primary">
+        <a href="admin.html">Onboard Admin</a>
+        <a href="creator.html">Onboard Creator</a>
+        <a href="runner.html">Onboard Runner</a>
+        <a href="stats.html" class="is-active" aria-current="page">Onboard Stats</a>
+      </nav>
+    </div>
+    <div class="actions">
+      <button id="refreshStats" class="btn is-primary is-btn-sm" type="button">Refresh</button>
+    </div>
+  </header>
+
+  <main class="stats-layout">
+    <section class="stats-hero">
+      <div class="stats-hero-left">
+        <h2 class="heading">Onboard Progress</h2>
+      </div>
+      <div class="stats-hero-right">
+        <div id="statsOverallPercent" class="stats-overall-percent">0%</div>
+        <div class="stats-overall-subtitle">Complete</div>
+      </div>
+      <div id="statsHotelName" class="stats-hotel-name">
+        <div class="stats-made-for-label">Made for</div>
+        <div id="statsHotelNameValue" class="stats-hotel-name-value">Unknown Hotel</div>
+      </div>
+      <div id="statsMeta" class="stats-meta"></div>
+    </section>
+
+    <section id="statsSummaryCards" class="stats-summary-cards"></section>
+
+    <section id="statsGroupSections" class="stats-group-sections"></section>
+
+    <section class="stats-feedback">
+      <p id="statsStatus" class="stats-meta">Loading...</p>
+    </section>
+  </main>
+
+  <script type="module" src="/src/stats.js"></script>
+</body>
+</html>

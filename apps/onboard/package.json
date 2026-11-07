@@ -1,0 +1,26 @@
+{
+  "name": "@revrebel/onboard",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "survey-analytics": "^1.11.9",
+    "survey-core": "^1.11.9",
+    "survey-creator-core": "^1.11.9",
+    "survey-creator-knockout": "^1.12.56",
+    "survey-pdf": "^1.11.9"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.2",
+    "vite": "^8.0.0"
+  },
+  "allowScripts": {
+    "core-js@3.46.0": true,
+    "fsevents@2.3.3": true
+  },
+  "packageManager": "npm@10.9.9"
+}

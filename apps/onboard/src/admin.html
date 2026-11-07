@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>REVREBEL | Onboard Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css">
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+
+<body class="admin-page">
+  <header class="bar">
+    <div class="bar-brand">
+      <h1>Onboard Admin</h1>
+      <nav class="app-nav" aria-label="Primary">
+        <a href="admin.html" class="is-active" aria-current="page">Onboard Admin</a>
+        <a href="creator.html">Onboard Creator</a>
+        <a href="runner.html">Onboard Runner</a>
+        <a href="stats.html">Onboard Stats</a>
+      </nav>
+    </div>
+    <div class="actions">
+      <button id="refreshInstances" type="button">Refresh</button>
+      <button id="refreshCatalog" type="button">Refresh Catalog</button>
+      <label class="inline-field">
+        <span>Rows</span>
+        <select id="limit">
+          <option value="25">25</option>
+          <option value="50" selected>50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main id="adminApp" class="admin-layout">
+    <section class="admin-card">
+      <h2>Create Onboarding Link</h2>
+      <form id="onboardingForm" class="admin-form" novalidate>
+        <div class="admin-form-grid">
+          <label class="admin-field">
+            <span>Hotel Name *</span>
+            <input id="hotel_name" name="hotel_name" required placeholder="Hotel Triton" />
+          </label>
+          <label class="admin-field">
+            <span>Location</span>
+            <input id="location" name="location" placeholder="San Francisco, CA" />
+          </label>
+          <label class="admin-field">
+            <span>PMS System</span>
+            <input id="pms_system" name="pms_system" placeholder="Opera" />
+          </label>
+          <label class="admin-field">
+            <span>CRS System</span>
+            <input id="crs_system" name="crs_system" placeholder="SynXis" />
+          </label>
+          <label class="admin-field">
+            <span>Sales &amp; Catering System</span>
+            <input id="sales_catering_system" name="sales_catering_system" placeholder="Delphi" />
+          </label>
+          <label class="admin-field">
+            <span>Rate Shopping Tool</span>
+            <input id="rate_shopping_tool" name="rate_shopping_tool" placeholder="OTA Insight" />
+          </label>
+          <label class="admin-field">
+            <span>RMS System</span>
+            <input id="rms_system" name="rms_system" placeholder="IDeaS" />
+          </label>
+          <label class="admin-field">
+            <span>Website CMS</span>
+            <input id="website_cms" name="website_cms" placeholder="Webflow" />
+          </label>
+          <label class="admin-field admin-field-wide">
+            <span>Survey Template</span>
+            <select id="survey_slug" name="survey_slug">
+              <option value="">Compose from scope modules (default)</option>
+            </select>
+          </label>
+          <label class="admin-field admin-field-wide">
+            <span>Google Drive Folder ID</span>
+            <input id="google_drive_folder_id" name="google_drive_folder_id" placeholder="Optional (falls back to default env folder)" />
+          </label>
+          <label class="admin-field">
+            <span>Theme</span>
+            <select id="theme" name="theme">
+              <option value="revrebel-dark">revrebel-dark</option>
+            </select>
+          </label>
+          <label class="admin-field">
+            <span>Theme Override</span>
+            <input id="theme_override" name="theme_override" placeholder="Optional custom key/url" />
+          </label>
+          <label class="admin-field">
+            <span>Expires In (days)</span>
+            <input id="expires_in_days" name="expires_in_days" type="number" min="1" max="365" value="90" />
+          </label>
+        </div>
+
+        <fieldset class="admin-scopes">
+          <legend>Scope Flags</legend>
+          <label class="scope-option"><br>
+            <input id="scope_revenue" name="scope_revenue" type="checkbox" checked>
+            <span class="checkbox-button-label">Revenue</span>
+          </label>
+
+          <label class="scope-option">
+            <input id="scope_distribution" name="scope_distribution" type="checkbox">
+            <span class="checkbox-button-label">Distribution</span>
+          </label>
+
+          <label class="scope-option">
+            <input id="scope_digital" name="scope_digital" type="checkbox">
+            <span class="checkbox-button-label">Digital</span>
+          </label>
+
+          <label class="scope-option">
+            <input id="scope_social" name="scope_social" type="checkbox">
+            <span class="checkbox-button-label">Social</span>
+          </label>
+        </fieldset>
+
+        <div class="actions">
+          <button id="createBtn" type="submit">Create URL</button>
+          <button id="resetBtn" type="reset">Reset</button>
+        </div>
+      </form>
+
+      <p id="createStatus" class="admin-status" role="status" aria-live="polite"></p>
+
+      <div id="createResult" class="admin-result" hidden>
+        <p><strong>Runner URL</strong></p>
+        <div class="result-line">
+          <input id="runnerUrl" readonly />
+          <button id="copyRunnerUrl" type="button">Copy</button>
+          <a id="openRunnerUrl" target="_blank" rel="noreferrer">Open</a>
+        </div>
+        <p><strong>Token</strong> <code id="createdToken"></code></p>
+      </div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Onboarding Instances</h2>
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Hotel</th>
+              <th>Status</th>
+              <th>Progress</th>
+              <th>Theme</th>
+              <th>Updated</th>
+              <th>Expires</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="instancesBody">
+            <tr>
+              <td colspan="7">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="tableStatus" class="admin-status" role="status" aria-live="polite"></p>
+      <div id="progressPanel" class="admin-progress" hidden>
+        <h3>Progress Detail</h3>
+        <p id="progressMeta"></p>
+        <ul id="progressSections"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>REVREBEL | Onboard Runner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/REVREBEL/fonts@main/rebel-fonts.css">
+  <link rel="stylesheet" href="/src/styles.css"/>
+  <link rel="stylesheet" href="/node_modules/survey-core/defaultV2.css" />
+</head>
+<body>
+  <header class="bar">
+    <div class="bar-brand">
+      <h1>REVREBEL | Onboard Runner</h1>
+      <nav class="app-nav" aria-label="Primary">
+        <a href="admin.html">Onboard Admin</a>
+        <a href="creator.html">Onboard Creator</a>
+        <a href="runner.html" class="is-active" aria-current="page">Onboard Runner</a>
+        <a href="stats.html">Onboard Stats</a>
+      </nav>
+    </div>
+    <div class="actions runner-dev-controls">
+      <input id="token" placeholder="onboarding token"/>
+      <button id="loadToken">Load by Token</button>
+      <select id="surveyList">
+        <option value="">Load saved survey...</option>
+      </select>
+      <input id="slug" placeholder="survey slug (e.g. guest-sat-v1)"/>
+      <button id="load">Load from DB</button>
+      <button id="downloadPdf" disabled>Download PDF</button>
+    </div>
+    <div class="actions runner-status-controls">
+      <span id="saveStatus">Idle</span>
+      <span id="lastSaved"></span>
+      <span id="progressStatus"></span>
+    </div>
+  </header>
+
+  <div id="surveyContainer"></div>
+  <div id="statsModal" class="stats-modal" aria-hidden="true">
+    <div class="stats-modal__panel" role="dialog" aria-modal="true" aria-label="Survey progress dashboard">
+      <div class="stats-modal__bar">
+        <h2>Progress Dashboard</h2>
+        <div class="actions">
+          <button id="openStatsTab" class="btn is-primary is-btn-sm" type="button">Open in New Tab</button>
+          <button id="closeStatsModal" class="btn is-primary is-btn-sm" type="button">Close</button>
+        </div>
+      </div>
+      <iframe id="statsFrame" title="Survey Progress Dashboard" loading="lazy"></iframe>
+    </div>
+  </div>
+  <script type="module" src="/src/runner.js"></script>
+</body>
+</html>
