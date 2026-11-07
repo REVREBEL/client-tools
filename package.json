@@ -9,7 +9,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint app portal/docs/app portal/metrics/app portal/playlist/app portal/playlist/Components middleware.ts"
+    "lint": "eslint app portal/docs/app portal/metrics/app portal/playlist/app portal/playlist/Components middleware.ts",
+    "design:dev": "npm --prefix design-system run dev",
+    "design:build": "npm --prefix design-system run build",
+    "design:typecheck": "npm --prefix design-system run typecheck",
+    "design:install": "npm --prefix design-system install"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.6.0",
