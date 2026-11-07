@@ -1,8 +1,12 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default clerkMiddleware(undefined, {
-  debug: process.env.CLERK_MIDDLEWARE_DEBUG === "true",
-});
+export default clerkMiddleware(
+  () => {
+    // Clerk still needs to run for matched requests even though authorization
+    // is enforced close to each resource with auth().
+  },
+  { debug: process.env.CLERK_MIDDLEWARE_DEBUG === "true" },
+);
 
 export const config = {
   // Webflow Cloud only supports Edge middleware. On Next.js 16, keep the
