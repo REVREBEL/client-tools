@@ -6,6 +6,10 @@ on:
       - main
     paths:
       - "design-system/**"
+      - "packages/**"
+      - "package.json"
+      - "package-lock.json"
+      - "turbo.json"
       - ".github/workflows/design-system-pages.yml"
   workflow_dispatch:
 
@@ -29,14 +33,17 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
-        working-directory: design-system
+      - name: Install workspace dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Typecheck design system
+        run: npm run design:typecheck
+
       - name: Build static Fumadocs site
-        working-directory: design-system
-        run: npm run build
+        run: npm run design:build
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5

@@ -26,7 +26,7 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-a-task-directory)
+# Grunt intermediate storage (https://gruntjs.com/creating-a-task-directory)
 .grunt
 
 # Bower dependency directory (https://bower.io/)
@@ -41,6 +41,10 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+
+# Turborepo cache
+.turbo/
+**/.turbo/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/

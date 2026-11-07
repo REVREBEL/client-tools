@@ -2,6 +2,11 @@
   "name": "revrebel-client-portal",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10.9.9",
+  "workspaces": [
+    "design-system",
+    "packages/*"
+  ],
   "engines": {
     "node": ">=22.13.0"
   },
@@ -10,10 +15,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint app portal/docs/app portal/metrics/app portal/playlist/app portal/playlist/Components middleware.ts",
-    "design:dev": "npm --prefix design-system run dev",
-    "design:build": "npm --prefix design-system run build",
-    "design:typecheck": "npm --prefix design-system run typecheck",
-    "design:install": "npm --prefix design-system install"
+    "typecheck": "tsc --noEmit",
+    "dev:all": "turbo run dev",
+    "build:all": "turbo run build",
+    "lint:all": "turbo run lint",
+    "typecheck:all": "turbo run typecheck",
+    "portal:dev": "next dev",
+    "portal:build": "next build",
+    "design:dev": "turbo run dev --filter=@revrebel/design-system-docs",
+    "design:build": "turbo run build --filter=@revrebel/design-system-docs",
+    "design:typecheck": "turbo run typecheck --filter=@revrebel/design-system-docs"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.6.0",
@@ -31,6 +42,7 @@
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.3",
     "tailwindcss": "4.2.1",
+    "turbo": "2.11.10",
     "typescript": "5.9.3",
     "wrangler": "^4.92.0"
   },
