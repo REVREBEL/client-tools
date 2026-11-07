@@ -1,8 +1,11 @@
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createNextStory } from '@fumadocs/story/next';
 import { createMDX } from 'fumadocs-mdx/next';
 
 const withMDX = createMDX();
 const withStory = createNextStory();
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 const githubPagesBasePath = process.env.GITHUB_ACTIONS === 'true' ? '/client-tools' : '';
 
@@ -15,6 +18,9 @@ const config = {
   assetPrefix: githubPagesBasePath || undefined,
   images: {
     unoptimized: true,
+  },
+  turbopack: {
+    root: projectRoot,
   },
 };
 
