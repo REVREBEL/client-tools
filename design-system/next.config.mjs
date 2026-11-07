@@ -4,12 +4,9 @@ import { createNextStory } from '@fumadocs/story/next';
 import { createMDX } from 'fumadocs-mdx/next';
 
 const projectRoot = dirname(fileURLToPath(import.meta.url));
-const storyFilter = `${projectRoot}/**/*.story.{js,jsx,ts,tsx}`;
 
 const withMDX = createMDX();
-const withStory = createNextStory({
-  filter: storyFilter,
-});
+const withStory = createNextStory();
 
 const githubPagesBasePath = process.env.GITHUB_ACTIONS === 'true' ? '/client-tools' : '';
 
@@ -27,6 +24,28 @@ const config = {
   // Dev/build use Webpack because npm workspaces hoist shared Next dependencies.
   turbopack: {
     root: projectRoot,
+  },
+  webpack(webpackConfig) {
+    // @fumadocs/story uses its glob string as webpack Rule.test. Webpack expects
+    // a RegExp (or an absolute literal path), so normalize only the Story rule.
+    for (const rule of webpackConfig.module?.rules ?? []) {
+      if (!rule || typeof rule !== 'object' || !('use' in rule)) continue;
+
+      const useEntries = Array.isArray(rule.use) ? rule.use : [rule.use];
+      const isStoryRule = useEntries.some(
+        (entry) =>
+          entry &&
+          typeof entry === 'object' &&
+          'loader' in entry &&
+          entry.loader === '@fumadocs/story/webpack/story',
+      );
+
+      if (isStoryRule) {
+        rule.test = /\.story\.[jt]sx?$/;
+      }
+    }
+
+    return webpackConfig;
   },
 };
 
