@@ -99,6 +99,28 @@ The Playlist write bridge supports both Action Item mutations and Workspace Setu
 
 After the first successful deployment, an organization admin can use `/portal/docs/manage` to migrate the PDFs and photos already stored in `portal/docs/public` into Object Storage.
 
+## Monorepo tooling
+
+This repository uses **npm workspaces + Turborepo** for local orchestration and shared-package development.
+
+Webflow Cloud currently supports only the `npm` package manager, so do not replace the root npm workspace with pnpm or Yarn while the Portal is deployed from this repository root.
+
+The root Portal remains the Webflow Cloud application and keeps its standard production commands:
+
+- `npm run dev` — Portal only
+- `npm run build` — Portal production build
+
+Turborepo adds multi-app and filtered commands without changing Webflow's production entry point:
+
+- `npm run dev:all` — Portal and workspace development tasks
+- `npm run build:all` — build all workspace packages
+- `npm run typecheck:all` — typecheck all workspace packages
+- `npm run design:dev` — Fumadocs design system on port 3001
+- `npm run design:build` — build only the Fumadocs design system
+- `npm run design:typecheck` — typecheck only the Fumadocs design system
+
+The workspace declaration reserves `packages/*` for shared packages such as `@revrebel/ui`, design tokens, configuration, and future SurveyJS adapters.
+
 ## Local verification
 
 ```bash
