@@ -23,6 +23,8 @@ export const metadata: Metadata = {
 const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || portalPath("/sign-in");
 const REQUEST_ACCESS_URL = portalPublicUrl("/request-access");
 const PORTAL_HOME_URL = portalPublicUrl();
+const SIGN_IN_FORCE_REDIRECT_URL =
+  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL || PORTAL_HOME_URL;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -32,9 +34,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           signInUrl={SIGN_IN_URL}
           signUpUrl={REQUEST_ACCESS_URL}
           waitlistUrl={REQUEST_ACCESS_URL}
-          signInFallbackRedirectUrl={
-            process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL || PORTAL_HOME_URL
-          }
+          signInForceRedirectUrl={SIGN_IN_FORCE_REDIRECT_URL}
+          signInFallbackRedirectUrl={SIGN_IN_FORCE_REDIRECT_URL}
+          signUpForceRedirectUrl={PORTAL_HOME_URL}
           signUpFallbackRedirectUrl={PORTAL_HOME_URL}
           localization={{
             signIn: {
