@@ -9,6 +9,7 @@ on:
       - "packages/**"
       - "package.json"
       - "package-lock.json"
+      - ".npmrc"
       - "turbo.json"
       - ".github/workflows/design-system-pages.yml"
   workflow_dispatch:
