@@ -72,8 +72,8 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 
 ### Google Sheets
 
-- `GOOGLE_SERVICE_ACCOUNT`
-- `SPREADSHEET_ID` — Metrics source spreadsheet
+- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+- `METRICS_SPREADSHEET_ID` — Metrics source spreadsheet
 - `METRICS_SEGMENT_GID` — Metrics `segment_dataset` tab GID
 - `METRICS_SOURCE_GID` — Metrics `source_dataset` tab GID
 - `DOCS_SPREADSHEET_ID` — Docs Hub source spreadsheet
@@ -82,7 +82,7 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 - `PLAYLIST_DATA_SHEET` — Action Item tab, normally `Action Items`
 - `PLAYLIST_SETUP_SHEET` — optional; defaults to `Setup`
 
-The Metrics, Docs Hub, and Playlist spreadsheet IDs remain intentionally separate so each tool can move to its own workbook without application-code changes. Metrics keeps the existing generic `SPREADSHEET_ID` name for backward compatibility, while its tab GIDs are explicit Webflow environment values instead of code constants.
+The Metrics, Docs Hub, and Playlist spreadsheet IDs remain intentionally separate so each tool can move to its own workbook without application-code changes. Metrics keeps the existing generic `METRICS_SPREADSHEET_ID` name for backward compatibility, while its tab GIDs are explicit Webflow environment values instead of code constants.
 
 ### Playlist write bridge
 
