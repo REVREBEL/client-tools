@@ -1,9 +1,3 @@
-type ServiceAccountCredentials = {
-  client_email?: string;
-  private_key?: string;
-  token_uri?: string;
-};
-
 type AccessTokenResponse = {
   access_token?: string;
   expires_in?: number;
@@ -23,18 +17,6 @@ function encodeJson(value: unknown) {
   return base64Url(new TextEncoder().encode(JSON.stringify(value)));
 }
 
-function decodeServiceAccount(raw: string) {
-  try {
-    return JSON.parse(raw) as ServiceAccountCredentials;
-  } catch {
-    try {
-      return JSON.parse(atob(raw)) as ServiceAccountCredentials;
-    } catch {
-      throw new Error("GOOGLE_SERVICE_ACCOUNT must contain the service-account JSON.");
-    }
-  }
-}
-
 function pemToBytes(pem: string) {
   const normalized = pem
     .replace(/\\n/g, "\n")
@@ -48,16 +30,17 @@ function pemToBytes(pem: string) {
 }
 
 function getServiceAccount() {
-  const raw = process.env.GOOGLE_SERVICE_ACCOUNT;
-  if (!raw) throw new Error("The Google service-account secret is not configured.");
-  const credentials = decodeServiceAccount(raw);
-  const clientEmail = credentials.client_email || process.env.GOOGLE_CLIENT_EMAIL;
-  const privateKey = credentials.private_key;
-  if (!clientEmail || !privateKey) throw new Error("The Google service-account JSON is incomplete.");
+  const clientEmail = process.env.GOOGLE_CLIENT_EMAIL?.trim();
+  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
+  if (!clientEmail || !privateKey) {
+    throw new Error(
+      "GOOGLE_CLIENT_EMAIL and GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY must be configured.",
+    );
+  }
   return {
     clientEmail,
     privateKey,
-    tokenUri: credentials.token_uri || "https://oauth2.googleapis.com/token",
+    tokenUri: "https://oauth2.googleapis.com/token",
   };
 }
 
