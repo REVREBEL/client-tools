@@ -32,12 +32,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <ClerkProvider
           signInUrl={SIGN_IN_URL}
+          signUpUrl={SIGN_UP_URL}
           signUpUrl={REQUEST_ACCESS_URL}
           waitlistUrl={REQUEST_ACCESS_URL}
           signInForceRedirectUrl={SIGN_IN_FORCE_REDIRECT_URL}
           signInFallbackRedirectUrl={SIGN_IN_FORCE_REDIRECT_URL}
-          signUpForceRedirectUrl={CLIENT_HUB_URL}
-          signUpFallbackRedirectUrl={CLIENT_HUB_URL}
+          signUpForceRedirectUrl={FORCE_REDIRECT_URL}
+          signUpFallbackRedirectUrl={FALLBACK_REDIRECT_URL}
           localization={{
             signIn: {
               start: {
