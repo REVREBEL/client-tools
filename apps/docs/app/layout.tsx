@@ -11,8 +11,12 @@ export const metadata: Metadata = {
   icons: { icon: "/revrebel-brand-icon.png", shortcut: "/revrebel-brand-icon.png" },
 };
 
-const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || "https://www.revrebel.io/sign-in";
-const CLIENT_HUB_URL = process.env.NEXT_PUBLIC_CLIENT_HUB_URL || "https://www.revrebel.io/client-hub";
+const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || "/client-hub/sign-in";
+const SIGN_UP_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL || "/client-hub/request-access";
+const FORCE_REDIRECT_URL =
+  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL || "/client-hub";
+const FALLBACK_REDIRECT_URL =
+  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL || "/client-hub";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -20,10 +24,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <ClerkProvider
           signInUrl={SIGN_IN_URL}
-          signInForceRedirectUrl={CLIENT_HUB_URL}
-          signInFallbackRedirectUrl={CLIENT_HUB_URL}
-          signUpForceRedirectUrl={CLIENT_HUB_URL}
-          signUpFallbackRedirectUrl={CLIENT_HUB_URL}
+          signUpUrl={SIGN_UP_URL}
+          signInForceRedirectUrl={FORCE_REDIRECT_URL}
+          signInFallbackRedirectUrl={FALLBACK_REDIRECT_URL}
+          signUpForceRedirectUrl={FORCE_REDIRECT_URL}
+          signUpFallbackRedirectUrl={FALLBACK_REDIRECT_URL}
         >
           {children}
         </ClerkProvider>
