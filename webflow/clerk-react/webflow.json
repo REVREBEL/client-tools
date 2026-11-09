@@ -1,0 +1,14 @@
+{
+  "library": {
+    "components": [
+      "**/*.webflow.@(js|jsx|mjs|ts|tsx)",
+      "**/*.webflow.component.@(js|jsx|mjs|ts|tsx)"
+    ],
+    "functions": [
+      "**/*.webflow.function.@(js|cjs|mjs|ts)"
+    ],
+    "name": "REVREBEL Client Auth",
+    "description": "REVREBEL Clerk authentication components for Webflow",
+    "id": "revrebel-client-auth"
+  }
+}
