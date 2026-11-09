@@ -1,4 +1,5 @@
 name: Validate Client Hub auth app
+# rerun after app-root isolation
 
 on:
   push:
