@@ -8,6 +8,9 @@ const root = path.resolve(import.meta.dirname, "..");
 const appsRoot = path.join(root, "apps");
 const mode = process.argv[2];
 
+// Keep this command deterministic: package.json declares intent, pnpm resolves,
+// and npm locks are materialized from those resolved direct versions.
+
 if (!["sync", "check"].includes(mode)) {
   console.error("Usage: node scripts/lockfiles.mjs <sync|check>");
   process.exit(2);
