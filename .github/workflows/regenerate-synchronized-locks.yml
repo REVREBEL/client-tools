@@ -6,6 +6,7 @@ on:
       - chore/unify-pnpm-npm-lock-validation
     paths:
       - ".github/workflows/regenerate-synchronized-locks.yml"
+      - "scripts/lockfiles.mjs"
 
 permissions:
   contents: write
