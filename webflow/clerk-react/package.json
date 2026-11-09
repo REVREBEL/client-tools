@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "webflow library bundle",
+    "build": "webflow devlink bundle",
     "dev": "webflow library dev",
     "publish": "webflow library publish"
   },
