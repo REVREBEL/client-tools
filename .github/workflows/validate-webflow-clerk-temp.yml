@@ -8,6 +8,9 @@ on:
       - "webflow/clerk-react/**"
       - ".github/workflows/validate-webflow-clerk-temp.yml"
 
+permissions:
+  contents: write
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -24,7 +27,7 @@ jobs:
       - name: Typecheck
         run: npx tsc --noEmit
       - name: Build Webflow library
-        run: npx webflow library build
+        run: npx webflow library bundle
       - name: Commit package lock
         working-directory: .
         run: |
