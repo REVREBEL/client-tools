@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || portalPath("/client-hub/sign-in");
+const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || portalPath("/sign-in");
 const REQUEST_ACCESS_URL =
   process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL || portalPublicUrl("/client-hub/request-access");
 const SIGN_IN_FORCE_REDIRECT_URL =
