@@ -72,7 +72,8 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 
 ### Google Sheets
 
-- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+- `GOOGLE_CLIENT_EMAIL` — service-account client email
+- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` — matching service-account private key
 - `METRICS_SPREADSHEET_ID` — Metrics source spreadsheet
 - `METRICS_SEGMENT_GID` — Metrics `segment_dataset` tab GID
 - `METRICS_SOURCE_GID` — Metrics `source_dataset` tab GID
