@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import process from "node:process";
 
@@ -159,9 +160,7 @@ if (mode === "sync") {
         return `${name}@${resolved}`;
       });
 
-    const manifestPath = path.join(app.dir, "package.json");
     const npmLockPath = path.join(app.dir, "package-lock.json");
-    const originalManifestText = readFileSync(manifestPath, "utf8");
     const exactManifest = structuredClone(app.manifest);
 
     for (const section of ["dependencies", "devDependencies", "optionalDependencies"]) {
@@ -177,10 +176,13 @@ if (mode === "sync") {
       }
     }
 
-    rmSync(npmLockPath, { force: true });
+    const tempDir = mkdtempSync(path.join(os.tmpdir(), "client-tools-npm-lock-"));
 
     try {
-      writeFileSync(manifestPath, `${JSON.stringify(exactManifest, null, 2)}\n`);
+      writeFileSync(
+        path.join(tempDir, "package.json"),
+        `${JSON.stringify(exactManifest, null, 2)}\n`,
+      );
 
       run(
         "npm",
@@ -191,27 +193,27 @@ if (mode === "sync") {
           "--no-audit",
           "--no-fund",
         ],
-        app.dir,
+        tempDir,
       );
-    } finally {
-      writeFileSync(manifestPath, originalManifestText);
-    }
 
-    const npmLock = readJson(npmLockPath);
-    const npmLockRoot = npmLock.packages?.[""];
-    if (!npmLockRoot) {
-      throw new Error(`${app.relativeDir}: regenerated npm lock has no root metadata.`);
-    }
-
-    for (const section of ["dependencies", "devDependencies", "optionalDependencies"]) {
-      if (app.manifest[section]) {
-        npmLockRoot[section] = app.manifest[section];
-      } else {
-        delete npmLockRoot[section];
+      const npmLock = readJson(path.join(tempDir, "package-lock.json"));
+      const npmLockRoot = npmLock.packages?.[""];
+      if (!npmLockRoot) {
+        throw new Error(`${app.relativeDir}: regenerated npm lock has no root metadata.`);
       }
-    }
 
-    writeFileSync(npmLockPath, `${JSON.stringify(npmLock, null, 2)}\n`);
+      for (const section of ["dependencies", "devDependencies", "optionalDependencies"]) {
+        if (app.manifest[section]) {
+          npmLockRoot[section] = app.manifest[section];
+        } else {
+          delete npmLockRoot[section];
+        }
+      }
+
+      writeFileSync(npmLockPath, `${JSON.stringify(npmLock, null, 2)}\n`);
+    } finally {
+      rmSync(tempDir, { recursive: true, force: true });
+    }
 
     validateManifestAgainstNpmLock(app);
     validateDirectResolvedVersions(app);
