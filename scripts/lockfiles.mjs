@@ -37,8 +37,10 @@ function discoverNpmApps() {
       const manifestPath = path.join(dir, "package.json");
       if (!existsSync(manifestPath)) return null;
 
+      const lockPath = path.join(dir, "package-lock.json");
+      if (!existsSync(lockPath)) return null;
+
       const manifest = readJson(manifestPath);
-      if (!String(manifest.packageManager ?? "").startsWith("npm@")) return null;
 
       return {
         dir,

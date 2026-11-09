@@ -21,6 +21,5 @@
   "allowScripts": {
     "core-js@3.46.0": true,
     "fsevents@2.3.3": true
-  },
-  "packageManager": "npm@10.9.9"
+  }
 }
