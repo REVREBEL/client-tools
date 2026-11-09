@@ -1,1 +1,1 @@
-export default { plugins: {} };\n
+export default { plugins: {} };
