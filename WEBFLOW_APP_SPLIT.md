@@ -7,7 +7,7 @@ application owns an npm package boundary.
 | --- | --- | --- | --- |
 | Docs | `apps/docs` | `/docs` | npm |
 | Metrics | `apps/metrics` | `/metrics` | npm |
-| Playlist | `apps/playlist` | `/playlist`* | npm |
+| Playlist | `apps/the-playlist` | `/playlist`* | npm |
 | Onboard | `apps/onboard` | `/onboard` | npm |
 | Design system | `apps/design-system` | GitHub Pages | npm |
 | Monorepo root | `./` | not deployed | pnpm |
@@ -26,7 +26,7 @@ For CLI-driven setup/deploys, the equivalent shape is:
 ```bash
 webflow apps deploy --directory apps/docs     --site-id 6a09244ce43d4439301ce56f --mount /docs     --environment production
 webflow apps deploy --directory apps/metrics  --site-id 6a09244ce43d4439301ce56f --mount /metrics  --environment production
-webflow apps deploy --directory apps/playlist --site-id 6a09244ce43d4439301ce56f --mount /playlist --environment production
+webflow apps deploy --directory apps/the-playlist --site-id 6a09244ce43d4439301ce56f --mount /playlist --environment production
 webflow apps deploy --directory apps/onboard  --site-id 6a09244ce43d4439301ce56f --mount /onboard   --environment production
 ```
 
@@ -57,7 +57,7 @@ environment:
 
 - `DOCS_SPREADSHEET_ID`
 - `DOCS_SPREADSHEET_GID`
-- `GOOGLE_SERVICE_ACCOUNT`
+- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
 - any Google credentials used by the Docs APIs
 - `DOCS_MEDIA` R2 binding
 
@@ -67,10 +67,14 @@ environment:
 
 Move/copy:
 
-- `SPREADSHEET_ID`
+- `METRICS_SPREADSHEET_ID`
 - `METRICS_SEGMENT_GID`
 - `METRICS_SOURCE_GID`
-- `GOOGLE_SERVICE_ACCOUNT`
+- `GOOGLE_CLIENT_EMAIL`
+- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+
+`GOOGLE_CLIENT_EMAIL` and `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` are the required
+service-account credential pair for Google Sheets access.
 
 ### Playlist
 
@@ -80,7 +84,12 @@ Move/copy:
 - `PLAYLIST_APPS_SCRIPT_TOKEN`
 - `PLAYLIST_SPREADSHEET_ID`
 - `PLAYLIST_DATA_SHEET`
+- `GOOGLE_CLIENT_EMAIL`
+- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
 - any setup-sheet variables currently used
+
+`GOOGLE_CLIENT_EMAIL` and `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` are the required
+service-account credential pair for Google Sheets access.
 
 ### Onboard
 

@@ -21,7 +21,7 @@ jobs:
       NEXT_PUBLIC_CLERK_SIGN_IN_URL: https://www.revrebel.io/sign-in
       NEXT_PUBLIC_CLIENT_HUB_URL: https://www.revrebel.io/client-hub
       NEXT_PUBLIC_BASE_PATH: /metrics
-      SPREADSHEET_ID: build-only-metrics-sheet
+      METRICS_SPREADSHEET_ID: build-only-metrics-sheet
       METRICS_SEGMENT_GID: "1"
       METRICS_SOURCE_GID: "2"
     steps:

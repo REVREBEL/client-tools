@@ -20,11 +20,13 @@ export const metadata: Metadata = {
   },
 };
 
-const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || portalPath("/sign-in");
-const REQUEST_ACCESS_URL = portalPublicUrl("/request-access");
-const CLIENT_HUB_URL = process.env.NEXT_PUBLIC_CLIENT_HUB_URL || "/client-hub";
+const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || portalPath("/client-hub/sign-in");
+const REQUEST_ACCESS_URL =
+  process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL || portalPublicUrl("/client-hub/request-access");
 const SIGN_IN_FORCE_REDIRECT_URL =
-  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL || CLIENT_HUB_URL;
+  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL || "/client-hub";
+const SIGN_IN_FALLBACK_REDIRECT_URL =
+  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL || "/client-hub";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -35,9 +37,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           signUpUrl={REQUEST_ACCESS_URL}
           waitlistUrl={REQUEST_ACCESS_URL}
           signInForceRedirectUrl={SIGN_IN_FORCE_REDIRECT_URL}
-          signInFallbackRedirectUrl={SIGN_IN_FORCE_REDIRECT_URL}
-          signUpForceRedirectUrl={CLIENT_HUB_URL}
-          signUpFallbackRedirectUrl={CLIENT_HUB_URL}
+          signInFallbackRedirectUrl={SIGN_IN_FALLBACK_REDIRECT_URL}
+          signUpForceRedirectUrl={SIGN_IN_FORCE_REDIRECT_URL}
+          signUpFallbackRedirectUrl={SIGN_IN_FALLBACK_REDIRECT_URL}
           localization={{
             signIn: {
               start: {
