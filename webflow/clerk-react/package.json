@@ -9,7 +9,7 @@
     "publish": "webflow library publish"
   },
   "dependencies": {
-    "@clerk/react": "^6.9.0",
+    "@clerk/react": "6.18.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
