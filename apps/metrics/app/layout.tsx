@@ -1,4 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -16,7 +18,9 @@ const FORCE_REDIRECT_URL =
 const FALLBACK_REDIRECT_URL =
   process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL || "/client-hub";
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const { userId } = await auth();
+  if (!userId) redirect(SIGN_IN_URL);
   return (
     <html lang="en">
       <body>
