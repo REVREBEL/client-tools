@@ -22,7 +22,10 @@
     "build:onboard": "turbo run build --filter=@revrebel/onboard",
     "build:design": "turbo run build --filter=@revrebel/design-system-docs",
     "legacy:dev": "next dev",
-    "legacy:build": "next build"
+    "legacy:build": "next build",
+    "locks:sync": "node scripts/lockfiles.mjs sync",
+    "locks:check": "node scripts/lockfiles.mjs check",
+    "deps:sync": "pnpm run locks:sync && pnpm run locks:check"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.25",

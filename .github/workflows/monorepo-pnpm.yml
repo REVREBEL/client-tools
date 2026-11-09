@@ -8,6 +8,9 @@ on:
       - "pnpm-workspace.yaml"
       - "turbo.json"
       - "apps/*/package.json"
+      - "apps/*/package-lock.json"
+      - "pnpm-lock.yaml"
+      - "scripts/lockfiles.mjs"
       - ".github/workflows/monorepo-pnpm.yml"
   pull_request:
     paths:
@@ -15,6 +18,9 @@ on:
       - "pnpm-workspace.yaml"
       - "turbo.json"
       - "apps/*/package.json"
+      - "apps/*/package-lock.json"
+      - "pnpm-lock.yaml"
+      - "scripts/lockfiles.mjs"
       - ".github/workflows/monorepo-pnpm.yml"
   workflow_dispatch:
 
@@ -37,4 +43,7 @@ jobs:
           run_install: false
 
       - name: Validate workspace install
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate pnpm and npm lock parity
+        run: pnpm run locks:check
