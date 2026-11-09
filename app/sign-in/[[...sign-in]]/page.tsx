@@ -5,7 +5,7 @@ import { portalPath, portalPublicUrl } from "../../lib/portal-urls";
 
 export const dynamic = "force-dynamic";
 
-const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || portalPath("/client-hub/sign-in");
+const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || portalPath("/sign-in");
 const SIGN_IN_FORCE_REDIRECT_URL =
   process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL || "/client-hub";
 const SIGN_IN_FALLBACK_REDIRECT_URL =
