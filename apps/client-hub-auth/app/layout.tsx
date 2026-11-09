@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const SIGN_IN_URL =
-  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || "/client-hub/sign-in";
+  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || "/sign-in";
 const HUB_URL =
   process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL || "/client-hub";
 const FALLBACK_URL =

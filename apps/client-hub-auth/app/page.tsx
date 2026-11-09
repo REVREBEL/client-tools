@@ -3,7 +3,7 @@ import { SignIn } from "@clerk/nextjs";
 export const dynamic = "force-dynamic";
 
 const SIGN_IN_URL =
-  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || "/client-hub/sign-in";
+  process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || "/sign-in";
 const HUB_URL =
   process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL || "/client-hub";
 const FALLBACK_URL =
