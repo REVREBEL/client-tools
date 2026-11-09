@@ -37,7 +37,7 @@
     "typescript": "5.9.3",
     "vinext": "0.2.1",
     "vite": "8.0.13",
-    "wrangler": "^4.148.0"
+    "wrangler": "^4.158.0"
   },
   "type": "module",
   "displayName": "Now Now Audit Resource Hub",
