@@ -38,8 +38,7 @@ export function RevrebelSignIn({
     >
       <SignIn
         appearance={clerkAuthAppearance}
-        path={path}
-        routing="path"
+        routing="hash"
         forceRedirectUrl={afterAuthUrl}
         fallbackRedirectUrl={afterAuthUrl}
         waitlistUrl={waitlistUrl}
@@ -64,8 +63,7 @@ export function RevrebelSignUp({
     >
       <SignUp
         appearance={clerkAuthAppearance}
-        path={path}
-        routing="path"
+        routing="hash"
         forceRedirectUrl={afterAuthUrl}
         fallbackRedirectUrl={afterAuthUrl}
         signInUrl={signInUrl}
@@ -150,8 +148,7 @@ export function RevrebelUserProfile({
     <ClerkProviderShell {...providerProps}>
       <UserProfile
         appearance={clerkAuthAppearance}
-        path={path}
-        routing="path"
+        routing="hash"
       />
     </ClerkProviderShell>
   );
