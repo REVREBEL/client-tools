@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode, useEffect } from "react";
 import { ClerkProvider } from "@clerk/react";
 import { clerkAuthAppearance, clerkLocalization } from "./clerk-theme";
