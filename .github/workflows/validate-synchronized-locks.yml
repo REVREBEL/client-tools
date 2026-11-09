@@ -1,0 +1,27 @@
+name: Validate synchronized locks
+
+on:
+  push:
+    branches:
+      - chore/unify-pnpm-npm-lock-validation
+    paths:
+      - ".github/workflows/validate-synchronized-locks.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: chore/unify-pnpm-npm-lock-validation
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.18.0
+          run_install: false
+      - name: Frozen pnpm install
+        run: pnpm install --frozen-lockfile
+      - name: Validate npm and pnpm parity
+        run: pnpm run locks:check
