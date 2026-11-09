@@ -137,10 +137,28 @@ if (apps.length === 0) {
 console.log(`npm-managed app boundaries: ${apps.map((app) => app.relativeDir).join(", ")}`);
 
 if (mode === "sync") {
+  // pnpm is the canonical resolver for the monorepo. Refresh its lock first,
+  // then materialize that exact direct-dependency resolution into each npm
+  // package boundary that Webflow installs independently.
   run("pnpm", ["install", "--lockfile-only"]);
+  run("pnpm", ["install", "--frozen-lockfile", "--ignore-scripts"]);
 
   for (const app of apps) {
-    console.log(`\nRefreshing ${app.relativeDir}/package-lock.json`);
+    console.log(`\nRefreshing ${app.relativeDir}/package-lock.json from pnpm resolutions`);
+
+    const pnpmVersions = pnpmDirectVersions(app);
+    const exactDirectSpecs = Object.keys(dependencySpecs(app.manifest))
+      .sort()
+      .map((name) => {
+        const resolved = pnpmVersions[name]?.version;
+        if (!resolved) {
+          throw new Error(
+            `${app.relativeDir}: pnpm did not report a resolved version for ${name}.`,
+          );
+        }
+        return `${name}@${resolved}`;
+      });
+
     run(
       "npm",
       [
@@ -149,12 +167,17 @@ if (mode === "sync") {
         "--ignore-scripts",
         "--no-audit",
         "--no-fund",
+        "--save=false",
+        ...exactDirectSpecs,
       ],
       app.dir,
     );
+
+    validateManifestAgainstNpmLock(app);
+    validateDirectResolvedVersions(app);
   }
 
-  console.log("\nLockfiles refreshed. Run \"pnpm deps:sync\" to install and verify both package managers.");
+  console.log("\n✓ npm lockfiles regenerated from pnpm's direct dependency resolutions.");
   process.exit(0);
 }
 
