@@ -1,0 +1,40 @@
+name: Refresh pnpm lock
+
+on:
+  push:
+    branches:
+      - chore/unify-pnpm-npm-lock-validation
+    paths:
+      - ".github/workflows/refresh-pnpm-lock.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: chore/unify-pnpm-npm-lock-validation
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.18.0
+          run_install: false
+      - name: Refresh pnpm lock
+        run: pnpm install --lockfile-only
+      - name: Commit pnpm lock
+        run: |
+          if git diff --quiet -- pnpm-lock.yaml; then
+            echo "pnpm-lock.yaml already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pnpm-lock.yaml
+          git commit -m "Refresh pnpm workspace lock"
+          git push origin HEAD:chore/unify-pnpm-npm-lock-validation
