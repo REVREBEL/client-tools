@@ -25,7 +25,7 @@
     "legacy:build": "next build",
     "locks:sync": "node scripts/lockfiles.mjs sync",
     "locks:check": "node scripts/lockfiles.mjs check",
-    "deps:sync": "pnpm run locks:sync && pnpm install --frozen-lockfile && pnpm run locks:check"
+    "deps:sync": "pnpm run locks:sync && pnpm run locks:check"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.25",
