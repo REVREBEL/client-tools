@@ -6,11 +6,15 @@ export const buttonStory = defineStory({
   Component: Button,
   args: {
     initial: {
-      children: 'Open playlist',
-      variant: 'primary',
-      size: 'md',
+      children: 'Book a strategy call',
+      color: 'primary',
+      colorMode: 'normal',
+      colorStyle: 'filled',
+      size: 'base',
+      clickable: true,
+      hoverEffect: 'inverse',
+      bracketed: true,
       disabled: false,
-      fullWidth: false,
     },
   },
 });

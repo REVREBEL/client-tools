@@ -4,11 +4,17 @@
   "private": true,
   "description": "REVREBEL shared React 19 components, styled with @revrebel/tokens.",
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     ".": "./src/index.ts",
     "./button": "./src/button.tsx",
-    "./cn": "./src/cn.ts"
+    "./cn": "./src/cn.ts",
+    "./styles.css": {
+      "style": "./src/styles.css",
+      "default": "./src/styles.css"
+    }
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

@@ -3,6 +3,7 @@
 @import 'fumadocs-ui/css/preset.css';
 @import '@fumadocs/story/css/preset.css';
 @import '@revrebel/tokens/index.css';
+@import '@revrebel/ui/styles.css';
 
 /* Let Tailwind find the class names used inside the shared components. */
 @source '../../../packages/ui/src';

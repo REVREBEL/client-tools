@@ -1,0 +1,245 @@
+/* packages/ui/src/button.css
+ *
+ * REVREBEL Button — React port of the live Webflow `c-button` system
+ * (revrebel.io/rebel-style/buttons). Same model as the Webflow shared embed:
+ *
+ *   data-color        family  -> --normal / --fade / --inverse / --inverse-fade
+ *   data-color-mode   normal | inverse | inherit -> --is-primary / --on-primary / --action ...
+ *   data-color-style  filled | outline
+ *   data-hover-effect inverse | fade      (only when data-clickable="enable")
+ *   data-size         xs | sm | base | md | lg
+ *
+ * One generic rule set drives all 13 families, so there are no per-color blocks.
+ */
+
+@layer components {
+  .rr-button {
+    /* ---- geometry & type (Webflow button tokens) ---- */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    width: fit-content;
+    box-sizing: border-box;
+    margin: 0;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 0;
+    font-family: var(--rr-font-button);
+    font-weight: var(--rr-button-font-weight);
+    line-height: var(--rr-button-line-height);
+    letter-spacing: var(--rr-button-letter-spacing);
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    /* ---- default color resolution ---- */
+    color: var(--on-primary);
+    background-color: var(--is-primary);
+    border-color: var(--is-primary);
+    outline: 0 solid transparent;
+    outline-offset: -3px;
+
+    transition-property: color, background-color, border-color, outline-color, box-shadow, opacity;
+    transition-duration: 600ms;
+    transition-timing-function: ease;
+  }
+
+  /* ======================================================================
+     COLOR FAMILY -> four semantic roles
+     ====================================================================== */
+  .rr-button[data-color="primary"] { --normal: var(--rr-color-primary); --fade: var(--rr-color-primary-fade); --inverse: var(--rr-color-primary-inverse); --inverse-fade: var(--rr-color-primary-inverse-fade); }
+  .rr-button[data-color="teal"]    { --normal: var(--rr-color-teal);    --fade: var(--rr-color-teal-fade);    --inverse: var(--rr-color-teal-inverse);    --inverse-fade: var(--rr-color-teal-inverse-fade); }
+  .rr-button[data-color="cyan"]    { --normal: var(--rr-color-cyan);    --fade: var(--rr-color-cyan-fade);    --inverse: var(--rr-color-cyan-inverse);    --inverse-fade: var(--rr-color-cyan-inverse-fade); }
+  .rr-button[data-color="aqua"]    { --normal: var(--rr-color-aqua);    --fade: var(--rr-color-aqua-fade);    --inverse: var(--rr-color-aqua-inverse);    --inverse-fade: var(--rr-color-aqua-inverse-fade); }
+  .rr-button[data-color="powder"]  { --normal: var(--rr-color-powder);  --fade: var(--rr-color-powder-fade);  --inverse: var(--rr-color-powder-inverse);  --inverse-fade: var(--rr-color-powder-inverse-fade); }
+  .rr-button[data-color="yellow"]  { --normal: var(--rr-color-yellow);  --fade: var(--rr-color-yellow-fade);  --inverse: var(--rr-color-yellow-inverse);  --inverse-fade: var(--rr-color-yellow-inverse-fade); }
+  .rr-button[data-color="orange"]  { --normal: var(--rr-color-orange);  --fade: var(--rr-color-orange-fade);  --inverse: var(--rr-color-orange-inverse);  --inverse-fade: var(--rr-color-orange-inverse-fade); }
+  .rr-button[data-color="red"]     { --normal: var(--rr-color-red);     --fade: var(--rr-color-red-fade);     --inverse: var(--rr-color-red-inverse);     --inverse-fade: var(--rr-color-red-inverse-fade); }
+  .rr-button[data-color="purple"]  { --normal: var(--rr-color-purple);  --fade: var(--rr-color-purple-fade);  --inverse: var(--rr-color-purple-inverse);  --inverse-fade: var(--rr-color-purple-inverse-fade); }
+  .rr-button[data-color="frost"]   { --normal: var(--rr-color-frost);   --fade: var(--rr-color-frost-fade);   --inverse: var(--rr-color-frost-inverse);   --inverse-fade: var(--rr-color-frost-inverse-fade); }
+  .rr-button[data-color="grey-1"]  { --normal: var(--rr-color-grey-1);  --fade: var(--rr-color-grey-1-fade);  --inverse: var(--rr-color-grey-1-inverse);  --inverse-fade: var(--rr-color-grey-1-inverse-fade); }
+  .rr-button[data-color="grey-2"]  { --normal: var(--rr-color-grey-2);  --fade: var(--rr-color-grey-2-fade);  --inverse: var(--rr-color-grey-2-inverse);  --inverse-fade: var(--rr-color-grey-2-inverse-fade); }
+  .rr-button[data-color="grey-3"]  { --normal: var(--rr-color-grey-3);  --fade: var(--rr-color-grey-3-fade);  --inverse: var(--rr-color-grey-3-inverse);  --inverse-fade: var(--rr-color-grey-3-inverse-fade); }
+
+  /* ======================================================================
+     COLOR MODE -> which role is the surface ("is") and which is the ink ("on")
+     ====================================================================== */
+  .rr-button[data-color-mode="normal"] {
+    --is-primary: var(--normal);
+    --on-primary: var(--inverse);
+    --action: var(--fade);
+    --on-action: var(--inverse-fade);
+    --flip-is: var(--inverse);
+    --flip-on: var(--normal);
+  }
+
+  .rr-button[data-color-mode="inverse"] {
+    --is-primary: var(--inverse);
+    --on-primary: var(--normal);
+    --action: var(--inverse-fade);
+    --on-action: var(--fade);
+    --flip-is: var(--normal);
+    --flip-on: var(--inverse);
+  }
+
+  /* Inherit: follow the surrounding text color. Filled uses it as the surface
+     with the parent background showing through the label (like Webflow). */
+  .rr-button[data-color-mode="inherit"] {
+    --is-primary: currentColor;
+    --on-primary: currentColor;
+    --action: color-mix(in srgb, currentColor 70%, transparent);
+    --on-action: currentColor;
+    --flip-is: transparent;
+    --flip-on: currentColor;
+    color: inherit;
+  }
+
+  /* ======================================================================
+     COLOR STYLE
+     ====================================================================== */
+  .rr-button[data-color-style="outline"] {
+    color: var(--is-primary);
+    background-color: transparent;
+    border-color: currentColor;
+  }
+
+  .rr-button[data-color-mode="inherit"][data-color-style="filled"] {
+    color: inherit;
+    background-color: transparent;
+    border-color: currentColor;
+    box-shadow: inset 0 0 0 100vmax color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  /* ======================================================================
+     SIZE  (font = fluid text-size token, padding = Webflow button sm / default / lg)
+     ====================================================================== */
+  .rr-button[data-size="xs"] {
+    font-size: var(--rr-text-xs);
+    padding: var(--rr-button-sm-padding-top) var(--rr-button-sm-padding-inline) var(--rr-button-sm-padding-bottom);
+  }
+  .rr-button[data-size="sm"] {
+    font-size: var(--rr-text-sm);
+    padding: var(--rr-button-sm-padding-top) var(--rr-button-sm-padding-inline) var(--rr-button-sm-padding-bottom);
+  }
+  .rr-button[data-size="base"] {
+    font-size: var(--rr-text-base);
+    padding: var(--rr-button-md-padding-top) var(--rr-button-md-padding-inline) var(--rr-button-md-padding-bottom);
+  }
+  .rr-button[data-size="md"] {
+    font-size: var(--rr-text-md);
+    padding: var(--rr-button-md-padding-top) var(--rr-button-md-padding-inline) var(--rr-button-md-padding-bottom);
+  }
+  .rr-button[data-size="lg"] {
+    font-size: var(--rr-text-lg);
+    padding: var(--rr-button-lg-padding-top) var(--rr-button-lg-padding-inline) var(--rr-button-lg-padding-bottom);
+  }
+
+  /* ======================================================================
+     INTERACTION  (clickable="enable" and not disabled)
+     Hover = 3D stepped shadow (17 layers to 8.5px) + inset outline.
+     Pressed = shorter shadow (9 layers to 4.5px), as if pushed in.
+     ====================================================================== */
+  .rr-button {
+    --button-shadow-color: var(--is-primary);
+    --button-outline-color: var(--action);
+    --rr-button-shadow-hover:
+      var(--button-shadow-color) 0.5px 0.5px 0, var(--button-shadow-color) 1px 1px 0,
+      var(--button-shadow-color) 1.5px 1.5px 0, var(--button-shadow-color) 2px 2px 0,
+      var(--button-shadow-color) 2.5px 2.5px 0, var(--button-shadow-color) 3px 3px 0,
+      var(--button-shadow-color) 3.5px 3.5px 0, var(--button-shadow-color) 4px 4px 0,
+      var(--button-shadow-color) 4.5px 4.5px 0, var(--button-shadow-color) 5px 5px 0,
+      var(--button-shadow-color) 5.5px 5.5px 0, var(--button-shadow-color) 6px 6px 0,
+      var(--button-shadow-color) 6.5px 6.5px 0, var(--button-shadow-color) 7px 7px 0,
+      var(--button-shadow-color) 7.5px 7.5px 0, var(--button-shadow-color) 8px 8px 0,
+      var(--button-shadow-color) 8.5px 8.5px 0;
+    --rr-button-shadow-pressed:
+      var(--button-shadow-color) 0.5px 0.5px 0, var(--button-shadow-color) 1px 1px 0,
+      var(--button-shadow-color) 1.5px 1.5px 0, var(--button-shadow-color) 2px 2px 0,
+      var(--button-shadow-color) 2.5px 2.5px 0, var(--button-shadow-color) 3px 3px 0,
+      var(--button-shadow-color) 3.5px 3.5px 0, var(--button-shadow-color) 4px 4px 0,
+      var(--button-shadow-color) 4.5px 4.5px 0;
+  }
+
+  /* Inverse hover: surface and ink flip to the paired colors. */
+  .rr-button[data-clickable="enable"][data-hover-effect="inverse"]:is(:hover, .is-hover-state):not([aria-disabled="true"], :disabled) {
+    outline-width: 2px;
+    outline-color: var(--button-outline-color);
+    box-shadow: var(--rr-button-shadow-hover);
+  }
+  .rr-button[data-clickable="enable"][data-hover-effect="inverse"][data-color-style="filled"]:is(:hover, .is-hover-state):not([aria-disabled="true"], :disabled) {
+    color: var(--flip-on);
+    background-color: var(--flip-is);
+    border-color: var(--is-primary);
+  }
+  .rr-button[data-clickable="enable"][data-hover-effect="inverse"]:is(:active, .is-pressed-state):not([aria-disabled="true"], :disabled) {
+    outline-width: 2px;
+    outline-color: var(--button-outline-color);
+    box-shadow: var(--rr-button-shadow-pressed);
+  }
+  .rr-button[data-clickable="enable"][data-hover-effect="inverse"][data-color-style="filled"]:is(:active, .is-pressed-state):not([aria-disabled="true"], :disabled) {
+    color: var(--flip-on);
+    background-color: var(--flip-is);
+    border-color: var(--is-primary);
+  }
+
+  /* Fade hover: soften to the fade roles, no shadow. */
+  .rr-button[data-clickable="enable"][data-hover-effect="fade"][data-color-style="filled"]:is(:hover, :active, .is-hover-state, .is-pressed-state):not([aria-disabled="true"], :disabled) {
+    color: var(--on-action);
+    background-color: var(--action);
+    border-color: var(--is-primary);
+    outline-width: 2px;
+    outline-color: var(--action);
+    box-shadow: none;
+  }
+  .rr-button[data-clickable="enable"][data-hover-effect="fade"][data-color-style="outline"]:is(:hover, :active, .is-hover-state, .is-pressed-state):not([aria-disabled="true"], :disabled) {
+    color: var(--action);
+    border-color: var(--action);
+    box-shadow: none;
+  }
+
+  /* ======================================================================
+     FOCUS, DISABLED, MOTION
+     ====================================================================== */
+  .rr-button:focus-visible {
+    outline: 3px solid var(--rr-color-cyan);
+    outline-offset: 3px;
+  }
+
+  .rr-button:disabled,
+  .rr-button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rr-button { transition-duration: 0ms; }
+  }
+
+  /* ======================================================================
+     PARTS
+     ====================================================================== */
+  .rr-button__icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 1.25em;
+    height: 1.25em;
+    max-width: 35px;
+    max-height: 35px;
+    margin-block: -0.25em;
+  }
+  .rr-button__icon > :is(svg, img) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .rr-button__bracket {
+    font-weight: var(--rr-weight-300);
+  }
+}

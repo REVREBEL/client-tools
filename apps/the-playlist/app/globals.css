@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@revrebel/tokens/index.css";
+@import "@revrebel/ui/styles.css";
 @source "../../../packages/ui/src";
 
 /* Legacy --playlist-* names now point at the shared tokens. Replace them with
