@@ -9,6 +9,7 @@ const appsRoot = path.join(root, "apps");
 const mode = process.argv[2];
 
 // Keep this command deterministic: package.json declares intent, pnpm resolves,
+// npm app boundaries are identified by committed package-lock.json files.
 // and npm locks are materialized from those resolved direct versions.
 
 if (!["sync", "check"].includes(mode)) {
