@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync, rmSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
@@ -159,22 +159,59 @@ if (mode === "sync") {
         return `${name}@${resolved}`;
       });
 
+    const manifestPath = path.join(app.dir, "package.json");
     const npmLockPath = path.join(app.dir, "package-lock.json");
+    const originalManifestText = readFileSync(manifestPath, "utf8");
+    const exactManifest = structuredClone(app.manifest);
+
+    for (const section of ["dependencies", "devDependencies", "optionalDependencies"]) {
+      if (!exactManifest[section]) continue;
+      for (const name of Object.keys(exactManifest[section])) {
+        const resolved = pnpmVersions[name]?.version;
+        if (!resolved) {
+          throw new Error(
+            `${app.relativeDir}: pnpm did not report a resolved version for ${name}.`,
+          );
+        }
+        exactManifest[section][name] = resolved;
+      }
+    }
+
     rmSync(npmLockPath, { force: true });
 
-    run(
-      "npm",
-      [
-        "install",
-        "--package-lock-only",
-        "--ignore-scripts",
-        "--no-audit",
-        "--no-fund",
-        "--save=false",
-        ...exactDirectSpecs,
-      ],
-      app.dir,
-    );
+    try {
+      writeFileSync(manifestPath, `${JSON.stringify(exactManifest, null, 2)}\n`);
+
+      run(
+        "npm",
+        [
+          "install",
+          "--package-lock-only",
+          "--ignore-scripts",
+          "--no-audit",
+          "--no-fund",
+        ],
+        app.dir,
+      );
+    } finally {
+      writeFileSync(manifestPath, originalManifestText);
+    }
+
+    const npmLock = readJson(npmLockPath);
+    const npmLockRoot = npmLock.packages?.[""];
+    if (!npmLockRoot) {
+      throw new Error(`${app.relativeDir}: regenerated npm lock has no root metadata.`);
+    }
+
+    for (const section of ["dependencies", "devDependencies", "optionalDependencies"]) {
+      if (app.manifest[section]) {
+        npmLockRoot[section] = app.manifest[section];
+      } else {
+        delete npmLockRoot[section];
+      }
+    }
+
+    writeFileSync(npmLockPath, `${JSON.stringify(npmLock, null, 2)}\n`);
 
     validateManifestAgainstNpmLock(app);
     validateDirectResolvedVersions(app);
