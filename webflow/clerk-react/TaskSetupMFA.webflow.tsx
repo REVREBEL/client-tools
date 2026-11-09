@@ -1,3 +1,5 @@
+"use client";
+
 import { declareComponent } from "@webflow/react";
 import { RevrebelTaskSetupMFA } from "./ClerkComponents";
 import { baseAuthProps, completionUrlProp } from "./webflow-props";

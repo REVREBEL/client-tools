@@ -1,3 +1,5 @@
+"use client";
+
 import { declareComponent } from "@webflow/react";
 import { RevrebelUserProfile } from "./ClerkComponents";
 import { baseAuthProps, routePathProp } from "./webflow-props";

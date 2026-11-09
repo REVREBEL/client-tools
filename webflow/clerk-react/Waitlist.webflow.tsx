@@ -1,3 +1,5 @@
+"use client";
+
 import { declareComponent } from "@webflow/react";
 import { RevrebelWaitlist } from "./ClerkComponents";
 import { baseAuthProps } from "./webflow-props";
