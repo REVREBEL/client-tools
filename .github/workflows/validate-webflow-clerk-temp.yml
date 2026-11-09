@@ -27,7 +27,7 @@ jobs:
       - name: Typecheck
         run: npx tsc --noEmit
       - name: Build Webflow library
-        run: npx webflow library bundle
+        run: npx webflow devlink bundle
       - name: Commit package lock
         working-directory: .
         run: |
