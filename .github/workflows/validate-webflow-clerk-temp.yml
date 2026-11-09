@@ -1,0 +1,39 @@
+name: Validate Webflow Clerk Components
+
+on:
+  push:
+    branches:
+      - feat/webflow-clerk-components
+    paths:
+      - "webflow/clerk-react/**"
+      - ".github/workflows/validate-webflow-clerk-temp.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: webflow/clerk-react
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Install
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Typecheck
+        run: npx tsc --noEmit
+      - name: Build Webflow library
+        run: npx webflow devlink bundle
+      - name: Commit package lock
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add webflow/clerk-react/package-lock.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Add Webflow Clerk component lockfile"
+          git push origin HEAD:feat/webflow-clerk-components

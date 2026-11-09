@@ -1,0 +1,24 @@
+{
+  "name": "@revrebel/webflow-clerk-react",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "webflow devlink bundle",
+    "dev": "webflow library dev",
+    "publish": "webflow library publish"
+  },
+  "dependencies": {
+    "@clerk/react": "6.18.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@webflow/data-types": "^2.5.0",
+    "@webflow/react": "^2.5.0",
+    "@webflow/webflow-cli": "^2.10.1",
+    "typescript": "^5.9.3",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
+  }
+}
