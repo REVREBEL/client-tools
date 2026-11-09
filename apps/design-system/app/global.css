@@ -2,14 +2,10 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 @import '@fumadocs/story/css/preset.css';
+@import '@revrebel/tokens/index.css';
 
-:root {
-  --rr-blue: #163666;
-  --rr-blue-dark: #0d274e;
-  --rr-aqua: #71c9c5;
-  --rr-frost: #eff5f6;
-  --rr-white: #fafafa;
-}
+/* Let Tailwind find the class names used inside the shared components. */
+@source '../../../packages/ui/src';
 
 html {
   scrollbar-gutter: stable;

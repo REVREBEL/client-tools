@@ -13,6 +13,7 @@ const githubPagesBasePath = process.env.GITHUB_ACTIONS === 'true' ? '/client-too
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  transpilePackages: ['@revrebel/ui', '@revrebel/tokens'],
   output: 'export',
   trailingSlash: true,
   basePath: githubPagesBasePath,

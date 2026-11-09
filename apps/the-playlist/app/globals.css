@@ -1,17 +1,21 @@
 @import "tailwindcss";
+@import "@revrebel/tokens/index.css";
+@source "../../../packages/ui/src";
 
+/* Legacy --playlist-* names now point at the shared tokens. Replace them with
+   --rr-* (or token classes) as components move to @revrebel/ui, then delete. */
 [data-client-tool="playlist"] {
-  --playlist-blue: #163666;
-  --playlist-teal: #047c97;
-  --playlist-cyan: #00a6b6;
-  --playlist-aqua: #71c9c5;
-  --playlist-powder: #b2d3de;
-  --playlist-yellow: #faca78;
-  --playlist-orange: #f37d59;
-  --playlist-frost: #eff5f6;
-  --playlist-red: #e05047;
-  --playlist-purple: #8e456a;
-  --playlist-white: #fafafa;
+  --playlist-blue: var(--rr-color-primary);
+  --playlist-teal: var(--rr-color-teal);
+  --playlist-cyan: var(--rr-color-cyan);
+  --playlist-aqua: var(--rr-color-aqua);
+  --playlist-powder: var(--rr-color-powder);
+  --playlist-yellow: var(--rr-color-yellow);
+  --playlist-orange: var(--rr-color-orange);
+  --playlist-frost: var(--rr-color-frost);
+  --playlist-red: var(--rr-color-red);
+  --playlist-purple: var(--rr-color-purple);
+  --playlist-white: var(--rr-color-light-1);
   color: var(--playlist-blue);
   background: var(--playlist-frost);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;

@@ -1,0 +1,28 @@
+---
+title: Color
+description: Brand color families and semantic colors.
+---
+
+Each brand color has four steps: base, `-fade`, `-inverse`, and `-inverse-fade`. Use them as `bg-teal`, `text-teal-inverse`, `border-teal-fade`, or as `var(--rr-color-teal)` in CSS.
+
+## Brand families
+
+<ColorFamilies />
+
+## Light and dark
+
+<ColorList names={['light-1', 'light-2', 'light-3', 'light-fade', 'dark-1', 'dark-2', 'dark-3', 'dark-fade']} />
+
+## States
+
+Classes: `text-success`, `bg-error`, `border-warning`, `text-disabled`.
+
+<ColorList names={['state-success', 'state-alert', 'state-error', 'state-warning', 'state-disabled']} />
+
+## Links and social
+
+<ColorList names={['link', 'link-inverse', 'social-email', 'social-instagram', 'social-linkedin', 'social-facebook', 'social-x', 'social-github', 'social-google', 'social-youtube']} />
+
+## Icon filters
+
+To recolor a single-color SVG `<img>`, use `filter: var(--rr-filter-teal)`. There is one filter per brand color.

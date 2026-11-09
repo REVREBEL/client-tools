@@ -1,0 +1,9 @@
+/* packages/tokens/src/index.css
+ * Single entry point. Import AFTER `@import "tailwindcss";` in an app's global CSS:
+ *
+ *   @import "tailwindcss";
+ *   @import "@revrebel/tokens/index.css";
+ */
+@import "./tokens.css";
+@import "./theme.css";
+@import "./typography.css";

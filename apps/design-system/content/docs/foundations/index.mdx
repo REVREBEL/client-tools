@@ -1,19 +1,26 @@
 ---
 title: Foundations
-description: Core visual and interaction rules shared across Client Tools.
+description: REVREBEL design tokens, mirrored from the Webflow variable collections.
 ---
 
-This section will hold the canonical design tokens and cross-product rules.
+All tokens live in `@revrebel/tokens`. Webflow is the source of truth; the package mirrors its `base`, `color`, `typography`, and `size` collections.
 
-## Initial token families
+## Setup in an app
 
-- Color
-- Typography
-- Spacing
-- Borders and radius
-- Elevation
-- Motion
-- Responsive behavior
-- Focus and accessibility states
+```css title="app/globals.css"
+@import "tailwindcss";
+@import "@revrebel/tokens/index.css";
+@source "../../../packages/ui/src";
+```
 
-The implementation target is CSS custom properties surfaced through Tailwind utilities, so components and SurveyJS adapters can consume the same values.
+## Layers
+
+- **`--rr-*` CSS variables**: raw values, e.g. `--rr-color-teal`, `--rr-headline-lg`.
+- **Tailwind classes**: `bg-teal`, `font-headline`, `text-headline-lg`, `gap-md`, `rounded-round`.
+- **Composite type classes**: `type-h1`, `type-s3`, `type-eyebrow`, `type-label`.
+
+## Pages
+
+- [Color](/docs/foundations/color)
+- [Typography](/docs/foundations/typography)
+- [Spacing, radius & widths](/docs/foundations/spacing)

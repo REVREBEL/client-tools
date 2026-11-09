@@ -1,0 +1,32 @@
+{
+  "name": "@revrebel/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "REVREBEL design tokens, mirrored from the Webflow variable collections (base, color, typography, size).",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    "./fonts": "./src/fonts.ts",
+    "./index.css": {
+      "style": "./src/index.css",
+      "default": "./src/index.css"
+    },
+    "./tokens.css": {
+      "style": "./src/tokens.css",
+      "default": "./src/tokens.css"
+    },
+    "./theme.css": {
+      "style": "./src/theme.css",
+      "default": "./src/theme.css"
+    },
+    "./typography.css": {
+      "style": "./src/typography.css",
+      "default": "./src/typography.css"
+    }
+  },
+  "files": [
+    "src"
+  ]
+}

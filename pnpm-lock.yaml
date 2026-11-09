@@ -255,6 +255,12 @@ importers:
       '@fumadocs/story':
         specifier: 1.5.3
         version: 1.5.3(f749a291f857d5dee850c602a99bc201)
+      '@revrebel/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
+      '@revrebel/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       fumadocs-core:
         specifier: 16.18.1
         version: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
@@ -436,6 +442,12 @@ importers:
       '@clerk/nextjs':
         specifier: ^7.6.0
         version: 7.9.20(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@revrebel/tokens':
+        specifier: workspace:*
+        version: link:../../packages/tokens
+      '@revrebel/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       lucide-react:
         specifier: ^0.468.0
         version: 0.468.0(react@19.2.6)
@@ -470,6 +482,30 @@ importers:
       tailwindcss:
         specifier: 4.2.1
         version: 4.2.1
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
+  packages/tokens: {}
+
+  packages/ui:
+    dependencies:
+      '@revrebel/tokens':
+        specifier: workspace:*
+        version: link:../tokens
+      react:
+        specifier: ^19.2.0
+        version: 19.3.1
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.3.1(react@19.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: 19.2.14
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.14)
       typescript:
         specifier: 5.9.3
         version: 5.9.3

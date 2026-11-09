@@ -1,0 +1,51 @@
+---
+title: Button
+description: The primary action control, built from the Webflow button tokens.
+---
+
+import { buttonStory } from '@/components/examples/button.story';
+
+```tsx
+import { Button } from '@revrebel/ui';
+
+<Button>Save</Button>
+<Button variant="secondary" size="sm" href="/playlist">Open playlist</Button>
+```
+
+## Playground
+
+<buttonStory.WithControl />
+
+## Variants
+
+<ButtonVariants />
+
+On dark backgrounds, use `inverse` or `accent`:
+
+<ButtonOnDark />
+
+## Sizes
+
+Padding, border width, radius, and font size come from the Webflow `button/sm`, default, and `button/lg` tokens.
+
+<ButtonSizes />
+
+## States
+
+<ButtonStates />
+
+## Props
+
+- `variant`: `primary` (default), `secondary`, `accent`, `inverse`, `ghost`, `danger`
+- `size`: `sm`, `md` (default), `lg`
+- `href`: renders an `<a>` instead of a `<button>`
+- `iconStart` / `iconEnd`: icons placed around the label, hidden from screen readers
+- `fullWidth`: stretches to the container width
+- Every native `<button>` or `<a>` attribute is passed through.
+
+## Accessibility
+
+- `type="button"` is the default, so a Button inside a form won't submit unless you set `type="submit"`.
+- Focus shows a 3px cyan outline when using the keyboard.
+- A disabled link gets `aria-disabled`, loses its `href`, and leaves the tab order.
+- Icon-only buttons need an `aria-label`.
