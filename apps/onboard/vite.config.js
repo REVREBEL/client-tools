@@ -17,19 +17,30 @@ const flattenHtmlOutput = {
   }
 };
 
-export default defineConfig(({ mode, isSsrBuild }) => {
+export default defineConfig(({ command, mode, isSsrBuild }) => {
   const env = loadEnv(mode, process.cwd(), "VITE_");
-  const accessCode = env.VITE_INDEX_ACCESS_CODE || process.env.VITE_INDEX_ACCESS_CODE;
+  const configuredAccessCode =
+    env.VITE_INDEX_ACCESS_CODE || process.env.VITE_INDEX_ACCESS_CODE;
+  const accessCode =
+    configuredAccessCode || (command === "serve" ? "local-dev-only" : undefined);
   const apiBaseUrl =
     env.VITE_API_BASE_URL ||
     process.env.VITE_API_BASE_URL ||
     env.VITE_API_BASE ||
     process.env.VITE_API_BASE;
 
+  if (!configuredAccessCode && command === "serve") {
+    console.warn(
+      "[Onboard] VITE_INDEX_ACCESS_CODE is not set; using the local-development-only access code \"local-dev-only\"."
+    );
+  }
+
   if (!accessCode) {
     console.error("\n[Onboard] BUILD CONFIG ERROR");
     console.error("[Onboard] VITE_INDEX_ACCESS_CODE is not set.");
-    console.error("[Onboard] Add VITE_INDEX_ACCESS_CODE to the Webflow Cloud environment variables, then redeploy.\n");
+    console.error(
+      "[Onboard] Production builds require VITE_INDEX_ACCESS_CODE in the Webflow Cloud environment.\n"
+    );
     throw new Error("Missing required environment variable: VITE_INDEX_ACCESS_CODE");
   }
 
