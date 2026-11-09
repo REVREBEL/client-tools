@@ -220,19 +220,19 @@ importers:
     dependencies:
       '@fumadocs/story':
         specifier: 1.5.3
-        version: 1.5.3(5e590a9869cbec87cde6fadd04ff8b07)
+        version: 1.5.3(0a94e52e646d0e7f4c0909a130604566)
       fumadocs-core:
         specifier: 16.18.1
-        version: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
+        version: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
       fumadocs-mdx:
         specifier: 15.4.10
-        version: 15.4.10(@types/mdast@4.0.4)(@types/mdx@2.0.14)(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)(rolldown@1.2.16)(supports-color@10.2.2)(vite@8.3.6(@types/node@22.19.19)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+        version: 15.4.10(@types/mdast@4.0.4)(@types/mdx@2.0.14)(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)(rolldown@1.2.16)(supports-color@10.2.2)(vite@8.3.6(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
       fumadocs-ui:
         specifier: 16.18.1
-        version: 16.18.1(@types/mdx@2.0.14)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(tailwindcss@4.2.1)
+        version: 16.18.1(@types/mdx@2.0.14)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(tailwindcss@4.2.1)
       next:
         specifier: 16.3.3
-        version: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react:
         specifier: 19.2.6
         version: 19.2.6
@@ -247,8 +247,8 @@ importers:
         specifier: ^2.0.13
         version: 2.0.14
       '@types/node':
-        specifier: 22.19.19
-        version: 22.19.19
+        specifier: 22.20.5
+        version: 22.20.5
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
@@ -269,16 +269,16 @@ importers:
     dependencies:
       '@clerk/nextjs':
         specifier: ^7.6.0
-        version: 7.9.25(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 7.9.25(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@opennextjs/cloudflare':
         specifier: ^1.20.16
-        version: 1.20.16(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)(wrangler@4.158.0(@types/node@22.19.19))
+        version: 1.20.16(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)(wrangler@4.158.0(@types/node@22.20.5))
       drizzle-orm:
         specifier: 0.45.2
         version: 0.45.2
       next:
         specifier: 16.4.5
-        version: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react:
         specifier: 19.2.6
         version: 19.2.6
@@ -290,8 +290,8 @@ importers:
         specifier: 4.2.1
         version: 4.2.1
       '@types/node':
-        specifier: 22.19.19
-        version: 22.19.19
+        specifier: 22.20.5
+        version: 22.20.5
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
@@ -315,16 +315,16 @@ importers:
         version: 5.9.3
       wrangler:
         specifier: ^4.158.0
-        version: 4.158.0(@types/node@22.19.19)
+        version: 4.158.0(@types/node@22.20.5)
 
   apps/metrics:
     dependencies:
       '@clerk/nextjs':
         specifier: ^7.6.0
-        version: 7.9.25(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 7.9.25(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@opennextjs/cloudflare':
         specifier: ^1.20.16
-        version: 1.20.16(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)(wrangler@4.158.0(@types/node@22.19.19))
+        version: 1.20.16(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)(wrangler@4.158.0(@types/node@22.20.5))
       drizzle-orm:
         specifier: 0.45.2
         version: 0.45.2
@@ -333,7 +333,7 @@ importers:
         version: 0.468.0(react@19.2.6)
       next:
         specifier: 16.4.5
-        version: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react:
         specifier: 19.2.6
         version: 19.2.6
@@ -345,8 +345,8 @@ importers:
         specifier: 4.2.1
         version: 4.2.1
       '@types/node':
-        specifier: 22.19.19
-        version: 22.19.19
+        specifier: 22.20.5
+        version: 22.20.5
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
@@ -370,7 +370,7 @@ importers:
         version: 5.9.3
       wrangler:
         specifier: ^4.158.0
-        version: 4.158.0(@types/node@22.19.19)
+        version: 4.158.0(@types/node@22.20.5)
 
   apps/onboard:
     dependencies:
@@ -401,13 +401,13 @@ importers:
     dependencies:
       '@clerk/nextjs':
         specifier: ^7.6.0
-        version: 7.9.25(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 7.9.25(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       lucide-react:
         specifier: ^0.468.0
         version: 0.468.0(react@19.2.6)
       next:
         specifier: 16.3.3
-        version: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react:
         specifier: 19.2.6
         version: 19.2.6
@@ -419,8 +419,8 @@ importers:
         specifier: 4.2.1
         version: 4.2.1
       '@types/node':
-        specifier: 22.19.19
-        version: 22.19.19
+        specifier: 22.20.5
+        version: 22.20.5
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
@@ -2752,8 +2752,8 @@ packages:
   '@types/node@18.19.130':
     resolution: {integrity: sha512-GRaXQx6jGfL8sKfaIDD6OupbIHBr9jv7Jnaml9tB7l4v068PAOXqfcujMMo5PhbIs6ggR1XODELqahT2R8v0fg==}
 
-  '@types/node@22.19.19':
-    resolution: {integrity: sha512-dyh/xO2Fh5bYrfWaaqGrRQQGkNdmYw6AmaAUvYeUMNTWQtvb796ikLdmTchRmOlOiIJ1TDXfWgVx1QkUlQ6Hew==}
+  '@types/node@22.20.5':
+    resolution: {integrity: sha512-U2+DNr+wSjpsTS/wZGYHq7GcwfuSmKiKvoPvK22zwTlRhU91yOniN4qRR5KhIjvif7ysw/dz/hKmfDH0Ris4aA==}
 
   '@types/node@26.6.6':
     resolution: {integrity: sha512-MzQj+8Kx3XI40OmUAE6Qoh58ZMNstNNMwn2nfd3qWsfe7nDNSqJNzes4njhz6AHwrSHOffSLwXU6yb474Q4aog==}
@@ -7074,22 +7074,22 @@ snapshots:
       - react
       - react-dom
 
-  '@clerk/nextjs@7.9.25(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@clerk/nextjs@7.9.25(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@clerk/backend': 3.27.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@clerk/react': 6.18.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@clerk/shared': 4.44.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
       server-only: 0.0.1
 
-  '@clerk/nextjs@7.9.25(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@clerk/nextjs@7.9.25(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@clerk/backend': 3.27.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@clerk/react': 6.18.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@clerk/shared': 4.44.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      next: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      next: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
       server-only: 0.0.1
@@ -7497,23 +7497,23 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.14
 
-  '@fumadocs/story@1.5.3(5e590a9869cbec87cde6fadd04ff8b07)':
+  '@fumadocs/story@1.5.3(0a94e52e646d0e7f4c0909a130604566)':
     dependencies:
       '@base-ui/react': 1.9.0(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@fuma-translate/react': 1.0.2(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@fumari/stf': 1.1.2(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       cn: 0.5.2
-      fumadocs-core: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
-      fumadocs-ui: 16.18.1(@types/mdx@2.0.14)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(tailwindcss@4.2.1)
+      fumadocs-core: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
+      fumadocs-ui: 16.18.1(@types/mdx@2.0.14)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(tailwindcss@4.2.1)
       lucide-react: 1.70.0(@types/react@19.2.14)(react@19.2.6)
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
       typescript: 7.1.0-beta
     optionalDependencies:
       '@types/react': 19.2.14
-      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      vite: 8.3.6(@types/node@22.19.19)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
-      webpack: 5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19))
+      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      vite: 8.3.6(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
+      webpack: 5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5))
     transitivePeerDependencies:
       - '@date-fns/tz'
       - date-fns
@@ -7816,7 +7816,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@opennextjs/aws@4.1.15(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)':
+  '@opennextjs/aws@4.1.15(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)':
     dependencies:
       '@ast-grep/napi': 0.45.3
       '@aws-sdk/client-cloudfront': 3.984.0
@@ -7832,7 +7832,7 @@ snapshots:
       cookie: 1.1.1
       esbuild: 0.28.2
       express: 5.3.0(supports-color@10.2.2)
-      next: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      next: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       path-to-regexp: 6.3.0
       urlpattern-polyfill: 10.1.0
       yaml: 2.9.1
@@ -7862,19 +7862,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@opennextjs/cloudflare@1.20.16(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)(wrangler@4.158.0(@types/node@22.19.19))':
+  '@opennextjs/cloudflare@1.20.16(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)(wrangler@4.158.0(@types/node@22.20.5))':
     dependencies:
       '@ast-grep/napi': 0.45.3
       '@dotenvx/dotenvx': 2.38.2
-      '@opennextjs/aws': 4.1.15(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)
+      '@opennextjs/aws': 4.1.15(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(supports-color@10.2.2)
       ci-info: 4.4.0
       cloudflare: 4.5.0
       comment-json: 4.6.2
       enquirer: 2.4.1
       glob: 13.0.7
-      next: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      next: 16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       ts-tqdm: 0.8.6
-      wrangler: 4.158.0(@types/node@22.19.19)
+      wrangler: 4.158.0(@types/node@22.20.5)
       yargs: 18.2.0
     transitivePeerDependencies:
       - diff
@@ -8762,7 +8762,7 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@22.19.19':
+  '@types/node@22.20.5':
     dependencies:
       undici-types: 6.21.0
 
@@ -10328,7 +10328,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7):
+  fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7):
     dependencies:
       '@fumari/image-size': 0.1.1
       estree-util-value-to-estree: 3.5.0
@@ -10356,21 +10356,21 @@ snapshots:
       '@types/mdast': 4.0.4
       '@types/react': 19.2.14
       lucide-react: 1.70.0(@types/react@19.2.14)(react@19.2.6)
-      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
       zod: 4.6.7
     transitivePeerDependencies:
       - supports-color
 
-  fumadocs-mdx@15.4.10(@types/mdast@4.0.4)(@types/mdx@2.0.14)(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)(rolldown@1.2.16)(supports-color@10.2.2)(vite@8.3.6(@types/node@22.19.19)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)):
+  fumadocs-mdx@15.4.10(@types/mdast@4.0.4)(@types/mdx@2.0.14)(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)(rolldown@1.2.16)(supports-color@10.2.2)(vite@8.3.6(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)):
     dependencies:
       '@mdx-js/mdx': 3.1.1(supports-color@10.2.2)
       '@standard-schema/spec': 1.1.0
       chokidar: 6.0.0
       esbuild: 0.28.2
       estree-util-value-to-estree: 3.5.0
-      fumadocs-core: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
+      fumadocs-core: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
       github-slugger: 2.0.0
       magic-string: 1.4.5
       mdast-util-mdx: 3.0.0(supports-color@10.2.2)
@@ -10388,14 +10388,14 @@ snapshots:
       '@types/mdast': 4.0.4
       '@types/mdx': 2.0.14
       '@types/react': 19.2.14
-      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react: 19.2.6
       rolldown: 1.2.16
-      vite: 8.3.6(@types/node@22.19.19)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
+      vite: 8.3.6(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
     transitivePeerDependencies:
       - supports-color
 
-  fumadocs-ui@16.18.1(@types/mdx@2.0.14)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(tailwindcss@4.2.1):
+  fumadocs-ui@16.18.1(@types/mdx@2.0.14)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(fumadocs-core@16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(tailwindcss@4.2.1):
     dependencies:
       '@fuma-translate/react': 1.0.2(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@fumadocs/tailwind': 0.1.5(tailwindcss@4.2.1)
@@ -10411,7 +10411,7 @@ snapshots:
       '@radix-ui/react-tabs': 1.2.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       class-variance-authority: 0.7.1
       cn: 0.5.2
-      fumadocs-core: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
+      fumadocs-core: 16.18.1(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@1.70.0(@types/react@19.2.14)(react@19.2.6))(next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(supports-color@10.2.2)(zod@4.6.7)
       lucide-react: 1.70.0(@types/react@19.2.14)(react@19.2.6)
       motion: 14.10.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       next-themes: 0.4.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -10423,7 +10423,7 @@ snapshots:
     optionalDependencies:
       '@types/mdx': 2.0.14
       '@types/react': 19.2.14
-      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      next: 16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
     transitivePeerDependencies:
       - '@types/react-dom'
       - remix
@@ -10836,7 +10836,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.19.19
+      '@types/node': 22.20.5
       merge-stream: 2.0.0
       supports-color: 8.1.1
     optional: true
@@ -11518,10 +11518,10 @@ snapshots:
     dependencies:
       mime-db: 1.54.0
 
-  miniflare@5.20261104.0-beta(@types/node@22.19.19):
+  miniflare@5.20261104.0-beta(@types/node@22.20.5):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
-      sharp: 0.35.5(@types/node@22.19.19)
+      sharp: 0.35.5(@types/node@22.20.5)
       undici: 7.30.1
       workerd: 1.20261104.1
       ws: 8.21.0
@@ -11558,17 +11558,17 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  minimizer-webpack-plugin@5.14.0(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19))(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19))):
+  minimizer-webpack-plugin@5.14.0(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5))(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5))):
     dependencies:
       jest-worker: 27.5.1
-      schema-utils: 4.8.3(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19)))
+      schema-utils: 4.8.3(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5)))
       terser: 5.51.2
-      webpack: 5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19))
+      webpack: 5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5))
     optionalDependencies:
       esbuild: 0.28.2
       lightningcss: 1.33.0
       postcss: 8.5.32
-      sharp: 0.35.5(@types/node@22.19.19)
+      sharp: 0.35.5(@types/node@22.20.5)
     optional: true
 
   minipass@7.1.3: {}
@@ -11612,7 +11612,7 @@ snapshots:
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
 
-  next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  next@16.3.3(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
     dependencies:
       '@next/env': 16.3.3
       '@swc/helpers': 0.5.23
@@ -11631,13 +11631,13 @@ snapshots:
       '@next/swc-linux-x64-musl': 16.3.3
       '@next/swc-win32-arm64-msvc': 16.3.3
       '@next/swc-win32-x64-msvc': 16.3.3
-      sharp: 0.35.5(@types/node@22.19.19)
+      sharp: 0.35.5(@types/node@22.20.5)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/node'
       - babel-plugin-macros
 
-  next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.19.19)(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
     dependencies:
       '@next/env': 16.4.5
       '@swc/helpers': 0.5.23
@@ -11656,7 +11656,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 16.4.5
       '@next/swc-win32-arm64-msvc': 16.4.5
       '@next/swc-win32-x64-msvc': 16.4.5
-      sharp: 0.35.5(@types/node@22.19.19)
+      sharp: 0.35.5(@types/node@22.20.5)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/node'
@@ -12145,14 +12145,14 @@ snapshots:
 
   scheduler@0.28.0: {}
 
-  schema-utils@4.8.3(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19))):
+  schema-utils@4.8.3(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5))):
     dependencies:
       '@types/json-schema': 7.0.15
       ajv: 8.20.0
       ajv-formats: 3.0.1
       ajv-keywords: 5.1.0(ajv@8.20.0)
     optionalDependencies:
-      webpack: 5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19))
+      webpack: 5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5))
     optional: true
 
   scroll-into-view-if-needed@3.1.0:
@@ -12214,7 +12214,7 @@ snapshots:
 
   setprototypeof@1.2.0: {}
 
-  sharp@0.35.5(@types/node@22.19.19):
+  sharp@0.35.5(@types/node@22.20.5):
     dependencies:
       '@img/colour': 1.1.0
       detect-libc: 2.1.2
@@ -12245,7 +12245,7 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.5
       '@img/sharp-win32-ia32': 0.35.5
       '@img/sharp-win32-x64': 0.35.5
-      '@types/node': 22.19.19
+      '@types/node': 22.20.5
 
   sharp@0.35.5(@types/node@26.6.6):
     dependencies:
@@ -12829,7 +12829,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.4
 
-  vite@8.3.6(@types/node@22.19.19)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1):
+  vite@8.3.6(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -12837,7 +12837,7 @@ snapshots:
       rolldown: 1.2.16
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 22.19.19
+      '@types/node': 22.20.5
       esbuild: 0.28.2
       fsevents: 2.3.3
       jiti: 2.7.0
@@ -12876,7 +12876,7 @@ snapshots:
   webpack-sources@3.7.0:
     optional: true
 
-  webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19)):
+  webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5)):
     dependencies:
       '@types/estree': 1.0.10
       '@types/json-schema': 7.0.15
@@ -12890,8 +12890,8 @@ snapshots:
       events: 3.3.0
       graceful-fs: 4.2.11
       mime-db: 1.54.0
-      minimizer-webpack-plugin: 5.14.0(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19))(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19)))
-      schema-utils: 4.8.3(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.19.19)))
+      minimizer-webpack-plugin: 5.14.0(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5))(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5)))
+      schema-utils: 4.8.3(webpack@5.112.2(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@22.20.5)))
       tapable: 2.3.3
       watchpack: 2.6.4
       webpack-sources: 3.7.0
@@ -12974,14 +12974,14 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20261104.1
       '@cloudflare/workerd-windows-64': 1.20261104.1
 
-  wrangler@4.158.0(@types/node@22.19.19):
+  wrangler@4.158.0(@types/node@22.20.5):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
       '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261104.1)
       '@cspotcode/source-map-support': 0.8.1
       blake3-wasm: 2.1.5
       esbuild: 0.28.2
-      miniflare: 5.20261104.0-beta(@types/node@22.19.19)
+      miniflare: 5.20261104.0-beta(@types/node@22.20.5)
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
       workerd: 1.20261104.1
