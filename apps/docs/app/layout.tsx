@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   icons: { icon: "/revrebel-brand-icon.png", shortcut: "/revrebel-brand-icon.png" },
 };
 
-const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || "/sign-in";
+const SIGN_IN_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL || "/client-hub/sign-in";
 const SIGN_UP_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL || "/client-hub/request-access";
 const FORCE_REDIRECT_URL =
   process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL || "/client-hub";
