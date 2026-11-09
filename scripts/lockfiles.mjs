@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
@@ -158,6 +158,9 @@ if (mode === "sync") {
         }
         return `${name}@${resolved}`;
       });
+
+    const npmLockPath = path.join(app.dir, "package-lock.json");
+    rmSync(npmLockPath, { force: true });
 
     run(
       "npm",
