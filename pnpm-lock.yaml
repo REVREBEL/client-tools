@@ -302,7 +302,7 @@ importers:
   apps/docs:
     dependencies:
       '@clerk/nextjs':
-        specifier: ^7.9.20
+        specifier: ^7.6.0
         version: 7.9.20(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@opennextjs/cloudflare':
         specifier: ^1.20.16
