@@ -1,5 +1,5 @@
 name: Validate Client Hub auth app
-# rerun after app-root isolation
+# rerun after PostCSS fix
 
 on:
   push:
