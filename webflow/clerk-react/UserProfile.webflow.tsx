@@ -1,5 +1,6 @@
 "use client";
 
+import "./clerk-auth.css";
 import { declareComponent } from "@webflow/react";
 import { RevrebelUserProfile } from "./ClerkComponents";
 import { baseAuthProps, routePathProp } from "./webflow-props";
