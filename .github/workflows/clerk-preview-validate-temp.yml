@@ -1,0 +1,49 @@
+name: Validate Clerk Fumadocs preview (temporary)
+
+on:
+  push:
+    branches:
+      - test/clerk-fumadocs-preview
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: test/clerk-fumadocs-preview
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.18.0
+          run_install: false
+
+      - name: Refresh workspace lockfile
+        run: pnpm install --lockfile-only
+
+      - name: Install workspace
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Fumadocs preview
+        run: pnpm --filter @revrebel/design-system-docs build
+
+      - name: Commit lockfile update
+        shell: bash
+        run: |
+          if git diff --quiet -- pnpm-lock.yaml; then
+            echo "No lockfile change."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pnpm-lock.yaml
+          git commit -m "Update pnpm lock for Clerk preview"
+          git push
