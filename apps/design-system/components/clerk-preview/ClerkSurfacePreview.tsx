@@ -112,7 +112,7 @@ function StateDiagnostic({
   );
 }
 
-export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface }) {
+function ClerkSurfacePreviewContent({ surface }: { surface: ClerkPreviewSurface }) {
   const { session, isLoaded: isSessionLoaded } = useSession();
   const { isSignedIn, isLoaded: isUserLoaded } = useUser();
   const currentTask = session?.currentTask?.key;
@@ -232,6 +232,10 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
       break;
   }
 
+  return content;
+}
+
+export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface }) {
   return (
     <div
       style={{
@@ -242,7 +246,9 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
         background: "#ffffff",
       }}
     >
-      <Provider>{content}</Provider>
+      <Provider>
+        <ClerkSurfacePreviewContent surface={surface} />
+      </Provider>
     </div>
   );
 }
