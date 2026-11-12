@@ -19,7 +19,7 @@ import {
 } from "../../../../webflow/clerk-react/clerk-theme";
 import type { ClerkPreviewSurface } from "./surfaces";
 
-const publishableKey = "pk_live_Y2xlcmsucmV2cmViZWwuaW8k";
+const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 const previewTokens = {
   "--rr-blue": "#163666",
@@ -34,6 +34,29 @@ const previewTokens = {
 } as CSSProperties;
 
 function Provider({ children }: { children: ReactNode }) {
+  if (!publishableKey) {
+    return (
+      <div
+        role="alert"
+        style={{
+          maxWidth: 560,
+          padding: 24,
+          border: "2px solid #e05047",
+          borderRadius: 8,
+          color: "#163666",
+          background: "#fff",
+          fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+        }}
+      >
+        <strong>Missing NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</strong>
+        <p style={{ marginBottom: 0 }}>
+          Add your Clerk development publishable key to
+          <code> apps/design-system/.env.local</code>, then restart the Fumadocs dev server.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <ClerkProvider
       publishableKey={publishableKey}
