@@ -98,10 +98,12 @@ export const clerkAuthAppearance = {
         boxShadow: "0 0 0 2px rgba(22, 54, 102, 0.12)",
       },
     },
-    formButtonPrimary: {
+    button: {
+      width: "100%",
       minHeight: "58px",
       backgroundColor: "#163666",
       color: "#eff5f6",
+      border: "1px solid #163666",
       borderRadius: "0.175rem",
       boxShadow: "none",
       fontFamily: "Khand, 'Arial Narrow', sans-serif",
@@ -109,7 +111,28 @@ export const clerkAuthAppearance = {
       fontWeight: 700,
       letterSpacing: "0.02em",
       textTransform: "uppercase" as const,
-      "&:hover, &:focus, &:active": { backgroundColor: "#0d274e" },
+      "&:hover, &:focus, &:active": {
+        backgroundColor: "#0d274e",
+        borderColor: "#0d274e",
+      },
+    },
+    formButtonPrimary: {
+      width: "100%",
+      minHeight: "58px",
+      backgroundColor: "#163666",
+      color: "#eff5f6",
+      border: "1px solid #163666",
+      borderRadius: "0.175rem",
+      boxShadow: "none",
+      fontFamily: "Khand, 'Arial Narrow', sans-serif",
+      fontSize: "1.08rem",
+      fontWeight: 700,
+      letterSpacing: "0.02em",
+      textTransform: "uppercase" as const,
+      "&:hover, &:focus, &:active": {
+        backgroundColor: "#0d274e",
+        borderColor: "#0d274e",
+      },
     },
     footer: {
       backgroundColor: "rgba(22, 54, 102, 0.035)",
