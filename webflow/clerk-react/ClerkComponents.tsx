@@ -80,8 +80,7 @@ export function RevrebelWaitlist({
 }: ClerkSurfaceProps) {
   return (
     <ClerkProviderShell {...providerProps} signInUrl={signInUrl}>
-      <Waitlist appearance={clerkAuthAppearance} 
-      signInUrl={signInUrl} />
+      <Waitlist appearance={clerkAuthAppearance} signInUrl={signInUrl} />
     </ClerkProviderShell>
   );
 }
