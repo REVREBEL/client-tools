@@ -34,7 +34,11 @@
 }
 
 /* Clerk renders inside Webflow's Shadow DOM. These stable Clerk classes
-   provide the visual system inside that boundary. */
+   provide the visual system inside that boundary.
+
+   Layout geometry intentionally mirrors the archived Clerk implementation:
+   let Clerk + clerkAuthAppearance own internal layout/spacing while this
+   stylesheet supplies the current visual treatment. */
 .cl-rootBox {
   width: 100%;
   max-width: 480px;
@@ -53,9 +57,6 @@
 }
 
 .cl-card {
-  width: 100%;
-  margin: 0;
-  padding: 0;
   background: var(--rr-frost);
   border: 0;
   border-radius: 0;
@@ -63,21 +64,15 @@
   color: var(--rr-blue);
 }
 
-.cl-main {
-  padding: 2rem;
-}
-
 .cl-logoBox {
-  margin: 0 0 1.35rem;
+  margin-bottom: 1.35rem;
   text-align: center;
 }
 
 .cl-logoImage {
-  display: block;
   width: 190px !important;
   max-width: 72% !important;
   height: auto !important;
-  margin: 0 auto;
 }
 
 .cl-header {
@@ -86,7 +81,6 @@
 }
 
 .cl-headerTitle {
-  margin: 0;
   color: var(--rr-blue);
   font-family: var(--rr-display);
   font-size: 1.9rem;
@@ -98,7 +92,6 @@
 
 .cl-headerSubtitle {
   max-width: 340px;
-  margin: 0.65rem auto 0;
   color: var(--rr-muted);
   font-family: var(--rr-body);
   font-size: 0.9rem;
@@ -107,21 +100,9 @@
   letter-spacing: 0.025em;
 }
 
-.cl-socialButtons {
-  display: grid;
-  gap: 0.75rem;
-  margin-top: 1.35rem;
-}
-
 .cl-socialButtonsBlockButton,
 .cl-socialButtonsIconButton {
-  width: 100%;
   min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  padding: 0.7rem 1rem;
   background: #fff;
   color: var(--rr-blue);
   border: 1px solid rgba(22, 54, 102, 0.32);
@@ -142,14 +123,6 @@
   outline-offset: 1px;
 }
 
-.cl-dividerRow {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 0.75rem;
-  margin: 1.15rem 0;
-}
-
 .cl-dividerLine {
   height: 1px;
   background: rgba(22, 54, 102, 0.16);
@@ -160,16 +133,6 @@
   font-size: 0.82rem;
 }
 
-.cl-form {
-  display: grid;
-  gap: 1rem;
-}
-
-.cl-formField {
-  display: grid;
-  gap: 0.4rem;
-}
-
 .cl-formFieldLabel {
   color: var(--rr-blue);
   font-family: var(--rr-body);
@@ -178,9 +141,7 @@
 }
 
 .cl-formFieldInput {
-  width: 100%;
   min-height: 44px;
-  padding: 0.75rem 0.8rem;
   background: #fff;
   color: var(--rr-blue);
   border: 1px solid var(--rr-blue);
@@ -207,12 +168,7 @@
 }
 
 .cl-formButtonPrimary {
-  width: 100%;
   min-height: 58px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1rem;
   background: var(--rr-blue);
   color: var(--rr-frost);
   border: 1px solid var(--rr-blue);
@@ -247,7 +203,7 @@
 }
 
 .cl-footerAction {
-  padding: 1rem 2rem;
+  padding-block: 1rem;
   border-bottom: 1px solid rgba(22, 54, 102, 0.42);
   text-align: center;
 }
@@ -273,7 +229,7 @@
 }
 
 .cl-footerPages {
-  padding: 0.85rem 2rem;
+  padding-block: 0.85rem;
   color: var(--rr-muted);
   font-size: 0.78rem;
   text-align: center;
@@ -293,14 +249,5 @@
 @media (max-width: 560px) {
   .rr-auth-page {
     padding: 24px 16px;
-  }
-
-  .cl-main {
-    padding: 1.4rem;
-  }
-
-  .cl-footerAction,
-  .cl-footerPages {
-    padding-inline: 1.4rem;
   }
 }
