@@ -26,7 +26,7 @@ function run(command, args, cwd = root, env = process.env) {
   });
 }
 
-function npmLockEnv() {
+function npmChildEnv() {
   const env = { ...process.env };
   delete env.npm_config_allow_scripts;
   delete env.NPM_CONFIG_ALLOW_SCRIPTS;
@@ -212,7 +212,7 @@ if (mode === "sync") {
         "npm",
         ["install", "--package-lock-only"],
         tempDir,
-        npmLockEnv(),
+        npmChildEnv(),
       );
 
       const npmLock = readJson(path.join(tempDir, "package-lock.json"));
@@ -258,6 +258,7 @@ for (const app of apps) {
       "--no-fund",
     ],
     app.dir,
+    npmChildEnv(),
   );
 
   validateDirectResolvedVersions(app);
