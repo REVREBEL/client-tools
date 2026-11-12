@@ -135,6 +135,24 @@ export const clerkLocalization = {
       actionLink__join_waitlist: "Request access",
     },
   },
+  signUp: {
+    restrictedAccess: {
+      title: "Request Client Access",
+      subtitle: "Request access to your REVREBEL client workspace.",
+      subtitleWaitlist: "Request access to your REVREBEL client workspace.",
+      blockButton__joinWaitlist: "Request Access",
+      actionText: "Already have access?",
+      actionLink: "Sign in",
+    },
+    start: {
+      title: "Request Client Access",
+      titleCombined: "Request Client Access",
+      subtitle: "Request access to your REVREBEL client workspace.",
+      subtitleCombined: "Request access to your REVREBEL client workspace.",
+      actionText: "Already have access?",
+      actionLink: "Sign in",
+    },
+  },
   waitlist: {
     start: {
       title: "Request Client Access",
