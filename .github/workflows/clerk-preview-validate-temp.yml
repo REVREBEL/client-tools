@@ -68,6 +68,38 @@ jobs:
             curl --fail --silent --show-error               "http://127.0.0.1:3005/client-tools/clerk-preview/$surface/" >/dev/null
           done
 
+      - name: Install Chromium for visual snapshots
+        run: pnpm --filter @revrebel/onboard exec playwright install chromium
+
+      - name: Capture Clerk preview screenshots
+        shell: bash
+        run: |
+          mkdir -p /tmp/clerk-preview-shots
+          pnpm --filter @revrebel/onboard exec playwright screenshot --full-page \
+            "http://127.0.0.1:3005/client-tools/docs/clerk-preview/" \
+            /tmp/clerk-preview-shots/all-surfaces.png
+          for surface in \
+            sign-in \
+            sign-up \
+            waitlist \
+            oauth-consent \
+            choose-organization \
+            reset-password \
+            setup-mfa \
+            user-profile
+          do
+            pnpm --filter @revrebel/onboard exec playwright screenshot --full-page \
+              "http://127.0.0.1:3005/client-tools/clerk-preview/$surface/" \
+              "/tmp/clerk-preview-shots/$surface.png"
+          done
+
+      - name: Upload Clerk preview screenshots
+        uses: actions/upload-artifact@v6
+        with:
+          name: clerk-fumadocs-preview
+          path: /tmp/clerk-preview-shots/*.png
+          if-no-files-found: error
+
       - name: Show preview server log
         if: always()
         run: cat /tmp/clerk-preview.log || true
