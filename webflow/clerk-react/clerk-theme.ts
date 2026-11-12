@@ -45,6 +45,7 @@ export const clerkAuthAppearance = {
     logoBox: { marginBottom: "1.35rem" },
     logoImage: { width: "190px", maxWidth: "72%", height: "auto" },
     header: { paddingTop: "0.25rem" },
+    headerIcon: { display: "none" },
     headerTitle: {
       color: "#163666",
       fontFamily: "Khand, 'Arial Narrow', sans-serif",
