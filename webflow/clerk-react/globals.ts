@@ -1,1 +1,0 @@
-import "./clerk-auth.css";
