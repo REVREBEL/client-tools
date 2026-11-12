@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import "../../../../webflow/clerk-react/clerk-auth.css";
-import "./archive-layout.css";
+import "../../../../z_archive/app/globals.css";
 
 export default function ClerkArchivePreviewLayout({
   children,
