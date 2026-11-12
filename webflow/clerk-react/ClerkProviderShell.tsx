@@ -3,7 +3,6 @@
 import React, { ReactNode, useEffect } from "react";
 import { ClerkProvider } from "@clerk/react";
 import { clerkAuthAppearance, clerkLocalization } from "./clerk-theme";
-import "./clerk-auth.css";
 
 export type ClerkSurfaceProps = {
   publishableKey?: string;
