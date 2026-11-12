@@ -4,7 +4,6 @@ import type { CSSProperties, ReactNode } from "react";
 import {
   ClerkProvider,
   OAuthConsent,
-  Show,
   SignIn,
   SignUp,
   TaskChooseOrganization,
@@ -12,6 +11,8 @@ import {
   TaskSetupMFA,
   UserProfile,
   Waitlist,
+  useSession,
+  useUser,
 } from "@clerk/react";
 import {
   clerkAuthAppearance,
@@ -84,7 +85,37 @@ function Provider({ children }: { children: ReactNode }) {
   );
 }
 
+function StateDiagnostic({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      role="status"
+      style={{
+        width: "min(560px, 100%)",
+        padding: 24,
+        border: "2px solid #163666",
+        borderRadius: 8,
+        background: "#eff5f6",
+        color: "#163666",
+        fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+        lineHeight: 1.5,
+      }}
+    >
+      <strong style={{ display: "block", marginBottom: 8 }}>{title}</strong>
+      <div>{children}</div>
+    </div>
+  );
+}
+
 export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface }) {
+  const { session, isLoaded: isSessionLoaded } = useSession();
+  const { isSignedIn, isLoaded: isUserLoaded } = useUser();
+  const currentTask = session?.currentTask?.key;
   let content;
 
   switch (surface) {
@@ -119,44 +150,85 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
         />
       );
       break;
-    case "oauth-consent":
-      content = (
-        <Show when="signed-in">
+    case "oauth-consent": {
+      const hasOAuthParams =
+        typeof window !== "undefined" &&
+        new URLSearchParams(window.location.search).has("client_id") &&
+        new URLSearchParams(window.location.search).has("redirect_uri");
+
+      content =
+        isUserLoaded && isSignedIn && hasOAuthParams ? (
           <OAuthConsent appearance={clerkAuthAppearance} />
-        </Show>
-      );
+        ) : (
+          <StateDiagnostic title="OAuth Consent is not eligible to render">
+            {!isUserLoaded
+              ? "Clerk session is still loading."
+              : !isSignedIn
+                ? "This component requires an authenticated user."
+                : "This component also requires a real OAuth authorization request with client_id and redirect_uri query parameters."}
+          </StateDiagnostic>
+        );
       break;
+    }
     case "choose-organization":
-      content = (
-        <TaskChooseOrganization
-          appearance={clerkAuthAppearance}
-          redirectUrlComplete="/docs/clerk-preview"
-        />
-      );
+      content =
+        isSessionLoaded && currentTask === "choose-organization" ? (
+          <TaskChooseOrganization
+            appearance={clerkAuthAppearance}
+            redirectUrlComplete="/docs/clerk-preview"
+          />
+        ) : (
+          <StateDiagnostic title="Choose Organization is not eligible to render">
+            {isSessionLoaded
+              ? `Current Clerk task: ${currentTask ?? "none"}. This component only renders when the pending session task is choose-organization.`
+              : "Clerk session is still loading."}
+          </StateDiagnostic>
+        );
       break;
     case "reset-password":
-      content = (
-        <TaskResetPassword
-          appearance={clerkAuthAppearance}
-          redirectUrlComplete="/docs/clerk-preview"
-        />
-      );
+      content =
+        isSessionLoaded && currentTask === "reset-password" ? (
+          <TaskResetPassword
+            appearance={clerkAuthAppearance}
+            redirectUrlComplete="/docs/clerk-preview"
+          />
+        ) : (
+          <StateDiagnostic title="Reset Password is not eligible to render">
+            {isSessionLoaded
+              ? `Current Clerk task: ${currentTask ?? "none"}. This component only renders when the pending session task is reset-password.`
+              : "Clerk session is still loading."}
+          </StateDiagnostic>
+        );
       break;
     case "setup-mfa":
-      content = (
-        <TaskSetupMFA
-          appearance={clerkAuthAppearance}
-          redirectUrlComplete="/docs/clerk-preview"
-        />
-      );
+      content =
+        isSessionLoaded && currentTask === "setup-mfa" ? (
+          <TaskSetupMFA
+            appearance={clerkAuthAppearance}
+            redirectUrlComplete="/docs/clerk-preview"
+          />
+        ) : (
+          <StateDiagnostic title="Setup MFA is not eligible to render">
+            {isSessionLoaded
+              ? `Current Clerk task: ${currentTask ?? "none"}. This component only renders when the pending session task is setup-mfa.`
+              : "Clerk session is still loading."}
+          </StateDiagnostic>
+        );
       break;
     case "user-profile":
-      content = (
-        <UserProfile
-          appearance={clerkAuthAppearance}
-          routing="hash"
-        />
-      );
+      content =
+        isUserLoaded && isSignedIn ? (
+          <UserProfile
+            appearance={clerkAuthAppearance}
+            routing="hash"
+          />
+        ) : (
+          <StateDiagnostic title="User Profile is not eligible to render">
+            {isUserLoaded
+              ? "This component requires an authenticated user."
+              : "Clerk session is still loading."}
+          </StateDiagnostic>
+        );
       break;
   }
 
