@@ -10,7 +10,7 @@ import {
   RevrebelTaskSetupMFA,
   RevrebelUserProfile,
   RevrebelWaitlist,
-} from "../../../../../webflow/clerk-react/ClerkComponents";
+} from "../../../../webflow/clerk-react/ClerkComponents";
 
 export const clerkPreviewSurfaces = [
   "sign-in",
