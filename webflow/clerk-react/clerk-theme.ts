@@ -64,7 +64,15 @@ export const clerkAuthAppearance = {
       lineHeight: 1.45,
       letterSpacing: "0.025em",
     },
+    socialButtons: {
+      display: "flex",
+      justifyContent: "center",
+      width: "100%",
+    },
     socialButtonsBlockButton: {
+      width: "70%",
+      maxWidth: "70%",
+      marginInline: "auto",
       minHeight: "42px",
       backgroundColor: "#ffffff",
       color: "#163666",
@@ -75,8 +83,20 @@ export const clerkAuthAppearance = {
     },
     dividerLine: { backgroundColor: "rgba(22, 54, 102, 0.16)" },
     dividerText: { color: "#536782", fontSize: "0.82rem" },
-    formFieldLabel: { color: "#163666", fontSize: "0.82rem", fontWeight: 600 },
+    formFieldLabelRow: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+    },
+    formFieldLabel: {
+      width: "100%",
+      color: "#163666",
+      fontSize: "0.82rem",
+      fontWeight: 600,
+      textAlign: "center" as const,
+    },
     formFieldInput: {
+      width: "100%",
       minHeight: "44px",
       backgroundColor: "#ffffff",
       color: "#163666",
@@ -107,8 +127,13 @@ export const clerkAuthAppearance = {
       borderTop: "1px solid #163666",
     },
     footerAction: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "0.3rem",
       paddingBlock: "1rem",
-      borderBottom: "1px solid rgba(22, 54, 102, 0.42)",
+      borderBottom: "0",
+      textAlign: "center" as const,
     },
     footerActionText: { color: "#536782", fontSize: "0.82rem" },
     footerActionLink: {
