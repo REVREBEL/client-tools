@@ -1,4 +1,4 @@
-import { dirname, resolve } from 'node:path';
+import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createNextStory } from '@fumadocs/story/next';
 import { createMDX } from 'fumadocs-mdx/next';
@@ -27,14 +27,6 @@ const config = {
     root: projectRoot,
   },
   webpack(webpackConfig) {
-    webpackConfig.resolve ??= {};
-    webpackConfig.resolve.alias = {
-      ...(webpackConfig.resolve.alias ?? {}),
-      '@clerk/react': resolve(projectRoot, 'node_modules/@clerk/react'),
-      react: resolve(projectRoot, 'node_modules/react'),
-      'react-dom': resolve(projectRoot, 'node_modules/react-dom'),
-    };
-
     // @fumadocs/story uses its glob string as webpack Rule.test. Webpack expects
     // a RegExp (or an absolute literal path), so normalize only the Story rule.
     for (const rule of webpackConfig.module?.rules ?? []) {
