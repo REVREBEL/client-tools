@@ -1,6 +1,5 @@
 export const clerkPreviewSurfaces = [
   "sign-in",
-  "sign-up",
   "waitlist",
   "oauth-consent",
   "choose-organization",
