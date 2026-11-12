@@ -26,8 +26,8 @@
     "locks:sync": "node scripts/lockfiles.mjs sync",
     "locks:check": "node scripts/lockfiles.mjs check",
     "deps:sync": "pnpm run locks:sync && pnpm run locks:check",
-    "webflow:clerk:bundle": "npm exec --prefix webflow/clerk-react -- webflow devlink bundle",
-    "webflow:clerk:import": "npm exec --prefix webflow/clerk-react -- webflow devlink import"
+    "webflow:clerk:bundle": "cd webflow/clerk-react && npx webflow devlink bundle",
+    "webflow:clerk:import": "cd webflow/clerk-react && npx webflow devlink import"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.25",
