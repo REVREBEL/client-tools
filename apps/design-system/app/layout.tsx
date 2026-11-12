@@ -23,7 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ))}
       </head>
       <body>
-        <RootProvider search={{ enabled: false }}>{children}</RootProvider>
+        <RootProvider search={{ enabled: false }} theme={{ enabled: false }}>
+          {children}
+        </RootProvider>
       </body>
     </html>
   );
