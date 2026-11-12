@@ -211,6 +211,30 @@
   border-color: var(--rr-blue-dark);
 }
 
+.cl-secondaryButton {
+  width: 100%;
+  min-height: 58px;
+  background: var(--rr-frost);
+  color: var(--rr-blue);
+  border: 1px solid var(--rr-blue);
+  border-radius: 0.0125rem;
+  box-shadow: none;
+  font-family: var(--rr-display);
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.cl-secondaryButton:hover,
+.cl-secondaryButton:focus-visible,
+.cl-secondaryButton:active {
+  background: var(--rr-white);
+  border-color: var(--rr-blue);
+}
+
 .cl-formFieldErrorText,
 .cl-alertText {
   color: var(--rr-danger);
