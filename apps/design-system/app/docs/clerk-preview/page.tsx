@@ -7,8 +7,7 @@ import {
 
 const surfaces = [
   ["Sign In", "sign-in", "Unauthenticated entry surface"],
-  ["Sign Up", "sign-up", "Direct sign-up surface"],
-  ["Waitlist", "waitlist", "Request-access surface"],
+  ["Request Access", "waitlist", "Client access request surface"],
   ["OAuth Consent", "oauth-consent", "Requires signed-in OAuth consent state"],
   ["Choose Organization", "choose-organization", "Requires active Clerk task state"],
   ["Reset Password", "reset-password", "Requires reset-password task state"],
