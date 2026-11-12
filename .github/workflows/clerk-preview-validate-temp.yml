@@ -29,21 +29,45 @@ jobs:
       - name: Refresh workspace lockfile
         run: pnpm install --lockfile-only
 
-      - name: Install workspace
-        run: pnpm install --frozen-lockfile
-
-      - name: Build Fumadocs preview
-        run: pnpm --filter @revrebel/design-system-docs build
-
       - name: Commit lockfile update
         shell: bash
         run: |
           if git diff --quiet -- pnpm-lock.yaml; then
             echo "No lockfile change."
-            exit 0
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add pnpm-lock.yaml
+            git commit -m "Update pnpm lock for Clerk preview"
+            git push
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pnpm-lock.yaml
-          git commit -m "Update pnpm lock for Clerk preview"
-          git push
+
+      - name: Install workspace
+        run: pnpm install --frozen-lockfile
+
+      - name: Start Fumadocs dev server
+        shell: bash
+        run: |
+          pnpm --filter @revrebel/design-system-docs dev > /tmp/clerk-preview.log 2>&1 &
+          echo $! > /tmp/clerk-preview.pid
+          for i in {1..60}; do
+            if curl --fail --silent http://127.0.0.1:3005/docs/clerk-preview/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/clerk-preview.log
+          exit 1
+
+      - name: Smoke test every Clerk surface
+        shell: bash
+        run: |
+          for surface in             sign-in             sign-up             waitlist             oauth-consent             choose-organization             reset-password             setup-mfa             user-profile
+          do
+            echo "Checking $surface"
+            curl --fail --silent --show-error               "http://127.0.0.1:3005/clerk-preview/$surface/" >/dev/null
+          done
+
+      - name: Show preview server log
+        if: always()
+        run: cat /tmp/clerk-preview.log || true
