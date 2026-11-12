@@ -17,13 +17,20 @@ if (!["sync", "check"].includes(mode)) {
   process.exit(2);
 }
 
-function run(command, args, cwd = root) {
+function run(command, args, cwd = root, env = process.env) {
   console.log(`\n> ${command} ${args.join(" ")}`);
   execFileSync(command, args, {
     cwd,
     stdio: "inherit",
-    env: process.env,
+    env,
   });
+}
+
+function npmLockEnv() {
+  const env = { ...process.env };
+  delete env.npm_config_allow_scripts;
+  delete env.NPM_CONFIG_ALLOW_SCRIPTS;
+  return env;
 }
 
 function readJson(file) {
@@ -205,6 +212,7 @@ if (mode === "sync") {
         "npm",
         ["install", "--package-lock-only"],
         tempDir,
+        npmLockEnv(),
       );
 
       const npmLock = readJson(path.join(tempDir, "package-lock.json"));
