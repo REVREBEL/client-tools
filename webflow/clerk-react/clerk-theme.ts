@@ -22,7 +22,7 @@ export const clerkAuthAppearance = {
     colorWarning: "#faca78",
     borderRadius: "0.175rem",
     spacing: "1rem",
-    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    fontFamily: "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     fontFamilyButtons: "Khand, 'Arial Narrow', sans-serif",
   },
   elements: {
@@ -127,19 +127,19 @@ export const clerkLocalization = {
     start: {
       title: "Sign in to Client Tools",
       titleCombined: "Sign in to Client Tools",
-      subtitle: "One account for your REVREBEL workspace",
-      subtitleCombined: "One account for your REVREBEL workspace",
-      actionText: "Need access?",
+      subtitle: "One account for your workspace",
+      subtitleCombined: "One account for your workspace",
+      actionText: "Missing Your Login?",
       actionLink: "Request access",
-      actionText__join_waitlist: "Need access?",
+      actionText__join_waitlist: "Missing Your Login?",
       actionLink__join_waitlist: "Request access",
     },
   },
   signUp: {
     restrictedAccess: {
       title: "Request Client Access",
-      subtitle: "Request access to your REVREBEL client workspace.",
-      subtitleWaitlist: "Request access to your REVREBEL client workspace.",
+      subtitle: "Request access to your client workspace.",
+      subtitleWaitlist: "Request access to your client workspace.",
       blockButton__joinWaitlist: "Request Access",
       actionText: "Already have access?",
       actionLink: "Sign in",
@@ -147,8 +147,8 @@ export const clerkLocalization = {
     start: {
       title: "Request Client Access",
       titleCombined: "Request Client Access",
-      subtitle: "Request access to your REVREBEL client workspace.",
-      subtitleCombined: "Request access to your REVREBEL client workspace.",
+      subtitle: "Request access to your client workspace.",
+      subtitleCombined: "Request access to your client workspace.",
       actionText: "Already have access?",
       actionLink: "Sign in",
     },
@@ -156,7 +156,7 @@ export const clerkLocalization = {
   waitlist: {
     start: {
       title: "Request Client Access",
-      subtitle: "Request access to your REVREBEL client workspace.",
+      subtitle: "Request access to your client workspace.",
       formButton: "Request Access",
       actionText: "Already have access?",
       actionLink: "Sign in",
