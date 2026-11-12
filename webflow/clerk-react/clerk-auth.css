@@ -96,8 +96,6 @@
   letter-spacing: -0.015em;
   text-transform: uppercase;
   text-wrap: balance;
-  align-items: center;
-  justify-content: center;
 }
 
 .cl-headerSubtitle {
@@ -109,8 +107,6 @@
   line-height: 1.45;
   letter-spacing: 0.025em;
   text-wrap: balance;
-  align-items: center;
-  justify-content: center;
 }
 
 .cl-socialButtonsBlockButton,
@@ -188,7 +184,7 @@
 }
 
 .cl-formButtonPrimary,
-.cl-button {
+.cl-signUp-root .cl-button {
   width: 100%;
   min-height: 58px;
   background: var(--rr-blue);
@@ -208,9 +204,9 @@
 .cl-formButtonPrimary:hover,
 .cl-formButtonPrimary:focus-visible,
 .cl-formButtonPrimary:active,
-.cl-button:hover,
-.cl-button:focus-visible,
-.cl-button:active {
+.cl-signUp-root .cl-button:hover,
+.cl-signUp-root .cl-button:focus-visible,
+.cl-signUp-root .cl-button:active {
   background: var(--rr-blue-dark);
   border-color: var(--rr-blue-dark);
 }
