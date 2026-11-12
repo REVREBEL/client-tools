@@ -5,7 +5,6 @@ import {
   ClerkProvider,
   OAuthConsent,
   SignIn,
-  SignUp,
   TaskChooseOrganization,
   TaskResetPassword,
   TaskSetupMFA,
@@ -64,7 +63,7 @@ function Provider({ children }: { children: ReactNode }) {
       appearance={clerkAuthAppearance}
       localization={clerkLocalization}
       signInUrl="/clerk-preview/sign-in"
-      signUpUrl="/clerk-preview/sign-up"
+      signUpUrl="/clerk-preview/waitlist"
       waitlistUrl="/clerk-preview/waitlist"
       signInForceRedirectUrl="/docs/clerk-preview"
       signInFallbackRedirectUrl="/docs/clerk-preview"
@@ -128,17 +127,6 @@ function ClerkSurfacePreviewContent({ surface }: { surface: ClerkPreviewSurface 
           fallbackRedirectUrl="/docs/clerk-preview"
           waitlistUrl="/clerk-preview/waitlist"
           withSignUp={false}
-        />
-      );
-      break;
-    case "sign-up":
-      content = (
-        <SignUp
-          appearance={clerkAuthAppearance}
-          routing="hash"
-          forceRedirectUrl="/docs/clerk-preview"
-          fallbackRedirectUrl="/docs/clerk-preview"
-          signInUrl="/clerk-preview/sign-in"
         />
       );
       break;
