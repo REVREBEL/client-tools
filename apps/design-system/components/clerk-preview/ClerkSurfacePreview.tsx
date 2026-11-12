@@ -187,8 +187,8 @@ function SetupMFAPreview() {
       subtitle="Add an extra layer of security to your account."
     >
       <div style={{ display: "grid", gap: "0.75rem" }}>
-        <button className="cl-formFieldInput" type="button" style={{ textAlign: "center" }}>Authenticator app</button>
-        <button className="cl-formFieldInput" type="button" style={{ textAlign: "center" }}>SMS verification</button>
+        <button className="cl-secondaryButton" type="button">Authenticator app</button>
+        <button className="cl-secondaryButton" type="button">SMS verification</button>
         <button className="cl-formButtonPrimary" type="button">Continue</button>
       </div>
     </PreviewCard>
@@ -202,18 +202,8 @@ function UserProfilePreview() {
       subtitle="Manage your account details and security."
     >
       <div style={{ display: "grid", gap: "0.75rem" }}>
-        <div
-          className="cl-formFieldInput"
-          style={{ display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}
-        >
-          Email address
-        </div>
-        <div
-          className="cl-formFieldInput"
-          style={{ display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}
-        >
-          Password & security
-        </div>
+        <button className="cl-secondaryButton" type="button">Email address</button>
+        <button className="cl-secondaryButton" type="button">Password & security</button>
       </div>
     </PreviewCard>
   );
