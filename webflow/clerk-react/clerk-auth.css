@@ -148,7 +148,6 @@
   font-size: 0.82rem;
   font-weight: 600;
   text-align: center;
-  algin: center;
 }
 
 .cl-formFieldInput {
@@ -217,7 +216,12 @@
 }
 
 .cl-footerAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
   padding-block: 1rem;
+  border-bottom: 0;
   text-align: center;
 }
 
