@@ -106,12 +106,6 @@
   text-wrap: balance;
 }
 
-.cl-socialButtons {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
 .cl-socialButtonsBlockButton,
 .cl-socialButtonsIconButton {
   min-height: 42px;
@@ -125,9 +119,7 @@
   text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
-  width: 70%;
-  max-width: 70%;
-  margin-inline: auto;
+  width: 100%;
 }
 
 .cl-socialButtonsBlockButton:hover,
@@ -149,22 +141,13 @@
   font-size: 0.82rem;
 }
 
-.cl-formField {
-  width: 100%;
-}
-
-.cl-formFieldLabelRow {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .cl-formFieldLabel {
-  width: 100%;
   color: var(--rr-blue);
   font-family: var(--rr-body);
   font-size: 0.82rem;
   font-weight: 600;
+  display: block;
+  width: 100%;
   text-align: center;
 }
 
