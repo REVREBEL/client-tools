@@ -190,16 +190,20 @@ if (mode === "sync") {
         `${JSON.stringify(exactManifest, null, 2)}\n`,
       );
 
+      writeFileSync(
+        path.join(tempDir, ".npmrc"),
+        [
+          "allow-remote=all",
+          "ignore-scripts=true",
+          "audit=false",
+          "fund=false",
+          "",
+        ].join("\n"),
+      );
+
       run(
         "npm",
-        [
-          "install",
-          "--package-lock-only",
-          "--ignore-scripts",
-          "--no-audit",
-          "--no-fund",
-          "--allow-remote=all",
-        ],
+        ["install", "--package-lock-only"],
         tempDir,
       );
 
