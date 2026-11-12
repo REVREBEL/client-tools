@@ -85,30 +85,122 @@ function Provider({ children }: { children: ReactNode }) {
   );
 }
 
-function StateDiagnostic({
+function PreviewCard({
   title,
+  subtitle,
   children,
 }: {
   title: string;
-  children: ReactNode;
+  subtitle?: string;
+  children?: ReactNode;
 }) {
   return (
-    <div
-      role="status"
-      style={{
-        width: "min(560px, 100%)",
-        padding: 24,
-        border: "2px solid #163666",
-        borderRadius: 8,
-        background: "#eff5f6",
-        color: "#163666",
-        fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-        lineHeight: 1.5,
-      }}
-    >
-      <strong style={{ display: "block", marginBottom: 8 }}>{title}</strong>
-      <div>{children}</div>
+    <div className="cl-rootBox">
+      <div className="cl-cardBox">
+        <div className="cl-card">
+          <div style={{ padding: "2rem" }}>
+            <div className="cl-logoBox">
+              <img
+                className="cl-logoImage"
+                src="https://res.cloudinary.com/revrebel/image/upload/v1761516148/RR/Logos/revrebel-logo.png"
+                alt="REVREBEL"
+              />
+            </div>
+            <div className="cl-header">
+              <h1 className="cl-headerTitle">{title}</h1>
+              {subtitle ? <p className="cl-headerSubtitle">{subtitle}</p> : null}
+            </div>
+            {children ? <div style={{ marginTop: "1.5rem" }}>{children}</div> : null}
+          </div>
+        </div>
+      </div>
     </div>
+  );
+}
+
+function OAuthConsentPreview() {
+  return (
+    <PreviewCard
+      title="Authorize Client Tools"
+      subtitle="Review the access requested by this application."
+    >
+      <div style={{ display: "grid", gap: "0.75rem" }}>
+        <div className="cl-formFieldInput" style={{ display: "flex", alignItems: "center" }}>
+          View your basic profile
+        </div>
+        <div className="cl-formFieldInput" style={{ display: "flex", alignItems: "center" }}>
+          Access your organization
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+          <button className="cl-button" type="button">Deny</button>
+          <button className="cl-button" type="button">Allow</button>
+        </div>
+      </div>
+    </PreviewCard>
+  );
+}
+
+function ChooseOrganizationPreview() {
+  return (
+    <PreviewCard
+      title="Choose Organization"
+      subtitle="Select the workspace you want to continue with."
+    >
+      <div style={{ display: "grid", gap: "0.75rem" }}>
+        <button className="cl-formFieldInput" type="button">REVREBEL</button>
+        <button className="cl-formFieldInput" type="button">Create organization</button>
+      </div>
+    </PreviewCard>
+  );
+}
+
+function ResetPasswordPreview() {
+  return (
+    <PreviewCard
+      title="Reset Password"
+      subtitle="Create a new password for your account."
+    >
+      <div style={{ display: "grid", gap: "1rem" }}>
+        <label className="cl-formFieldLabel">New password</label>
+        <input className="cl-formFieldInput" type="password" placeholder="Enter a new password" readOnly />
+        <label className="cl-formFieldLabel">Confirm password</label>
+        <input className="cl-formFieldInput" type="password" placeholder="Confirm your password" readOnly />
+        <button className="cl-formButtonPrimary" type="button">Reset Password</button>
+      </div>
+    </PreviewCard>
+  );
+}
+
+function SetupMFAPreview() {
+  return (
+    <PreviewCard
+      title="Set Up MFA"
+      subtitle="Add an extra layer of security to your account."
+    >
+      <div style={{ display: "grid", gap: "0.75rem" }}>
+        <button className="cl-formFieldInput" type="button">Authenticator app</button>
+        <button className="cl-formFieldInput" type="button">SMS verification</button>
+        <button className="cl-formButtonPrimary" type="button">Continue</button>
+      </div>
+    </PreviewCard>
+  );
+}
+
+function UserProfilePreview() {
+  return (
+    <PreviewCard
+      title="Your Profile"
+      subtitle="Manage your account details and security."
+    >
+      <div style={{ display: "grid", gap: "0.75rem" }}>
+        <div className="cl-formFieldInput" style={{ display: "flex", alignItems: "center" }}>
+          Email address
+        </div>
+        <div className="cl-formFieldInput" style={{ display: "flex", alignItems: "center" }}>
+          Password & security
+        </div>
+      </div>
+    </PreviewCard>
   );
 }
 
@@ -160,13 +252,7 @@ function ClerkSurfacePreviewContent({ surface }: { surface: ClerkPreviewSurface 
         isUserLoaded && isSignedIn && hasOAuthParams ? (
           <OAuthConsent appearance={clerkAuthAppearance} />
         ) : (
-          <StateDiagnostic title="OAuth Consent is not eligible to render">
-            {!isUserLoaded
-              ? "Clerk session is still loading."
-              : !isSignedIn
-                ? "This component requires an authenticated user."
-                : "This component also requires a real OAuth authorization request with client_id and redirect_uri query parameters."}
-          </StateDiagnostic>
+          <OAuthConsentPreview />
         );
       break;
     }
