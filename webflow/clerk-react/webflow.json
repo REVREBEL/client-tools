@@ -10,8 +10,7 @@
     "name": "REVREBEL Client Auth",
     "description": "REVREBEL Clerk authentication components for Webflow",
     "id": "revrebel-client-auth",
-    "ssrDefault": false,
-    "globals": "./globals.ts"
+    "ssrDefault": false
   },
   "siteId": "6a09244ce43d4439301ce56f"
 }
