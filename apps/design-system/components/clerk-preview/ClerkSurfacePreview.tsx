@@ -62,17 +62,17 @@ function Provider({ children }: { children: ReactNode }) {
       publishableKey={publishableKey}
       appearance={clerkAuthAppearance}
       localization={clerkLocalization}
-      signInUrl="/client-hub/sign-in"
-      signUpUrl="/client-hub/sign-up"
-      waitlistUrl="/client-hub/request-access"
-      signInForceRedirectUrl="/client-hub"
-      signInFallbackRedirectUrl="/client-hub"
-      signUpForceRedirectUrl="/client-hub"
-      signUpFallbackRedirectUrl="/client-hub"
+      signInUrl="/clerk-preview/sign-in"
+      signUpUrl="/clerk-preview/sign-up"
+      waitlistUrl="/clerk-preview/waitlist"
+      signInForceRedirectUrl="/docs/clerk-preview"
+      signInFallbackRedirectUrl="/docs/clerk-preview"
+      signUpForceRedirectUrl="/docs/clerk-preview"
+      signUpFallbackRedirectUrl="/docs/clerk-preview"
       taskUrls={{
-        "choose-organization": "/client-hub/tasks/choose-organization",
-        "reset-password": "/client-hub/tasks/reset-password",
-        "setup-mfa": "/client-hub/tasks/setup-mfa",
+        "choose-organization": "/clerk-preview/choose-organization",
+        "reset-password": "/clerk-preview/reset-password",
+        "setup-mfa": "/clerk-preview/setup-mfa",
       }}
     >
       <main className="rr-auth-page">
@@ -93,9 +93,9 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
         <SignIn
           appearance={clerkAuthAppearance}
           routing="hash"
-          forceRedirectUrl="/client-hub"
-          fallbackRedirectUrl="/client-hub"
-          waitlistUrl="/client-hub/request-access"
+          forceRedirectUrl="/docs/clerk-preview"
+          fallbackRedirectUrl="/docs/clerk-preview"
+          waitlistUrl="/clerk-preview/waitlist"
           withSignUp={false}
         />
       );
@@ -105,9 +105,9 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
         <SignUp
           appearance={clerkAuthAppearance}
           routing="hash"
-          forceRedirectUrl="/client-hub"
-          fallbackRedirectUrl="/client-hub"
-          signInUrl="/client-hub/sign-in"
+          forceRedirectUrl="/docs/clerk-preview"
+          fallbackRedirectUrl="/docs/clerk-preview"
+          signInUrl="/clerk-preview/sign-in"
         />
       );
       break;
@@ -115,7 +115,7 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
       content = (
         <Waitlist
           appearance={clerkAuthAppearance}
-          signInUrl="/client-hub/sign-in"
+          signInUrl="/clerk-preview/sign-in"
         />
       );
       break;
@@ -130,7 +130,7 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
       content = (
         <TaskChooseOrganization
           appearance={clerkAuthAppearance}
-          redirectUrlComplete="/client-hub"
+          redirectUrlComplete="/docs/clerk-preview"
         />
       );
       break;
@@ -138,7 +138,7 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
       content = (
         <TaskResetPassword
           appearance={clerkAuthAppearance}
-          redirectUrlComplete="/client-hub"
+          redirectUrlComplete="/docs/clerk-preview"
         />
       );
       break;
@@ -146,7 +146,7 @@ export function ClerkSurfacePreview({ surface }: { surface: ClerkPreviewSurface 
       content = (
         <TaskSetupMFA
           appearance={clerkAuthAppearance}
-          redirectUrlComplete="/client-hub"
+          redirectUrlComplete="/docs/clerk-preview"
         />
       );
       break;
