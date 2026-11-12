@@ -156,8 +156,8 @@ function ChooseOrganizationPreview() {
       subtitle="Select the workspace you want to continue with."
     >
       <div style={{ display: "grid", gap: "0.75rem" }}>
-        <button className="cl-formFieldInput" type="button" style={{ textAlign: "center" }}>REVREBEL</button>
-        <button className="cl-formFieldInput" type="button" style={{ textAlign: "center" }}>Create organization</button>
+        <button className="cl-secondaryButton" type="button">REVREBEL</button>
+        <button className="cl-secondaryButton" type="button">Create organization</button>
       </div>
     </PreviewCard>
   );
