@@ -63,9 +63,9 @@ function ArchivedLayoutProvider({ children }: { children: ReactNode }) {
 
 function AuthShell({ children }: { children: ReactNode }) {
   return (
-    <main className="archive-auth-page">
+    <main className="auth-page">
       <section
-        className="archive-auth-card-frame"
+        className="auth-card-frame"
         aria-label="REVREBEL client portal access"
       >
         {children}
