@@ -1,0 +1,19 @@
+.archive-auth-page {
+  min-height: 100vh;
+  padding: 48px 24px;
+  display: grid;
+  place-items: center;
+  background: #fafafa;
+}
+
+.archive-auth-card-frame {
+  width: min(480px, 100%);
+  display: grid;
+  justify-items: stretch;
+}
+
+@media (max-width: 560px) {
+  .archive-auth-page {
+    padding: 24px 16px;
+  }
+}
