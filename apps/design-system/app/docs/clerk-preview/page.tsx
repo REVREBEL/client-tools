@@ -10,7 +10,7 @@ const surfaces = [
   ["Sign Up", "sign-up", "Client account sign-up surface"],
   ["Request Access", "waitlist", "Client access request surface"],
   ["OAuth Consent", "oauth-consent", "Requires signed-in OAuth consent state"],
-  ["Choose Organization", "choose-organization", "Requires active Clerk task state"],
+  ["Choose an Organization", "choose-organization", "Requires active Clerk task state"],
   ["Reset Password", "reset-password", "Requires reset-password task state"],
   ["Setup MFA", "setup-mfa", "Requires MFA setup task state"],
   ["User Profile", "user-profile", "Requires signed-in user state"],
