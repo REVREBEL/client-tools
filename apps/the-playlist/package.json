@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^7.6.0",
-    "@revrebel/tokens": "workspace:*",
-    "@revrebel/ui": "workspace:*",
+    "@revrebel/tokens": "file:../../packages/tokens",
+    "@revrebel/ui": "file:../../packages/ui",
     "lucide-react": "^0.468.0",
     "next": "16.4.5",
     "react": "19.2.6",
