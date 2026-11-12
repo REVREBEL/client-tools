@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
+import { ClerkSurfacePreview } from "@/components/clerk-preview/ClerkSurfacePreview";
 import {
-  ClerkSurfacePreview,
   clerkPreviewSurfaces,
   type ClerkPreviewSurface,
-} from "@/components/clerk-preview/ClerkSurfacePreview";
+} from "@/components/clerk-preview/surfaces";
 
 export const dynamicParams = false;
 
