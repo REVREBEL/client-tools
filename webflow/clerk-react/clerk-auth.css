@@ -183,7 +183,9 @@
   color: var(--rr-blue);
 }
 
-.cl-formButtonPrimary {
+.cl-formButtonPrimary,
+.cl-button {
+  width: 100%;
   min-height: 58px;
   background: var(--rr-blue);
   color: var(--rr-frost);
@@ -201,7 +203,10 @@
 
 .cl-formButtonPrimary:hover,
 .cl-formButtonPrimary:focus-visible,
-.cl-formButtonPrimary:active {
+.cl-formButtonPrimary:active,
+.cl-button:hover,
+.cl-button:focus-visible,
+.cl-button:active {
   background: var(--rr-blue-dark);
   border-color: var(--rr-blue-dark);
 }
