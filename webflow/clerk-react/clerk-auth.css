@@ -80,6 +80,10 @@
   text-align: center;
 }
 
+.cl-headerIcon {
+  display: none !important;
+}
+
 .cl-headerTitle {
   color: var(--rr-blue);
   font-family: var(--rr-display);
