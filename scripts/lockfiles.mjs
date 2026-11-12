@@ -17,20 +17,13 @@ if (!["sync", "check"].includes(mode)) {
   process.exit(2);
 }
 
-function run(command, args, cwd = root, env = process.env) {
+function run(command, args, cwd = root) {
   console.log(`\n> ${command} ${args.join(" ")}`);
   execFileSync(command, args, {
     cwd,
     stdio: "inherit",
-    env,
+    env: process.env,
   });
-}
-
-function npmLockEnv() {
-  const env = { ...process.env };
-  delete env.npm_config_allow_scripts;
-  delete env.NPM_CONFIG_ALLOW_SCRIPTS;
-  return env;
 }
 
 function readJson(file) {
@@ -197,18 +190,21 @@ if (mode === "sync") {
         `${JSON.stringify(exactManifest, null, 2)}\n`,
       );
 
+      writeFileSync(
+        path.join(tempDir, ".npmrc"),
+        [
+          "allow-remote=all",
+          "ignore-scripts=true",
+          "audit=false",
+          "fund=false",
+          "",
+        ].join("\n"),
+      );
+
       run(
         "npm",
-        [
-          "install",
-          "--package-lock-only",
-          "--ignore-scripts",
-          "--no-audit",
-          "--no-fund",
-          "--allow-remote=all",
-        ],
+        ["install", "--package-lock-only"],
         tempDir,
-        npmLockEnv(),
       );
 
       const npmLock = readJson(path.join(tempDir, "package-lock.json"));
