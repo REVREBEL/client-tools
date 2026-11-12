@@ -64,15 +64,8 @@ export const clerkAuthAppearance = {
       lineHeight: 1.45,
       letterSpacing: "0.025em",
     },
-    socialButtons: {
-      display: "flex",
-      justifyContent: "center",
-      width: "100%",
-    },
     socialButtonsBlockButton: {
-      width: "70%",
-      maxWidth: "70%",
-      marginInline: "auto",
+      width: "100%",
       minHeight: "42px",
       backgroundColor: "#ffffff",
       color: "#163666",
@@ -83,12 +76,8 @@ export const clerkAuthAppearance = {
     },
     dividerLine: { backgroundColor: "rgba(22, 54, 102, 0.16)" },
     dividerText: { color: "#536782", fontSize: "0.82rem" },
-    formFieldLabelRow: {
-      width: "100%",
-      display: "flex",
-      justifyContent: "center",
-    },
     formFieldLabel: {
+      display: "block",
       width: "100%",
       color: "#163666",
       fontSize: "0.82rem",
