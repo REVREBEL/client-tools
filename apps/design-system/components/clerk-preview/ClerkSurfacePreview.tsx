@@ -99,9 +99,10 @@ function PreviewCard({
       <div className="cl-cardBox">
         <div className="cl-card">
           <div style={{ padding: "2rem" }}>
-            <div className="cl-logoBox">
+            <div className="cl-logoBox" style={{ display: "flex", justifyContent: "center" }}>
               <img
                 className="cl-logoImage"
+                style={{ display: "block", marginInline: "auto" }}
                 src="https://res.cloudinary.com/revrebel/image/upload/v1761516148/RR/Logos/revrebel-logo.png"
                 alt="REVREBEL"
               />
@@ -110,7 +111,9 @@ function PreviewCard({
               <h1 className="cl-headerTitle">{title}</h1>
               {subtitle ? <p className="cl-headerSubtitle">{subtitle}</p> : null}
             </div>
-            {children ? <div style={{ marginTop: "1.5rem" }}>{children}</div> : null}
+            {children ? (
+              <div style={{ marginTop: "1.5rem", textAlign: "center" }}>{children}</div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -125,10 +128,16 @@ function OAuthConsentPreview() {
       subtitle="Review the access requested by this application."
     >
       <div style={{ display: "grid", gap: "0.75rem" }}>
-        <div className="cl-formFieldInput" style={{ display: "flex", alignItems: "center" }}>
+        <div
+          className="cl-formFieldInput"
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}
+        >
           View your basic profile
         </div>
-        <div className="cl-formFieldInput" style={{ display: "flex", alignItems: "center" }}>
+        <div
+          className="cl-formFieldInput"
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}
+        >
           Access your organization
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
@@ -147,8 +156,8 @@ function ChooseOrganizationPreview() {
       subtitle="Select the workspace you want to continue with."
     >
       <div style={{ display: "grid", gap: "0.75rem" }}>
-        <button className="cl-formFieldInput" type="button">REVREBEL</button>
-        <button className="cl-formFieldInput" type="button">Create organization</button>
+        <button className="cl-formFieldInput" type="button" style={{ textAlign: "center" }}>REVREBEL</button>
+        <button className="cl-formFieldInput" type="button" style={{ textAlign: "center" }}>Create organization</button>
       </div>
     </PreviewCard>
   );
@@ -178,8 +187,8 @@ function SetupMFAPreview() {
       subtitle="Add an extra layer of security to your account."
     >
       <div style={{ display: "grid", gap: "0.75rem" }}>
-        <button className="cl-formFieldInput" type="button">Authenticator app</button>
-        <button className="cl-formFieldInput" type="button">SMS verification</button>
+        <button className="cl-formFieldInput" type="button" style={{ textAlign: "center" }}>Authenticator app</button>
+        <button className="cl-formFieldInput" type="button" style={{ textAlign: "center" }}>SMS verification</button>
         <button className="cl-formButtonPrimary" type="button">Continue</button>
       </div>
     </PreviewCard>
@@ -193,10 +202,16 @@ function UserProfilePreview() {
       subtitle="Manage your account details and security."
     >
       <div style={{ display: "grid", gap: "0.75rem" }}>
-        <div className="cl-formFieldInput" style={{ display: "flex", alignItems: "center" }}>
+        <div
+          className="cl-formFieldInput"
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}
+        >
           Email address
         </div>
-        <div className="cl-formFieldInput" style={{ display: "flex", alignItems: "center" }}>
+        <div
+          className="cl-formFieldInput"
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}
+        >
           Password & security
         </div>
       </div>
