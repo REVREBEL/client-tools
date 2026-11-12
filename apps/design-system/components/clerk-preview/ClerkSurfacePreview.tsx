@@ -264,11 +264,7 @@ function ClerkSurfacePreviewContent({ surface }: { surface: ClerkPreviewSurface 
             redirectUrlComplete="/docs/clerk-preview"
           />
         ) : (
-          <StateDiagnostic title="Choose Organization is not eligible to render">
-            {isSessionLoaded
-              ? `Current Clerk task: ${currentTask ?? "none"}. This component only renders when the pending session task is choose-organization.`
-              : "Clerk session is still loading."}
-          </StateDiagnostic>
+          <ChooseOrganizationPreview />
         );
       break;
     case "reset-password":
@@ -279,11 +275,7 @@ function ClerkSurfacePreviewContent({ surface }: { surface: ClerkPreviewSurface 
             redirectUrlComplete="/docs/clerk-preview"
           />
         ) : (
-          <StateDiagnostic title="Reset Password is not eligible to render">
-            {isSessionLoaded
-              ? `Current Clerk task: ${currentTask ?? "none"}. This component only renders when the pending session task is reset-password.`
-              : "Clerk session is still loading."}
-          </StateDiagnostic>
+          <ResetPasswordPreview />
         );
       break;
     case "setup-mfa":
@@ -294,11 +286,7 @@ function ClerkSurfacePreviewContent({ surface }: { surface: ClerkPreviewSurface 
             redirectUrlComplete="/docs/clerk-preview"
           />
         ) : (
-          <StateDiagnostic title="Setup MFA is not eligible to render">
-            {isSessionLoaded
-              ? `Current Clerk task: ${currentTask ?? "none"}. This component only renders when the pending session task is setup-mfa.`
-              : "Clerk session is still loading."}
-          </StateDiagnostic>
+          <SetupMFAPreview />
         );
       break;
     case "user-profile":
@@ -309,11 +297,7 @@ function ClerkSurfacePreviewContent({ surface }: { surface: ClerkPreviewSurface 
             routing="hash"
           />
         ) : (
-          <StateDiagnostic title="User Profile is not eligible to render">
-            {isUserLoaded
-              ? "This component requires an authenticated user."
-              : "Clerk session is still loading."}
-          </StateDiagnostic>
+          <UserProfilePreview />
         );
       break;
   }
