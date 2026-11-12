@@ -17,19 +17,7 @@ import {
   clerkAuthAppearance,
   clerkLocalization,
 } from "../../../../webflow/clerk-react/clerk-theme";
-
-export const clerkPreviewSurfaces = [
-  "sign-in",
-  "sign-up",
-  "waitlist",
-  "oauth-consent",
-  "choose-organization",
-  "reset-password",
-  "setup-mfa",
-  "user-profile",
-] as const;
-
-export type ClerkPreviewSurface = (typeof clerkPreviewSurfaces)[number];
+import type { ClerkPreviewSurface } from "./surfaces";
 
 const publishableKey = "pk_live_Y2xlcmsucmV2cmViZWwuaW8k";
 
