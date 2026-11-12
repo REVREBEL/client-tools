@@ -124,7 +124,7 @@ function PreviewCard({
 function OAuthConsentPreview() {
   return (
     <PreviewCard
-      title="Authorize Client Tools"
+      title="Authorize Your Account"
       subtitle="Review the access requested by this application."
     >
       <div style={{ display: "grid", gap: "0.75rem" }}>

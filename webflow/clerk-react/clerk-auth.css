@@ -96,10 +96,12 @@
   letter-spacing: -0.015em;
   text-transform: uppercase;
   text-wrap: balance;
+  align-items: center;
+  justify-content: center;
 }
 
 .cl-headerSubtitle {
-  max-width: 340px;
+
   color: var(--rr-muted);
   font-family: var(--rr-body);
   font-size: 0.9rem;
@@ -107,6 +109,8 @@
   line-height: 1.45;
   letter-spacing: 0.025em;
   text-wrap: balance;
+  align-items: center;
+  justify-content: center;
 }
 
 .cl-socialButtonsBlockButton,
@@ -214,7 +218,7 @@
 .cl-secondaryButton {
   width: 100%;
   min-height: 58px;
-  background: var(--rr-frost);
+  background: var(--rr-white);
   color: var(--rr-blue);
   border: 1px solid var(--rr-blue);
   border-radius: 0.0125rem;
@@ -231,7 +235,7 @@
 .cl-secondaryButton:hover,
 .cl-secondaryButton:focus-visible,
 .cl-secondaryButton:active {
-  background: var(--rr-white);
+  background: #FFFFFF;
   border-color: var(--rr-blue);
 }
 
