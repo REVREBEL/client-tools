@@ -51,7 +51,7 @@ jobs:
           pnpm --filter @revrebel/design-system-docs dev > /tmp/clerk-preview.log 2>&1 &
           echo $! > /tmp/clerk-preview.pid
           for i in {1..60}; do
-            if curl --fail --silent http://127.0.0.1:3005/docs/clerk-preview/ >/dev/null; then
+            if curl --fail --silent http://127.0.0.1:3005/client-tools/docs/clerk-preview/ >/dev/null; then
               exit 0
             fi
             sleep 1
@@ -65,7 +65,7 @@ jobs:
           for surface in             sign-in             sign-up             waitlist             oauth-consent             choose-organization             reset-password             setup-mfa             user-profile
           do
             echo "Checking $surface"
-            curl --fail --silent --show-error               "http://127.0.0.1:3005/clerk-preview/$surface/" >/dev/null
+            curl --fail --silent --show-error               "http://127.0.0.1:3005/client-tools/clerk-preview/$surface/" >/dev/null
           done
 
       - name: Show preview server log
