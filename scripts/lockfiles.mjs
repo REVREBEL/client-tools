@@ -198,6 +198,7 @@ if (mode === "sync") {
           "--ignore-scripts",
           "--no-audit",
           "--no-fund",
+          "--allow-remote=all",
         ],
         tempDir,
       );
