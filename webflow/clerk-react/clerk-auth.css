@@ -7,7 +7,7 @@
   --rr-muted: #536782;
   --rr-danger: #e05047;
   --rr-display: "Khand", "Arial Narrow", sans-serif;
-  --rr-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --rr-body: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 *,
@@ -70,8 +70,8 @@
 }
 
 .cl-logoImage {
-  width: 190px !important;
-  max-width: 72% !important;
+  width: 140px !important;
+  max-width: 100% !important;
   height: auto !important;
 }
 
@@ -88,6 +88,7 @@
   line-height: 1;
   letter-spacing: -0.015em;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
 .cl-headerSubtitle {
@@ -98,6 +99,7 @@
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0.025em;
+  text-wrap: balance;
 }
 
 .cl-socialButtonsBlockButton,
@@ -109,9 +111,12 @@
   border-radius: 0.175rem;
   box-shadow: none;
   font-family: var(--rr-body);
-  font-size: 0.9rem;
+  font-size: 1.15rem;
+  text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
+  max-width: 70%;
+  align: center;
 }
 
 .cl-socialButtonsBlockButton:hover,
@@ -138,6 +143,7 @@
   font-family: var(--rr-body);
   font-size: 0.82rem;
   font-weight: 600;
+  text-align: center;
 }
 
 .cl-formFieldInput {
@@ -154,6 +160,7 @@
 
 .cl-formFieldInput::placeholder {
   color: rgba(83, 103, 130, 0.8);
+  text-align: center;
 }
 
 .cl-formFieldInput:focus,
@@ -172,7 +179,7 @@
   background: var(--rr-blue);
   color: var(--rr-frost);
   border: 1px solid var(--rr-blue);
-  border-radius: 0.175rem;
+  border-radius: 0.0125rem;
   box-shadow: none;
   font-family: var(--rr-display);
   font-size: 1.08rem;
@@ -200,12 +207,12 @@
 .cl-footer {
   background: color-mix(in srgb, var(--rr-frost) 90%, var(--rr-blue) 10%);
   border-top: 1px solid var(--rr-blue);
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }
 
 .cl-footerAction {
   padding-block: 1rem;
-  padding-top: 3rem;
-  border-bottom: 1px solid rgba(22, 54, 102, 0.42);
   text-align: center;
 }
 
@@ -226,7 +233,7 @@
 
 .cl-footerActionLink:hover,
 .cl-footerActionLink:focus-visible {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .cl-footerPages {
