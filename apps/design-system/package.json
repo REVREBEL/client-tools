@@ -13,6 +13,7 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@clerk/react": "6.18.6",
     "@fumadocs/story": "1.5.3",
     "@revrebel/tokens": "workspace:*",
     "@revrebel/ui": "workspace:*",
