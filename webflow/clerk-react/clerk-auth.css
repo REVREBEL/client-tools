@@ -198,12 +198,13 @@
 }
 
 .cl-footer {
-  background: rgba(22, 54, 102, 0.035);
+  background: color-mix(in srgb, var(--rr-frost) 90%, var(--rr-blue) 10%);
   border-top: 1px solid var(--rr-blue);
 }
 
 .cl-footerAction {
   padding-block: 1rem;
+  padding-top: 3rem;
   border-bottom: 1px solid rgba(22, 54, 102, 0.42);
   text-align: center;
 }
