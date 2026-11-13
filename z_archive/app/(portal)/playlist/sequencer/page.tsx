@@ -1,4 +1,4 @@
-import SequenceArrangerPage from "../../../../portal/playlist/app/sequencer/page";
+import SequenceArrangerPage from "../../../../apps/playlist/app/sequencer/page";
 
 export const dynamic = "force-dynamic";
 

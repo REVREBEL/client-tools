@@ -15,8 +15,8 @@ Do not hard-code `basePath` or `assetPrefix` in `next.config.ts`. Webflow Cloud 
 
 Set `NEXT_PUBLIC_BASE_PATH=/portal` only for browser-side `fetch()` calls, raw asset URLs, and third-party paths that Next.js cannot prefix automatically. Internal Next.js navigation must stay relative to the application root:
 
-- `<Link href="/playlist">` becomes `/portal/playlist` after Webflow mounts the app.
-- Do **not** build Next.js links as `${NEXT_PUBLIC_BASE_PATH}/playlist`; that produces `/portal/portal/playlist`.
+- `<Link href="/playlist">` becomes `/apps/playlist` after Webflow mounts the app.
+- Do **not** build Next.js links as `${NEXT_PUBLIC_BASE_PATH}/playlist`; that produces `/apps/apps/playlist`.
 - Raw `fetch()`, plain asset URLs, and third-party redirect properties can use `NEXT_PUBLIC_BASE_PATH` when they need the externally mounted URL.
 
 Server-side authentication redirects are a separate case. Webflow Cloud executes the Next.js app behind its `*.wf-app-prod.cosmic.webflow.services` service origin, so a server redirect can otherwise expose that internal hostname to the browser. `PORTAL_PUBLIC_ORIGIN` provides the canonical browser origin for Clerk and protected-route redirects.
@@ -43,13 +43,13 @@ wrangler.json
 Because Webflow mounts the whole application at `/portal`, the public URLs are:
 
 - `/portal`
-- `/portal/docs`
-- `/portal/metrics`
-- `/portal/playlist`
-- `/portal/playlist/tracking`
-- `/portal/playlist/sequencer`
-- `/portal/playlist/setup`
-- `/portal/docs/manage`
+- `/apps/docs`
+- `/apps/metrics`
+- `/apps/playlist`
+- `/apps/playlist/tracking`
+- `/apps/playlist/sequencer`
+- `/apps/playlist/setup`
+- `/apps/docs/manage`
 
 The physical `app/` directory is a Next.js framework convention. It does not create an `/app` URL and does not conflict with another Webflow Cloud application mounted at `/app`.
 
@@ -66,8 +66,8 @@ The physical `app/` directory is a Next.js framework convention. It does not cre
 
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 - `CLERK_SECRET_KEY`
-- `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/portal/sign-in`
-- `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/portal/request-access`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/apps/sign-in`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/apps/request-access`
 - `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/portal`
 
 ### Google Sheets
@@ -98,7 +98,7 @@ The Playlist write bridge supports both Action Item mutations and Workspace Setu
 
 `wrangler.json` declares the `DOCS_MEDIA` R2 binding for bucket `revrebel-client-docs-media`. Webflow Cloud provisions the binding from this root-level file.
 
-After the first successful deployment, an organization admin can use `/portal/docs/manage` to migrate the PDFs and photos already stored in `portal/docs/public` into Object Storage.
+After the first successful deployment, an organization admin can use `/apps/docs/manage` to migrate the PDFs and photos already stored in `portal/docs/public` into Object Storage.
 
 ## Monorepo tooling
 

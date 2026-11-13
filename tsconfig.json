@@ -23,16 +23,16 @@
     ".next/types/**/*.ts",
     "app/**/*.ts",
     "app/**/*.tsx",
-    "portal/docs/app/**/*.ts",
-    "portal/docs/app/**/*.tsx",
-    "portal/metrics/app/**/*.ts",
-    "portal/metrics/app/**/*.tsx",
-    "portal/metrics/app/**/*.jsx",
-    "portal/playlist/app/**/*.ts",
-    "portal/playlist/app/**/*.tsx",
-    "portal/playlist/Components/**/*.ts",
-    "portal/playlist/Components/**/*.tsx",
+    "apps/docs/app/**/*.ts",
+    "apps/docs/app/**/*.tsx",
+    "apps/metrics/app/**/*.ts",
+    "apps/metrics/app/**/*.tsx",
+    "apps/metrics/app/**/*.jsx",
+    "apps/playlist/app/**/*.ts",
+    "apps/playlist/app/**/*.tsx",
+    "apps/playlist/Components/**/*.ts",
+    "apps/playlist/Components/**/*.tsx",
     "middleware.ts"
   ],
-  "exclude": ["node_modules", "**/build/**", "**/.next/**", "portal/metrics/app/code/**"]
+  "exclude": ["node_modules", "**/build/**", "**/.next/**", "apps/metrics/app/code/**"]
 }

@@ -1,4 +1,4 @@
-import MetricsPage from "../../../portal/metrics/app/page";
+import MetricsPage from "../../../apps/metrics/app/page";
 
 export const dynamic = "force-dynamic";
 

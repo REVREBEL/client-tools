@@ -1,4 +1,4 @@
-import TrackingPage from "../../../../portal/playlist/app/tracking/page";
+import TrackingPage from "../../../../apps/playlist/app/tracking/page";
 
 export const dynamic = "force-dynamic";
 

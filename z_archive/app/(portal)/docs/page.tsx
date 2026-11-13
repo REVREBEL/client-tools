@@ -1,4 +1,4 @@
-import DocsHome from "../../../portal/docs/app/page";
+import DocsHome from "../../../apps/docs/app/page";
 
 function getDocsSheetUrl() {
   const sheetId = process.env.DOCS_SPREADSHEET_ID?.trim();

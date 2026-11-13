@@ -1,1 +1,1 @@
-export { default } from "../../../../portal/docs/app/campaigns/page";
+export { default } from "../../../../apps/docs/app/campaigns/page";
