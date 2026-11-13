@@ -8,9 +8,7 @@ const monorepoRoot = path.resolve(appDir, "../..");
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: ["@revrebel/ui", "@revrebel/tokens"],
-  turbopack: {
-    root: monorepoRoot,
-  },
+  outputFileTracingRoot: monorepoRoot,
 };
 
 export default nextConfig;
