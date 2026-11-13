@@ -1,0 +1,211 @@
+/* packages/tokens/src/theme.css
+ *
+ * Maps the raw --rr-* tokens into Tailwind v4 theme namespaces so they become
+ * utilities: bg-primary, text-teal-inverse, font-headline, text-headline-lg,
+ * gap-md, p-page-x, rounded-round, max-w-page-base, size-icon-sm ...
+ *
+ * `inline` makes utilities reference the --rr-* variables directly, so
+ * overriding a token at runtime (e.g. on a [data-theme] wrapper) still works.
+ */
+
+@theme inline {
+  /* ---- Brand color families ---- */
+  --color-primary: var(--rr-color-primary);
+  --color-primary-fade: var(--rr-color-primary-fade);
+  --color-primary-inverse: var(--rr-color-primary-inverse);
+  --color-primary-inverse-fade: var(--rr-color-primary-inverse-fade);
+
+  --color-teal: var(--rr-color-teal);
+  --color-teal-fade: var(--rr-color-teal-fade);
+  --color-teal-inverse: var(--rr-color-teal-inverse);
+  --color-teal-inverse-fade: var(--rr-color-teal-inverse-fade);
+
+  --color-cyan: var(--rr-color-cyan);
+  --color-cyan-fade: var(--rr-color-cyan-fade);
+  --color-cyan-inverse: var(--rr-color-cyan-inverse);
+  --color-cyan-inverse-fade: var(--rr-color-cyan-inverse-fade);
+
+  --color-aqua: var(--rr-color-aqua);
+  --color-aqua-fade: var(--rr-color-aqua-fade);
+  --color-aqua-inverse: var(--rr-color-aqua-inverse);
+  --color-aqua-inverse-fade: var(--rr-color-aqua-inverse-fade);
+
+  --color-powder: var(--rr-color-powder);
+  --color-powder-fade: var(--rr-color-powder-fade);
+  --color-powder-inverse: var(--rr-color-powder-inverse);
+  --color-powder-inverse-fade: var(--rr-color-powder-inverse-fade);
+
+  --color-yellow: var(--rr-color-yellow);
+  --color-yellow-fade: var(--rr-color-yellow-fade);
+  --color-yellow-inverse: var(--rr-color-yellow-inverse);
+  --color-yellow-inverse-fade: var(--rr-color-yellow-inverse-fade);
+
+  --color-orange: var(--rr-color-orange);
+  --color-orange-fade: var(--rr-color-orange-fade);
+  --color-orange-inverse: var(--rr-color-orange-inverse);
+  --color-orange-inverse-fade: var(--rr-color-orange-inverse-fade);
+
+  --color-red: var(--rr-color-red);
+  --color-red-fade: var(--rr-color-red-fade);
+  --color-red-inverse: var(--rr-color-red-inverse);
+  --color-red-inverse-fade: var(--rr-color-red-inverse-fade);
+
+  --color-purple: var(--rr-color-purple);
+  --color-purple-fade: var(--rr-color-purple-fade);
+  --color-purple-inverse: var(--rr-color-purple-inverse);
+  --color-purple-inverse-fade: var(--rr-color-purple-inverse-fade);
+
+  --color-frost: var(--rr-color-frost);
+  --color-frost-fade: var(--rr-color-frost-fade);
+  --color-frost-inverse: var(--rr-color-frost-inverse);
+  --color-frost-inverse-fade: var(--rr-color-frost-inverse-fade);
+
+  --color-grey-1: var(--rr-color-grey-1);
+  --color-grey-1-fade: var(--rr-color-grey-1-fade);
+  --color-grey-1-inverse: var(--rr-color-grey-1-inverse);
+  --color-grey-1-inverse-fade: var(--rr-color-grey-1-inverse-fade);
+
+  --color-grey-2: var(--rr-color-grey-2);
+  --color-grey-2-fade: var(--rr-color-grey-2-fade);
+  --color-grey-2-inverse: var(--rr-color-grey-2-inverse);
+  --color-grey-2-inverse-fade: var(--rr-color-grey-2-inverse-fade);
+
+  --color-grey-3: var(--rr-color-grey-3);
+  --color-grey-3-fade: var(--rr-color-grey-3-fade);
+  --color-grey-3-inverse: var(--rr-color-grey-3-inverse);
+  --color-grey-3-inverse-fade: var(--rr-color-grey-3-inverse-fade);
+
+  --color-light-1: var(--rr-color-light-1);
+  --color-light-2: var(--rr-color-light-2);
+  --color-light-3: var(--rr-color-light-3);
+  --color-light-fade: var(--rr-color-light-fade);
+  --color-light-inverse: var(--rr-color-light-inverse);
+  --color-light-inverse-fade: var(--rr-color-light-inverse-fade);
+
+  --color-dark-1: var(--rr-color-dark-1);
+  --color-dark-2: var(--rr-color-dark-2);
+  --color-dark-3: var(--rr-color-dark-3);
+  --color-dark-fade: var(--rr-color-dark-fade);
+  --color-dark-inverse: var(--rr-color-dark-inverse);
+  --color-dark-inverse-fade: var(--rr-color-dark-inverse-fade);
+
+  /* ---- Semantic ---- */
+  --color-link: var(--rr-color-link);
+  --color-link-inverse: var(--rr-color-link-inverse);
+  --color-navlink-light: var(--rr-color-navlink-light);
+  --color-navlink-dark: var(--rr-color-navlink-dark);
+
+  --color-success: var(--rr-color-state-success);
+  --color-alert: var(--rr-color-state-alert);
+  --color-alert-inverse: var(--rr-color-state-alert-inverse);
+  --color-error: var(--rr-color-state-error);
+  --color-warning: var(--rr-color-state-warning);
+  --color-disabled: var(--rr-color-state-disabled);
+
+  --color-social-email: var(--rr-color-social-email);
+  --color-social-instagram: var(--rr-color-social-instagram);
+  --color-social-linkedin: var(--rr-color-social-linkedin);
+  --color-social-facebook: var(--rr-color-social-facebook);
+  --color-social-x: var(--rr-color-social-x);
+  --color-social-github: var(--rr-color-social-github);
+  --color-social-google: var(--rr-color-social-google);
+  --color-social-blog: var(--rr-color-social-blog);
+  --color-social-youtube: var(--rr-color-social-youtube);
+
+  /* ---- Font families (font-headline, font-body ...) ---- */
+  --font-headline: var(--rr-font-headline);
+  --font-subheadline: var(--rr-font-subheadline);
+  --font-eyebrow: var(--rr-font-eyebrow);
+  --font-body: var(--rr-font-body);
+  --font-emphasis: var(--rr-font-emphasis);
+  --font-code: var(--rr-font-code);
+  --font-emoji: var(--rr-font-emoji);
+  --font-blockquote: var(--rr-font-blockquote);
+  --font-logo: var(--rr-font-logo);
+  --font-button: var(--rr-font-button);
+  --font-label: var(--rr-font-labels);
+
+  /* ---- Font sizes (text-headline-lg, text-subheadline-md, text-body-base ...) ---- */
+  --text-headline-xl: var(--rr-headline-xl);
+  --text-headline-lg: var(--rr-headline-lg);
+  --text-headline-md: var(--rr-headline-md);
+  --text-headline-base: var(--rr-headline-base);
+  --text-headline-sm: var(--rr-headline-sm);
+  --text-headline-xs: var(--rr-headline-xs);
+  --text-headline-xxs: var(--rr-headline-xxs);
+
+  --text-subheadline-xl: var(--rr-subheadline-xl);
+  --text-subheadline-lg: var(--rr-subheadline-lg);
+  --text-subheadline-md: var(--rr-subheadline-md);
+  --text-subheadline-base: var(--rr-subheadline-base);
+  --text-subheadline-sm: var(--rr-subheadline-sm);
+  --text-subheadline-xs: var(--rr-subheadline-xs);
+  --text-subheadline-xxs: var(--rr-subheadline-xxs);
+
+  --text-body-xxl: var(--rr-text-xxl);
+  --text-body-xl: var(--rr-text-xl);
+  --text-body-lg: var(--rr-text-lg);
+  --text-body-md: var(--rr-text-md);
+  --text-body-base: var(--rr-text-base);
+  --text-body-sm: var(--rr-text-sm);
+  --text-body-xs: var(--rr-text-xs);
+  --text-body-xxs: var(--rr-text-xxs);
+
+  /* ---- Line heights (leading-md ...) ---- */
+  --leading-xxl: var(--rr-line-height-xxl);
+  --leading-xl: var(--rr-line-height-xl);
+  --leading-lg: var(--rr-line-height-lg);
+  --leading-md: var(--rr-line-height-md);
+  --leading-base: var(--rr-line-height-base);
+  --leading-sm: var(--rr-line-height-sm);
+  --leading-xs: var(--rr-line-height-xs);
+  --leading-xxs: var(--rr-line-height-xxs);
+
+  /* ---- Spacing (gap-md, p-page-x, py-section ...) ---- */
+  --spacing-xxs: var(--rr-gap-xxs);
+  --spacing-xs: var(--rr-gap-xs);
+  --spacing-sm: var(--rr-gap-sm);
+  --spacing-md: var(--rr-gap-md);
+  --spacing-lg: var(--rr-gap-lg);
+  --spacing-xl: var(--rr-gap-xl);
+  --spacing-xxl: var(--rr-gap-xxl);
+  --spacing-page-x: var(--rr-page-padding-inline);
+  --spacing-page-y: var(--rr-page-padding-block);
+  --spacing-section: var(--rr-section-padding-block);
+
+  /* ---- Radius (rounded-sm ... rounded-round, rounded-image) ---- */
+  --radius-sm: var(--rr-radius-sm);
+  --radius-md: var(--rr-radius-md);
+  --radius-lg: var(--rr-radius-lg);
+  --radius-xl: var(--rr-radius-xl);
+  --radius-round: var(--rr-radius-round);
+  --radius-image: var(--rr-image-radius);
+
+  /* ---- Widths (max-w-page-base, w-content-sm, max-w-frame-lg) ---- */
+  --container-page-xxl: var(--rr-max-width-xxl);
+  --container-page-xl: var(--rr-max-width-xl);
+  --container-page-lg: var(--rr-max-width-lg);
+  --container-page-md: var(--rr-max-width-md);
+  --container-page-base: var(--rr-max-width-base);
+  --container-page-sm: var(--rr-max-width-sm);
+  --container-page-xs: var(--rr-max-width-xs);
+
+  --container-content-xxl: var(--rr-width-xxl);
+  --container-content-xl: var(--rr-width-xl);
+  --container-content-lg: var(--rr-width-lg);
+  --container-content-base: var(--rr-width-base);
+  --container-content-sm: var(--rr-width-sm);
+  --container-content-xs: var(--rr-width-xs);
+  --container-content-xxs: var(--rr-width-xxs);
+
+  --container-frame-xl: var(--rr-container-xl);
+  --container-frame-lg: var(--rr-container-lg);
+  --container-frame-md: var(--rr-container-md);
+  --container-frame-sm: var(--rr-container-sm);
+}
+
+/* Icon sizes as square utilities: size-icon-sm, size-icon-base ... */
+@utility size-icon-* {
+  width: --value(--rr-icon-*);
+  height: --value(--rr-icon-*);
+}
