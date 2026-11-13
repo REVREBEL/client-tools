@@ -14,11 +14,10 @@
     "react-dom": "^19.2.0",
     "@emotion/cache": "11.14.0",
     "@emotion/react": "11.14.0",
-    "@webflow/variables": "2.9.0",
-    "@webflow/functions": "2.9.0",
-    "@webflow/designer-extension-typings": "2.9.0",
-    "@webflow/cloud-app": "1.0.0",
-    "@webflow/emotion-utils": "2.9.0"
+    "@webflow/variables": "^2.9.0",
+    "@webflow/functions": "^2.9.0",
+    "@webflow/designer-extension-typings": "^2.2.0",
+    "@webflow/emotion-utils": "^2.9.0"
   },
   "devDependencies": {
     "@types/react": "19.2.14",
