@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { ReactNode, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   OAuthConsent,
   Show,
@@ -23,6 +24,17 @@ type RouteProps = ClerkSurfaceProps & {
   path?: string;
 };
 
+function LightDomPortal({ children, selector = "#clerk-sign-in" }: { children: ReactNode; selector?: string }) {
+  const [target, setTarget] = useState<Element | null>(null);
+
+  useEffect(() => {
+    setTarget(document.querySelector(selector));
+  }, [selector]);
+
+  return target ? createPortal(children, target) : children;
+}
+
+
 export function RevrebelSignIn({
   path = "/client-hub/sign-in",
   signUpUrl = "/client-hub/sign-up",
@@ -31,22 +43,24 @@ export function RevrebelSignIn({
   ...providerProps
 }: RouteProps) {
   return (
-    <ClerkProviderShell
-      {...providerProps}
-      signInUrl={path}
-      signUpUrl={signUpUrl}
-      waitlistUrl={waitlistUrl}
-      afterAuthUrl={afterAuthUrl}
-    >
-      <SignIn
-        appearance={clerkAuthAppearance}
-        routing="hash"
-        forceRedirectUrl={afterAuthUrl}
-        fallbackRedirectUrl={afterAuthUrl}
+    <LightDomPortal>
+      <ClerkProviderShell
+        {...providerProps}
+        signInUrl={path}
+        signUpUrl={signUpUrl}
         waitlistUrl={waitlistUrl}
-        withSignUp={false}
-      />
-    </ClerkProviderShell>
+        afterAuthUrl={afterAuthUrl}
+      >
+        <SignIn
+          appearance={clerkAuthAppearance}
+          routing="hash"
+          forceRedirectUrl={afterAuthUrl}
+          fallbackRedirectUrl={afterAuthUrl}
+          waitlistUrl={waitlistUrl}
+          withSignUp={false}
+        />
+      </ClerkProviderShell>
+    </LightDomPortal>
   );
 }
 
@@ -57,20 +71,22 @@ export function RevrebelSignUp({
   ...providerProps
 }: RouteProps) {
   return (
-    <ClerkProviderShell
-      {...providerProps}
-      signUpUrl={path}
-      signInUrl={signInUrl}
-      afterAuthUrl={afterAuthUrl}
-    >
-      <SignUp
-        appearance={clerkAuthAppearance}
-        routing="hash"
-        forceRedirectUrl={afterAuthUrl}
-        fallbackRedirectUrl={afterAuthUrl}
+    <LightDomPortal>
+      <ClerkProviderShell
+        {...providerProps}
+        signUpUrl={path}
         signInUrl={signInUrl}
-      />
-    </ClerkProviderShell>
+        afterAuthUrl={afterAuthUrl}
+      >
+        <SignUp
+          appearance={clerkAuthAppearance}
+          routing="hash"
+          forceRedirectUrl={afterAuthUrl}
+          fallbackRedirectUrl={afterAuthUrl}
+          signInUrl={signInUrl}
+        />
+      </ClerkProviderShell>
+    </LightDomPortal>
   );
 }
 
