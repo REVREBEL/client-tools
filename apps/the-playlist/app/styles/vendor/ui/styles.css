@@ -1,0 +1,7 @@
+/* packages/ui/src/styles.css
+ * All component styles. Import once, after the tokens:
+ *   @import "tailwindcss";
+ *   @import "@revrebel/tokens/index.css";
+ *   @import "@revrebel/ui/styles.css";
+ */
+@import "./button.css";
