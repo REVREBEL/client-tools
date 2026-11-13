@@ -443,11 +443,11 @@ importers:
         specifier: ^7.6.0
         version: 7.9.20(next@16.4.5(@babel/core@7.29.13(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@revrebel/tokens':
-        specifier: workspace:*
+        specifier: file:../../packages/tokens
         version: link:../../packages/tokens
       '@revrebel/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
+        specifier: file:../../packages/ui
+        version: file:packages/ui(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       lucide-react:
         specifier: ^0.468.0
         version: 0.468.0(react@19.2.6)
@@ -491,7 +491,7 @@ importers:
   packages/ui:
     dependencies:
       '@revrebel/tokens':
-        specifier: workspace:*
+        specifier: file:../tokens
         version: link:../tokens
       react:
         specifier: ^19.2.0
@@ -2218,6 +2218,15 @@ packages:
 
   '@radix-ui/rect@1.1.3':
     resolution: {integrity: sha512-JtyZR+mqgBibTo8xea3B6ZRmzZiM/YeVBtUkas6zMuXjAlfIFIW2FgqeM9eLyvEaYX66vr6DJMK+4U6LV0KhNw==}
+
+  '@revrebel/tokens@file:packages/tokens':
+    resolution: {directory: packages/tokens, type: directory}
+
+  '@revrebel/ui@file:packages/ui':
+    resolution: {directory: packages/ui, type: directory}
+    peerDependencies:
+      react: ^19.2.0
+      react-dom: ^19.2.0
 
   '@rolldown/binding-android-arm-eabi@1.2.16':
     resolution: {integrity: sha512-ia3DwAs0OsMGS7+IConptSiyk9pEXkOx/AbJ2n/lAGxH3QkWQus1t8d7gnAT38FCU2sQu8lUbeR6AiZFv4JxaA==}
@@ -8236,6 +8245,14 @@ snapshots:
       '@types/react-dom': 19.2.3(@types/react@19.2.14)
 
   '@radix-ui/rect@1.1.3': {}
+
+  '@revrebel/tokens@file:packages/tokens': {}
+
+  '@revrebel/ui@file:packages/ui(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+    dependencies:
+      '@revrebel/tokens': file:packages/tokens
+      react: 19.2.6
+      react-dom: 19.2.6(react@19.2.6)
 
   '@rolldown/binding-android-arm-eabi@1.2.16':
     optional: true
