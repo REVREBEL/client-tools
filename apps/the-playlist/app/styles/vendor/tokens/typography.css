@@ -1,0 +1,216 @@
+/* packages/tokens/src/typography.css
+ *
+ * Composite type styles from the Webflow typography collection, exposed as
+ * opt-in utilities (no global h1/p styling, so Fumadocs pages stay untouched):
+ *
+ *   type-h0 … type-h6     headline roles (Khand)
+ *   type-s0 … type-s6     subheadline roles (General Sans)
+ *   type-p-xl … type-p-xxs, type-p   paragraph roles
+ *   type-body, type-eyebrow, type-label, type-list, type-blockquote
+ */
+
+@utility type-h0 {
+  font-family: var(--rr-font-headline);
+  font-size: var(--rr-headline-md);
+  font-weight: var(--rr-weight-700);
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5%;
+}
+
+@utility type-h1 {
+  font-family: var(--rr-font-headline);
+  font-size: var(--rr-headline-lg);
+  font-weight: var(--rr-weight-700);
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+  margin-bottom: 0;
+}
+
+@utility type-h2 {
+  font-family: var(--rr-font-headline);
+  font-size: var(--rr-headline-md);
+  font-weight: var(--rr-weight-700);
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+  margin-bottom: 1%;
+}
+
+@utility type-h3 {
+  font-family: var(--rr-font-headline);
+  font-size: var(--rr-headline-base);
+  font-weight: var(--rr-weight-700);
+  line-height: 0.85;
+  letter-spacing: 0;
+  margin-bottom: 0.15em;
+}
+
+@utility type-h4 {
+  font-family: var(--rr-font-headline);
+  font-size: var(--rr-headline-sm);
+  font-weight: var(--rr-weight-700);
+  line-height: 0.85;
+  letter-spacing: 0;
+  margin-bottom: 0.15em;
+}
+
+@utility type-h5 {
+  font-family: var(--rr-font-headline);
+  font-size: var(--rr-headline-xs);
+  font-weight: var(--rr-weight-700);
+  line-height: 0.85;
+  letter-spacing: 0;
+  margin-bottom: 0.15em;
+}
+
+@utility type-h6 {
+  font-family: var(--rr-font-headline);
+  font-size: var(--rr-headline-xxs);
+  font-weight: var(--rr-weight-700);
+  line-height: 0.95;
+  letter-spacing: 0;
+  margin-bottom: 0.15em;
+}
+
+@utility type-s0 {
+  font-family: var(--rr-font-subheadline);
+  font-size: var(--rr-subheadline-xl);
+  font-weight: var(--rr-weight-300);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+@utility type-s1 {
+  font-family: var(--rr-font-subheadline);
+  font-size: var(--rr-subheadline-lg);
+  font-weight: var(--rr-weight-300);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+@utility type-s2 {
+  font-family: var(--rr-font-subheadline);
+  font-size: var(--rr-subheadline-md);
+  font-weight: var(--rr-weight-300);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+@utility type-s3 {
+  font-family: var(--rr-font-subheadline);
+  font-size: var(--rr-subheadline-base);
+  font-weight: var(--rr-weight-200);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+@utility type-s4 {
+  font-family: var(--rr-font-subheadline);
+  font-size: var(--rr-subheadline-sm);
+  font-weight: var(--rr-weight-300);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+@utility type-s5 {
+  font-family: var(--rr-font-subheadline);
+  font-size: var(--rr-subheadline-xs);
+  font-weight: var(--rr-weight-300);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+/* Webflow stores s6/font-weight as 1.25 (a line-height value) and the real
+   weight as s6/s6-font-weight (300). Corrected here: weight 300, line-height 1.25. */
+@utility type-s6 {
+  font-family: var(--rr-font-subheadline);
+  font-size: var(--rr-subheadline-xxs);
+  font-weight: var(--rr-weight-300);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+@utility type-body {
+  font-family: var(--rr-font-body);
+  font-size: var(--rr-body-font-size);
+  font-weight: var(--rr-body-font-weight);
+  line-height: var(--rr-body-line-height);
+  letter-spacing: var(--rr-body-letter-spacing);
+}
+
+@utility type-p-xl {
+  font-family: var(--rr-font-body);
+  font-size: var(--rr-text-xl);
+  line-height: 1.5;
+}
+
+@utility type-p-lg {
+  font-family: var(--rr-font-body);
+  font-size: var(--rr-text-lg);
+  line-height: 1.5;
+}
+
+@utility type-p-md {
+  font-family: var(--rr-font-body);
+  font-size: var(--rr-text-md);
+  line-height: 1.5;
+}
+
+@utility type-p {
+  font-family: var(--rr-font-body);
+  font-size: var(--rr-text-base);
+  line-height: 1.55;
+}
+
+/* Webflow: paragraph-sm uses text-size/md and a 1.35px line-height (almost
+   certainly meant to be 1.35). Corrected to the unitless 1.35 here. */
+@utility type-p-sm {
+  font-family: var(--rr-font-body);
+  font-size: var(--rr-text-md);
+  line-height: 1.35;
+}
+
+@utility type-p-xs {
+  font-family: var(--rr-font-body);
+  font-size: var(--rr-text-xs);
+  line-height: 1;
+}
+
+@utility type-p-xxs {
+  font-family: var(--rr-font-body);
+  font-size: var(--rr-text-xxs);
+  line-height: 1;
+}
+
+@utility type-eyebrow {
+  font-family: var(--rr-font-eyebrow);
+  font-size: var(--rr-eyebrow-font-size);
+  font-weight: var(--rr-eyebrow-font-weight);
+  letter-spacing: var(--rr-eyebrow-letter-spacing);
+}
+
+@utility type-label {
+  font-family: var(--rr-font-labels);
+  font-weight: var(--rr-label-font-weight);
+  line-height: var(--rr-label-line-height);
+  letter-spacing: var(--rr-label-letter-spacing);
+  padding-block: var(--rr-label-padding-block);
+  padding-inline: var(--rr-label-padding-inline);
+}
+
+@utility type-list {
+  font-family: var(--rr-font-body);
+  line-height: var(--rr-list-line-height);
+}
+
+@utility type-blockquote {
+  font-family: var(--rr-font-blockquote);
+  font-size: var(--rr-blockquote-font-size);
+  font-weight: var(--rr-blockquote-font-weight);
+  letter-spacing: var(--rr-blockquote-letter-spacing);
+  background: var(--rr-blockquote-background);
+  border-radius: var(--rr-blockquote-radius);
+  border: var(--rr-blockquote-border-width) solid var(--rr-blockquote-border-color);
+  padding-block: var(--rr-blockquote-padding-block);
+  padding-inline: var(--rr-blockquote-padding-inline);
+}
