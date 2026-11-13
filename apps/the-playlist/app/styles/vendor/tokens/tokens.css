@@ -1,0 +1,458 @@
+/* packages/tokens/src/tokens.css
+ *
+ * Raw design tokens as CSS custom properties, mirrored 1:1 from the Webflow
+ * variable collections: base.json, color.json, typography.json, size.json.
+ *
+ * Naming: Webflow "group/name" -> --rr-group-name
+ *   color-inputs/teal     -> --rr-input-teal
+ *   teal/inverse-fade     -> --rr-color-teal-inverse-fade
+ *   headline-size/lg      -> --rr-headline-lg
+ *   size/1.5x             -> --rr-size-1_5x
+ *
+ * Values marked "WEBFLOW PARITY" are copied exactly even where they look odd,
+ * so the portal matches the live Webflow site. See README.md for the review list.
+ */
+
+:root {
+  /* ======================================================================
+     BASE — color inputs (primitives)
+     ====================================================================== */
+  --rr-input-primary: #163666;
+  --rr-input-teal: #047c97;
+  --rr-input-cyan: #00a6b6;
+  --rr-input-aqua: #71c9c5;
+  --rr-input-powder: #b2d3de;
+  --rr-input-yellow: #faca78;
+  --rr-input-orange: #f37d59;
+  --rr-input-red: #e05047;
+  --rr-input-purple: #8e456a;
+  --rr-input-frost: #eff5f6;
+  --rr-input-grey-1: #ababab;
+  --rr-input-grey-2: #575757;
+  --rr-input-grey-3: #2e2e2e;
+  --rr-input-white: white;
+  --rr-input-light: #fafafa;
+  --rr-input-dark: var(--rr-input-primary);
+
+  /* ======================================================================
+     COLOR — semantic families (normal / fade / inverse / inverse-fade)
+     ====================================================================== */
+  --rr-color-primary: var(--rr-input-primary);
+  --rr-color-primary-fade: color-mix(in srgb, var(--rr-color-primary) 80%, white 20%);
+  --rr-color-primary-inverse: var(--rr-input-powder);
+  /* WEBFLOW PARITY: mix totals 110% (browser normalizes). */
+  --rr-color-primary-inverse-fade: color-mix(in srgb, var(--rr-color-primary-inverse) 80%, white 30%);
+
+  --rr-color-teal: var(--rr-input-teal);
+  --rr-color-teal-fade: color-mix(in srgb, var(--rr-color-teal) 70%, white 30%);
+  --rr-color-teal-inverse: var(--rr-input-frost);
+  --rr-color-teal-inverse-fade: color-mix(in srgb, var(--rr-color-teal-inverse) 90%, black 10%);
+
+  --rr-color-cyan: var(--rr-input-cyan);
+  --rr-color-cyan-fade: color-mix(in srgb, var(--rr-color-cyan) 70%, white 30%);
+  --rr-color-cyan-inverse: var(--rr-input-yellow);
+  --rr-color-cyan-inverse-fade: color-mix(in srgb, var(--rr-color-cyan-inverse) 80%, white 20%);
+
+  --rr-color-aqua: var(--rr-input-aqua);
+  --rr-color-aqua-fade: color-mix(in srgb, var(--rr-color-aqua) 80%, white 20%);
+  --rr-color-aqua-inverse: var(--rr-input-teal);
+  --rr-color-aqua-inverse-fade: color-mix(in srgb, var(--rr-color-aqua-inverse) 80%, white 20%);
+
+  --rr-color-powder: var(--rr-input-powder);
+  --rr-color-powder-fade: color-mix(in srgb, var(--rr-color-powder) 70%, white 30%);
+  --rr-color-powder-inverse: var(--rr-input-primary);
+  --rr-color-powder-inverse-fade: color-mix(in srgb, var(--rr-color-powder-inverse) 80%, white 20%);
+
+  --rr-color-yellow: var(--rr-input-yellow);
+  --rr-color-yellow-fade: color-mix(in srgb, var(--rr-color-yellow) 80%, white 20%);
+  --rr-color-yellow-inverse: var(--rr-input-red);
+  --rr-color-yellow-inverse-fade: color-mix(in srgb, var(--rr-color-yellow-inverse) 90%, white 10%);
+
+  --rr-color-orange: var(--rr-input-orange);
+  --rr-color-orange-fade: color-mix(in srgb, var(--rr-color-orange) 80%, white 20%);
+  --rr-color-orange-inverse: var(--rr-input-primary);
+  --rr-color-orange-inverse-fade: color-mix(in srgb, var(--rr-color-orange-inverse) 80%, white 20%);
+
+  --rr-color-red: var(--rr-input-red);
+  --rr-color-red-fade: color-mix(in srgb, var(--rr-color-red) 80%, white 20%);
+  --rr-color-red-inverse: var(--rr-input-powder);
+  --rr-color-red-inverse-fade: color-mix(in srgb, var(--rr-color-red-inverse) 85%, black 15%);
+
+  --rr-color-purple: var(--rr-input-purple);
+  --rr-color-purple-fade: color-mix(in srgb, var(--rr-color-purple) 80%, white 20%);
+  --rr-color-purple-inverse: var(--rr-color-orange);
+  --rr-color-purple-inverse-fade: color-mix(in srgb, var(--rr-color-purple-inverse) 80%, white 20%);
+
+  --rr-color-frost: var(--rr-input-frost);
+  --rr-color-frost-fade: color-mix(in srgb, var(--rr-color-frost) 95%, var(--rr-color-primary) 5%);
+  --rr-color-frost-inverse: var(--rr-input-primary);
+  --rr-color-frost-inverse-fade: color-mix(in srgb, var(--rr-color-frost-inverse) 80%, white 20%);
+
+  --rr-color-grey-1: var(--rr-input-grey-1);
+  --rr-color-grey-1-fade: color-mix(in srgb, var(--rr-color-grey-1) 80%, white 20%);
+  --rr-color-grey-1-inverse: var(--rr-input-grey-2);
+  --rr-color-grey-1-inverse-fade: color-mix(in srgb, var(--rr-color-grey-1-inverse) 80%, white 20%);
+
+  --rr-color-grey-2: var(--rr-input-grey-2);
+  --rr-color-grey-2-fade: color-mix(in srgb, var(--rr-color-grey-2) 80%, white 20%);
+  --rr-color-grey-2-inverse: var(--rr-input-grey-1);
+  --rr-color-grey-2-inverse-fade: color-mix(in srgb, var(--rr-color-grey-2-inverse) 80%, white 20%);
+
+  --rr-color-grey-3: var(--rr-input-grey-3);
+  --rr-color-grey-3-fade: color-mix(in srgb, var(--rr-color-grey-3) 80%, white 20%);
+  --rr-color-grey-3-inverse: var(--rr-input-grey-1);
+  --rr-color-grey-3-inverse-fade: color-mix(in srgb, var(--rr-color-grey-3-inverse) 80%, white 20%);
+
+  --rr-color-light-1: var(--rr-input-light);
+  /* WEBFLOW PARITY: mix totals 90%, so this resolves with ~10% transparency. */
+  --rr-color-light-2: color-mix(in srgb, var(--rr-color-light-1) 80%, black 10%);
+  --rr-color-light-3: color-mix(in srgb, var(--rr-color-light-1) 80%, black 20%);
+  --rr-color-light-fade: color-mix(in srgb, var(--rr-color-light-1) 80%, black 20%);
+  --rr-color-light-inverse: var(--rr-input-dark);
+  --rr-color-light-inverse-fade: color-mix(in srgb, var(--rr-color-light-inverse) 80%, white 30%);
+
+  --rr-color-dark-1: var(--rr-input-dark);
+  --rr-color-dark-2: color-mix(in srgb, var(--rr-color-dark-1) 80%, white 20%);
+  --rr-color-dark-3: color-mix(in srgb, var(--rr-color-dark-1) 60%, white 40%);
+  --rr-color-dark-fade: color-mix(in srgb, var(--rr-color-dark-1) 80%, white 20%);
+  --rr-color-dark-inverse: var(--rr-input-light);
+  --rr-color-dark-inverse-fade: color-mix(in srgb, var(--rr-color-dark-inverse) 80%, black 20%);
+
+  --rr-color-link: var(--rr-color-cyan);
+  --rr-color-link-inverse: var(--rr-color-frost);
+  --rr-color-navlink-light: var(--rr-color-light-1);
+  --rr-color-navlink-dark: var(--rr-color-dark-1);
+
+  --rr-color-state-success: var(--rr-color-cyan);
+  --rr-color-state-alert: var(--rr-color-red);
+  --rr-color-state-alert-inverse: var(--rr-color-primary-inverse);
+  --rr-color-state-error: var(--rr-color-red);
+  --rr-color-state-warning: var(--rr-color-yellow);
+  --rr-color-state-disabled: var(--rr-color-grey-2);
+
+  --rr-color-social-email: var(--rr-color-primary);
+  --rr-color-social-instagram: var(--rr-color-red);
+  --rr-color-social-linkedin: var(--rr-color-teal);
+  --rr-color-social-facebook: var(--rr-color-purple);
+  --rr-color-social-x: var(--rr-color-aqua);
+  --rr-color-social-github: var(--rr-color-grey-2);
+  --rr-color-social-google: var(--rr-color-orange);
+  --rr-color-social-blog: var(--rr-color-yellow);
+  /* Webflow points this at "shade" collection red/700, which wasn't exported.
+     Falls back to red until the shade collection is added. */
+  --rr-color-social-youtube: var(--rr-color-shade-red-700, var(--rr-color-red));
+
+  --rr-color-transparent: transparent;
+  --rr-color-white: white;
+  /* WEBFLOW PARITY: Webflow "black" is the brand primary navy. */
+  --rr-color-black: var(--rr-input-primary);
+
+  /* ======================================================================
+     BASE — SVG/icon recolor filters (filter: var(--rr-filter-teal))
+     ====================================================================== */
+  --rr-filter-primary: invert(17%) sepia(24%) saturate(2415%) hue-rotate(185deg) brightness(103%) contrast(98%);
+  --rr-filter-light: invert(99%) sepia(49%) saturate(197%) hue-rotate(239deg) brightness(113%) contrast(96%);
+  --rr-filter-dark: invert(17%) sepia(24%) saturate(2415%) hue-rotate(185deg) brightness(103%) contrast(98%);
+  --rr-filter-teal: invert(26%) sepia(80%) saturate(2128%) hue-rotate(169deg) brightness(93%) contrast(97%);
+  --rr-filter-cyan: invert(60%) sepia(83%) saturate(5082%) hue-rotate(155deg) brightness(97%) contrast(101%);
+  --rr-filter-aqua: invert(81%) sepia(41%) saturate(374%) hue-rotate(123deg) brightness(84%) contrast(92%);
+  --rr-filter-powder: invert(90%) sepia(15%) saturate(576%) hue-rotate(162deg) brightness(92%) contrast(89%);
+  --rr-filter-yellow: invert(95%) sepia(17%) saturate(4211%) hue-rotate(309deg) brightness(113%) contrast(96%);
+  --rr-filter-orange: invert(64%) sepia(13%) saturate(3377%) hue-rotate(323deg) brightness(99%) contrast(92%);
+  --rr-filter-red: invert(53%) sepia(85%) saturate(4480%) hue-rotate(335deg) brightness(94%) contrast(86%);
+  --rr-filter-purple: invert(34%) sepia(17%) saturate(1564%) hue-rotate(277deg) brightness(92%) contrast(89%);
+  --rr-filter-frost: invert(99%) sepia(2%) saturate(551%) hue-rotate(144deg) brightness(99%) contrast(95%);
+  --rr-filter-grey-1: invert(77%) sepia(0%) saturate(523%) hue-rotate(135deg) brightness(89%) contrast(90%);
+  --rr-filter-grey-2: invert(31%) sepia(51%) saturate(6%) hue-rotate(315deg) brightness(95%) contrast(94%);
+  --rr-filter-grey-3: invert(15%) sepia(0%) saturate(0%) hue-rotate(251deg) brightness(98%) contrast(90%);
+
+  /* ======================================================================
+     BASE — misc
+     ====================================================================== */
+  --rr-image-radius: 0.25rem;
+  --rr-checkbox-spacing: 0.095rem;
+  --rr-ratio-subheading: 0.4927;
+  --rr-ratio-body: 0.2932;
+  /* Unitless rem values used by the fluid clamp() formulas below. */
+  --rr-max-viewport: 120;
+  --rr-min-viewport: 16;
+
+  /* ======================================================================
+     TYPOGRAPHY — families & weights
+     ====================================================================== */
+  --rr-font-headline: "Khand", system-ui, sans-serif;
+  --rr-font-subheadline: "General Sans", system-ui, sans-serif;
+  --rr-font-eyebrow: "Supreme", system-ui, sans-serif;
+  --rr-font-body: "General Sans", system-ui, sans-serif;
+  --rr-font-emphasis: "Fira Code", ui-monospace, monospace;
+  --rr-font-code: "Fira Code", ui-monospace, monospace;
+  --rr-font-emoji: "Noto Emoji", sans-serif;
+  --rr-font-blockquote: "Logic Monoscript", ui-monospace, monospace;
+  --rr-font-logo: "Barlow", system-ui, sans-serif;
+  --rr-font-button: "Khand", system-ui, sans-serif;
+  --rr-font-labels: "Khand", system-ui, sans-serif;
+
+  --rr-weight-200: 200;
+  --rr-weight-300: 300;
+  --rr-weight-400: 400;
+  --rr-weight-500: 500;
+  --rr-weight-600: 600;
+  --rr-weight-700: 700;
+  --rr-weight-800: 800;
+  --rr-weight-900: 900;
+
+  /* ======================================================================
+     TYPOGRAPHY — fluid viewport sizes (headline-size/*, subheadline/*, text-size/*)
+     clamp(MIN, MIN - slope*minVP + slope*100vw, MAX)
+     ====================================================================== */
+  --rr-headline-xl: clamp(6 * 1rem, ((6 - ((9 - 6) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((9 - 6) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 9 * 1rem);
+  --rr-headline-lg: clamp(5 * 1rem, ((5 - ((7 - 5) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((7 - 5) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 7 * 1rem);
+  --rr-headline-md: clamp(4.5 * 1rem, ((4.5 - ((6 - 4.5) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((6 - 4.5) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 6 * 1rem);
+  --rr-headline-base: clamp(4 * 1rem, ((4 - ((5 - 4) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((5 - 4) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 5 * 1rem);
+  --rr-headline-sm: clamp(3.5 * 1rem, ((3.5 - ((4 - 3.5) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((4 - 3.5) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 4 * 1rem);
+  --rr-headline-xs: 2.5rem;
+  --rr-headline-xxs: 2rem;
+
+  --rr-subheadline-xl: clamp(2.46 * 1rem, ((2.46 - ((3.29 - 2.46) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((3.29 - 2.46) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 3.29 * 1rem);
+  --rr-subheadline-lg: clamp(1.72 * 1rem, ((1.72 - ((3.69 - 1.72) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((3.69 - 1.72) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 3.69 * 1rem);
+  --rr-subheadline-md: clamp(1.26 * 1rem, ((1.26 - ((2.58 - 1.26) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((2.58 - 1.26) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 2.58 * 1rem);
+  --rr-subheadline-base: clamp(1.15 * 1rem, ((1.15 - ((2.32 - 1.15) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((2.32 - 1.15) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 2.32 * 1rem);
+  --rr-subheadline-sm: clamp(1.05 * 1rem, ((1.05 - ((2.22 - 1.05) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((2.22 - 1.05) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 2.22 * 1rem);
+  --rr-subheadline-xs: clamp(0.9 * 1rem, ((0.9 - ((1.75 - 0.9) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((1.75 - 0.9) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 1.75 * 1rem);
+  --rr-subheadline-xxs: clamp(0.8 * 1rem, ((0.8 - ((1.5 - 0.8) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((1.5 - 0.8) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 1.5 * 1rem);
+
+  --rr-text-xxl: clamp(1.75 * 1rem, ((1.75 - ((3.25 - 1.75) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((3.25 - 1.75) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 3.25 * 1rem);
+  /* WEBFLOW PARITY: min/max are swapped inside the slope, so this shrinks as the viewport grows. */
+  --rr-text-xl: clamp(1.45 * 1rem, ((1.55 - ((1.45 - 1.55) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((1.45 - 1.55) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 1.55 * 1rem);
+  --rr-text-lg: clamp(1.25 * 1rem, ((1.25 - ((1.35 - 1.25) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((1.35 - 1.25) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 1.35 * 1rem);
+  --rr-text-md: clamp(1.15 * 1rem, ((1.15 - ((1.25 - 1.15) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((1.25 - 1.15) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 1.25 * 1rem);
+  --rr-text-base: clamp(1.05 * 1rem, ((1.05 - ((1.15 - 1.05) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((1.15 - 1.05) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 1.15 * 1rem);
+  --rr-text-sm: clamp(0.95 * 1rem, ((0.95 - ((1.05 - 0.95) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((1.05 - 0.95) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 1.05 * 1rem);
+  --rr-text-xs: clamp(0.85 * 1rem, ((0.85 - ((0.95 - 0.85) / (var(--rr-max-viewport) - var(--rr-min-viewport)) * var(--rr-min-viewport))) * 1rem + ((0.95 - 0.85) / (var(--rr-max-viewport) - var(--rr-min-viewport))) * 100vw), 0.95 * 1rem);
+  --rr-text-xxs: 0.85rem;
+
+  /* ======================================================================
+     TYPOGRAPHY — container-query sizes (responsive-*; use inside container-type: inline-size)
+     ====================================================================== */
+  --rr-r-headline-jumbo: clamp(8.545rem, calc(8.336rem + 1.046cqi), 9.277rem);
+  --rr-r-headline-xxxl: clamp(7.704rem, calc(7.515rem + 0.943cqi), 8.365rem);
+  --rr-r-headline-xxl: clamp(6.863rem, calc(6.695rem + 0.84cqi), 7.452rem);
+  --rr-r-headline-xl: clamp(6.022rem, calc(5.875rem + 0.737cqi), 6.539rem);
+  --rr-r-headline-lg: clamp(5.182rem, calc(5.055rem + 0.634cqi), 5.626rem);
+  --rr-r-headline-md: clamp(4.341rem, calc(4.235rem + 0.532cqi), 4.713rem);
+  --rr-r-headline-base: clamp(3.5rem, calc(3.414rem + 0.429cqi), 3.8rem);
+  --rr-r-headline-sm: clamp(3.087rem, calc(3.011rem + 0.378cqi), 3.351rem);
+  --rr-r-headline-xs: clamp(2.674rem, calc(2.608rem + 0.327cqi), 2.903rem);
+  --rr-r-headline-xxs: clamp(2.26rem, calc(2.205rem + 0.277cqi), 2.454rem);
+  --rr-r-headline-xxxs: clamp(1.847rem, calc(1.802rem + 0.226cqi), 2.006rem);
+  --rr-r-headline-tiny: clamp(1.434rem, calc(1.399rem + 0.176cqi), 1.557rem);
+
+  --rr-r-subheadline-jumbo: clamp(3.5rem, calc(3.414rem + 0.429cqi), 3.8rem);
+  --rr-r-subheadline-xxxl: clamp(3.156rem, calc(3.078rem + 0.386cqi), 3.426rem);
+  --rr-r-subheadline-xxl: clamp(2.811rem, calc(2.742rem + 0.344cqi), 3.052rem);
+  --rr-r-subheadline-xl: clamp(2.467rem, calc(2.407rem + 0.302cqi), 2.678rem);
+  --rr-r-subheadline-lg: clamp(2.123rem, calc(2.071rem + 0.26cqi), 2.305rem);
+  --rr-r-subheadline-md: clamp(1.778rem, calc(1.735rem + 0.218cqi), 1.931rem);
+  --rr-r-subheadline-base: clamp(1.434rem, calc(1.399rem + 0.176cqi), 1.557rem);
+  --rr-r-subheadline-sm: clamp(1.294rem, calc(1.262rem + 0.158cqi), 1.405rem);
+  --rr-r-subheadline-xs: clamp(1.154rem, calc(1.126rem + 0.141cqi), 1.253rem);
+  --rr-r-subheadline-xxs: clamp(1.014rem, calc(0.989rem + 0.124cqi), 1.101rem);
+  --rr-r-subheadline-xxxs: clamp(0.874rem, calc(0.853rem + 0.107cqi), 0.949rem);
+  --rr-r-subheadline-tiny: clamp(0.734rem, calc(0.716rem + 0.09cqi), 0.797rem);
+
+  --rr-r-text-jumbo: clamp(1.74rem, calc(1.916rem + 0.241cqi), 2.03rem);
+  --rr-r-text-xxxl: clamp(1.627rem, calc(1.782rem + 0.224cqi), 1.903rem);
+  --rr-r-text-xxl: clamp(1.589rem, calc(1.647rem + 0.207cqi), 1.833rem);
+  --rr-r-text-xl: clamp(1.551rem, calc(1.513rem + 0.19cqi), 1.684rem);
+  --rr-r-text-lg: clamp(1.413rem, calc(1.378rem + 0.173cqi), 1.534rem);
+  --rr-r-text-md: clamp(1.277rem, calc(1.246rem + 0.156cqi), 1.387rem);
+  --rr-r-text-base: clamp(1.141rem, calc(1.113rem + 0.14cqi), 1.239rem);
+  /* WEBFLOW PARITY: sm equals md and xs equals base in the export. */
+  --rr-r-text-sm: clamp(1.277rem, calc(1.246rem + 0.156cqi), 1.387rem);
+  --rr-r-text-xs: clamp(1.141rem, calc(1.113rem + 0.14cqi), 1.239rem);
+  --rr-r-text-xxs: clamp(1.006rem, calc(0.981rem + 0.123cqi), 1.092rem);
+  --rr-r-text-xxxs: clamp(0.87rem, calc(0.848rem + 0.107cqi), 0.944rem);
+  --rr-r-text-tiny: clamp(0.734rem, calc(0.716rem + 0.09cqi), 0.797rem);
+
+  /* ======================================================================
+     TYPOGRAPHY — role settings
+     ====================================================================== */
+  --rr-body-font-weight: var(--rr-weight-300);
+  --rr-body-font-size: var(--rr-text-sm);
+  --rr-body-line-height: 1.5;
+  --rr-body-line-height-sm: 1;
+  --rr-body-letter-spacing: -0.0025em;
+  --rr-body-margin-bottom: 1%;
+
+  --rr-headline-font-weight: var(--rr-weight-700);
+  --rr-headline-line-height: 0.85;
+  --rr-headline-letter-spacing: -0.02em;
+
+  --rr-eyebrow-font-size: 1rem;
+  --rr-eyebrow-font-weight: 300;
+  --rr-eyebrow-letter-spacing: 0.1em;
+
+  --rr-label-font-weight: var(--rr-weight-700);
+  --rr-label-line-height: 1;
+  --rr-label-letter-spacing: 0.055em;
+  --rr-label-padding-block: 0.15em;
+  --rr-label-padding-inline: 0.25em;
+
+  --rr-list-line-height: 2;
+
+  --rr-blockquote-font-size: 2rem;
+  --rr-blockquote-font-weight: var(--rr-weight-500);
+  --rr-blockquote-letter-spacing: 0.01em;
+  --rr-blockquote-background: transparent;
+  --rr-blockquote-radius: 0px;
+  --rr-blockquote-border-width: 3px;
+  --rr-blockquote-border-color: transparent;
+  --rr-blockquote-padding-inline: 0px;
+  --rr-blockquote-padding-block: 0px;
+
+  /* ======================================================================
+     BUTTONS (base collection)
+     ====================================================================== */
+  --rr-button-font-weight: 700;
+  --rr-button-line-height: 1;
+  --rr-button-letter-spacing: 0.05em;
+
+  --rr-button-sm-font-size: 0.85rem;
+  --rr-button-sm-radius: 1.25px;
+  --rr-button-sm-border-width: 2px;
+  --rr-button-sm-padding-top: 0.8rem;
+  --rr-button-sm-padding-bottom: 0.75rem;
+  --rr-button-sm-padding-inline: 1rem;
+
+  /* Webflow has no button/font-size; 1rem is assumed for the default size. */
+  --rr-button-md-font-size: 1rem;
+  --rr-button-md-radius: 2px;
+  --rr-button-md-border-width: 3px;
+  --rr-button-md-padding-top: 1.1rem;
+  --rr-button-md-padding-bottom: 1rem;
+  --rr-button-md-padding-inline: 1.15rem;
+
+  --rr-button-lg-font-size: 1.15rem;
+  --rr-button-lg-radius: 0px;
+  --rr-button-lg-border-width: 3px;
+  --rr-button-lg-padding-top: 1.25rem;
+  --rr-button-lg-padding-bottom: 1.25rem;
+  --rr-button-lg-padding-inline: 1.75rem;
+
+  /* ======================================================================
+     SIZE — scale, gaps, radius
+     ====================================================================== */
+  --rr-size-0_25x: 0.25rem;
+  --rr-size-0_5x: 0.5rem;
+  --rr-size-0_75x: 0.75rem;
+  --rr-size-1x: 1rem;
+  --rr-size-1_25x: 1.25rem;
+  --rr-size-1_5x: 1.5rem;
+  --rr-size-1_75x: 1.75rem;
+  --rr-size-2x: 2rem;
+  --rr-size-3x: 3rem;
+  --rr-size-4x: 4rem;
+  --rr-size-5x: 5rem;
+  --rr-size-6x: 6rem;
+  --rr-size-7x: 7rem;
+  --rr-size-8x: 8rem;
+
+  --rr-gap-xxs: var(--rr-size-0_5x);
+  --rr-gap-xs: var(--rr-size-1x);
+  --rr-gap-sm: var(--rr-size-2x);
+  --rr-gap-md: var(--rr-size-3x);
+  --rr-gap-lg: var(--rr-size-4x);
+  --rr-gap-xl: var(--rr-size-5x);
+  --rr-gap-xxl: var(--rr-size-6x);
+
+  --rr-page-padding-block: var(--rr-size-3x);
+  --rr-page-padding-inline: var(--rr-size-4x);
+  --rr-section-padding-block: var(--rr-size-8x);
+
+  --rr-radius-sm: 0.25rem;
+  --rr-radius-md: 0.5rem;
+  --rr-radius-lg: 0.75rem;
+  --rr-radius-xl: 1rem;
+  --rr-radius-round: 100rem;
+
+  /* ======================================================================
+     SIZE — widths & containers
+     ====================================================================== */
+  --rr-max-width-xxl: 1820px;
+  --rr-max-width-xl: 1720px;
+  --rr-max-width-lg: 1600px;
+  --rr-max-width-md: 1440px;
+  --rr-max-width-base: 1280px;
+  --rr-max-width-sm: 1150px;
+  --rr-max-width-xs: 900px;
+  /* WEBFLOW PARITY: 12px (width/xxs is 12rem — likely meant to match). */
+  --rr-max-width-xxs: 12px;
+  --rr-max-size-xs: 60%;
+
+  --rr-width-xxl: 70rem;
+  --rr-width-xl: 60rem;
+  --rr-width-lg: 50rem;
+  --rr-width-base: 40rem;
+  --rr-width-sm: 35rem;
+  --rr-width-xs: 25rem;
+  --rr-width-xxs: 12rem;
+  --rr-width-full: 100%;
+  --rr-width-three-quarters: 75%;
+  --rr-width-half: 50%;
+  --rr-width-quarter: 25%;
+
+  --rr-container-xl: 1600px;
+  --rr-container-lg: 1440px;
+  --rr-container-md: 1200px;
+  --rr-container-sm: 1000px;
+
+  --rr-icon-xxl: 3.75rem;
+  --rr-icon-xl: 3.5rem;
+  --rr-icon-lg: 3.25rem;
+  --rr-icon-md: 2.75rem;
+  --rr-icon-base: 2.5rem;
+  --rr-icon-sm: 2.25rem;
+  --rr-icon-xs: 2rem;
+  --rr-icon-xxs: 1.5rem;
+
+  --rr-line-height-xxl: 2;
+  --rr-line-height-xl: 1.75;
+  --rr-line-height-lg: 1.5;
+  --rr-line-height-md: 1.25;
+  --rr-line-height-base: 1.15;
+  /* WEBFLOW PARITY: sm (0.75) is tighter than xs (0.95) and xxs (0.85). */
+  --rr-line-height-sm: 0.75;
+  --rr-line-height-xs: 0.95;
+  --rr-line-height-xxs: 0.85;
+}
+
+/* ==========================================================================
+   SIZE — Webflow breakpoint modes
+   Tablet [x768] <= 991px · Mobile [L] <= 767px · Mobile [P] <= 478px
+   ========================================================================== */
+@media (max-width: 991px) {
+  :root {
+    --rr-page-padding-block: var(--rr-size-2x);
+    --rr-page-padding-inline: var(--rr-size-2x);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --rr-line-height-xxl: 1.75;
+    --rr-line-height-xl: 1.5;
+    --rr-line-height-lg: 1.25;
+    --rr-line-height-md: 1.15;
+    --rr-line-height-base: 1.05;
+    --rr-line-height-sm: 0.85;
+    --rr-line-height-xs: 1;
+    --rr-line-height-xxs: 0.95;
+  }
+}
+
+@media (max-width: 478px) {
+  :root {
+    --rr-page-padding-block: var(--rr-size-1x);
+    --rr-page-padding-inline: var(--rr-size-1x);
+  }
+}
