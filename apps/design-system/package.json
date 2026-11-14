@@ -17,7 +17,7 @@
     "@revrebel/tokens": "workspace:*",
     "@revrebel/ui": "workspace:*",
     "fumadocs-core": "16.18.1",
-    "fumadocs-mdx": "15.4.10",
+    "fumadocs-mdx": "15.6.2",
     "fumadocs-ui": "16.18.1",
     "next": "16.4.5",
     "react": "19.2.6",
